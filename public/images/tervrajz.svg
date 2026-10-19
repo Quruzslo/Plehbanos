@@ -1,0 +1,218 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 740" role="img" aria-labelledby="bh-title">
+  <title id="bh-title">Családi ház homlokzati vonalrajza, kiemelt bádogos elemekkel</title>
+  <defs>
+    <style>
+      .b-o  { fill: #fff; stroke: #6b7177; stroke-width: 1.5; stroke-linejoin: round; }
+      .b-o2 { fill: #fff; stroke: #8a9096; stroke-width: 1; stroke-linejoin: round; }
+      .b-s  { stroke: #6b7177; stroke-width: 1.5; stroke-linejoin: round; }
+      .b-l  { fill: none; stroke: #6b7177; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+      .b-t  { fill: none; stroke: #9aa0a6; stroke-width: 1; stroke-linecap: round; }
+      .b-r  { fill: none; stroke: #c9cdd1; stroke-width: 1; stroke-linecap: round; }
+      .b-d  { fill: none; stroke: #b3b8bd; stroke-width: 1; stroke-dasharray: 4 4; }
+
+      /* Bádog elemek – accent */
+      .b-m  { fill: #f5ebe2; stroke: #b87333; stroke-width: 1.75; stroke-linejoin: round; }
+      .b-ml { fill: none; stroke: #b87333; stroke-width: 2; stroke-linecap: round; }
+      .b-mt { fill: none; stroke: #b87333; stroke-width: 1.25; stroke-linecap: round; }
+
+      /* Jelölések, szöveg */
+      .b-lead { fill: none; stroke: #b87333; stroke-width: 1; }
+      .b-c    { fill: #fff; stroke: #b87333; stroke-width: 1.25; }
+      .b-txt  { font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; font-size: 12px; fill: #7a8086; }
+      .b-n    { font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; font-size: 10px; font-weight: 600; fill: #b87333; text-anchor: middle; }
+      .b-h    { font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; font-size: 12px; font-weight: 600; letter-spacing: 0.08em; fill: #2f3438; }
+    </style>
+
+    <pattern id="b-tiles" width="24" height="28" patternUnits="userSpaceOnUse">
+      <path d="M0 13.5H24M0 27.5H24M0.5 0V14M12.5 14V28" fill="none" stroke="#dde0e3" stroke-width="1"/>
+    </pattern>
+    <pattern id="b-brick" width="20" height="16" patternUnits="userSpaceOnUse">
+      <path d="M0 7.5H20M0 15.5H20M0.5 0V8M10.5 8V16" fill="none" stroke="#d3d6d9" stroke-width="1"/>
+    </pattern>
+    <pattern id="b-hatch" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+      <path d="M0 0V8" fill="none" stroke="#d6d9dc" stroke-width="1"/>
+    </pattern>
+  </defs>
+
+  <rect width="1200" height="740" fill="#fff"/>
+
+  <!-- Szintjelek -->
+  <g>
+    <line class="b-d" x1="70" y1="404" x2="156" y2="404"/>
+    <line class="b-d" x1="70" y1="230" x2="336" y2="230"/>
+    <path class="b-l" d="M74 630H86L80 640Z"/>
+    <path class="b-l" d="M74 394H86L80 404Z"/>
+    <path class="b-l" d="M74 220H86L80 230Z"/>
+    <text class="b-txt" x="92" y="634">±0,00</text>
+    <text class="b-txt" x="92" y="398">+4,72</text>
+    <text class="b-txt" x="92" y="224">+8,20</text>
+  </g>
+
+  <!-- Méretlánc -->
+  <g>
+    <path class="b-t" d="M200 650V700M760 650V700M1020 650V700M190 692H1030"/>
+    <path class="b-l" d="M195 697l10-10M755 697l10-10M1015 697l10-10"/>
+    <text class="b-txt" x="480" y="684" text-anchor="middle">11,20</text>
+    <text class="b-txt" x="890" y="684" text-anchor="middle">5,20</text>
+  </g>
+
+  <!-- Terepvonal -->
+  <rect x="80" y="640" width="1040" height="14" fill="url(#b-hatch)"/>
+  <line class="b-l" x1="80" y1="640" x2="1120" y2="640"/>
+
+  <!-- ===== FŐ ÉPÜLET ===== -->
+  <rect x="200" y="404" width="560" height="236" fill="#fff"/>
+  <rect x="200" y="606" width="560" height="34" fill="url(#b-hatch)"/>
+  <rect class="b-s" x="200" y="404" width="560" height="236" fill="none"/>
+  <line class="b-t" x1="200" y1="426" x2="760" y2="426"/>
+  <!-- Lábazati csepegtető -->
+  <path class="b-ml" d="M196 606H764"/>
+
+  <!-- Kontytető -->
+  <polygon points="168,404 792,404 620,230 340,230" fill="#fff"/>
+  <polygon class="b-s" points="168,404 792,404 620,230 340,230" fill="url(#b-tiles)"/>
+
+  <!-- Hófogó -->
+  <path class="b-ml" d="M205 380H755M205 387H755"/>
+  <path class="b-mt" d="M215 377v13M285 377v13M355 377v13M425 377v13M495 377v13M565 377v13M635 377v13M705 377v13M745 377v13"/>
+
+  <!-- Kémény -->
+  <rect x="360" y="172" width="44" height="156" fill="#fff"/>
+  <rect class="b-s" x="360" y="172" width="44" height="156" fill="url(#b-brick)"/>
+  <!-- Kéményfedés, kéménykalap -->
+  <rect class="b-m" x="352" y="164" width="60" height="8" rx="1"/>
+  <path class="b-ml" d="M370 163V149M394 163V149" style="stroke-width:1.5"/>
+  <path class="b-m" d="M362 148H402L382 134Z"/>
+  <!-- Kéményszegély -->
+  <rect class="b-m" x="355" y="288" width="5" height="26"/>
+  <rect class="b-m" x="404" y="288" width="5" height="26"/>
+  <polygon class="b-m" points="356,312 408,312 420,336 344,336"/>
+  <path class="b-mt" d="M350 330H414"/>
+
+  <!-- Ereszcsatorna -->
+  <rect class="b-m" x="160" y="404" width="640" height="14" rx="7"/>
+  <path class="b-mt" d="M166 408.5H794"/>
+
+  <!-- Lefolyócső (bal) -->
+  <polygon class="b-m" points="209,418 233,418 228,428 214,428"/>
+  <rect class="b-m" x="215" y="428" width="12" height="194"/>
+  <rect class="b-m" x="211" y="470" width="20" height="4"/>
+  <rect class="b-m" x="211" y="540" width="20" height="4"/>
+  <rect class="b-m" x="211" y="596" width="20" height="4"/>
+  <polygon class="b-m" points="215,622 227,622 231,632 211,632"/>
+
+  <!-- Ablak A -->
+  <g>
+    <rect class="b-o" x="250" y="466" width="100" height="110"/>
+    <rect class="b-o2" x="256" y="472" width="88" height="98"/>
+    <path class="b-t" d="M300 472V570M256 500H344"/>
+    <path class="b-r" d="M264 556l16-16M268 564l8-8M308 556l16-16M312 564l8-8"/>
+    <polygon class="b-m" points="244,462 356,462 352,454 248,454"/>
+    <polygon class="b-m" points="240,576 360,576 363,584 237,584"/>
+  </g>
+
+  <!-- Ablak B -->
+  <g>
+    <rect class="b-o" x="580" y="466" width="100" height="110"/>
+    <rect class="b-o2" x="586" y="472" width="88" height="98"/>
+    <path class="b-t" d="M630 472V570M586 500H674"/>
+    <path class="b-r" d="M594 556l16-16M598 564l8-8M638 556l16-16M642 564l8-8"/>
+    <polygon class="b-m" points="574,462 686,462 682,454 578,454"/>
+    <polygon class="b-m" points="570,576 690,576 693,584 567,584"/>
+  </g>
+
+  <!-- Bejárati ajtó + előtető -->
+  <g>
+    <rect class="b-o" x="432" y="486" width="66" height="144"/>
+    <rect class="b-o2" x="438" y="492" width="54" height="138"/>
+    <rect class="b-o2" x="458" y="504" width="14" height="96"/>
+    <path class="b-r" d="M461 540l8-8M461 552l8-8"/>
+    <circle cx="446" cy="562" r="2.5" fill="#6b7177"/>
+    <rect class="b-o" x="420" y="630" width="90" height="10"/>
+    <path class="b-l" d="M414 478v16l14-16M516 478v16l-14-16"/>
+    <polygon class="b-m" points="410,468 520,468 524,478 406,478"/>
+  </g>
+
+  <!-- ===== OROMFALAS SZÁRNY ===== -->
+  <polygon points="760,640 760,439.2 890,294 1020,439.2 1020,640" fill="#fff"/>
+  <rect x="760" y="606" width="260" height="34" fill="url(#b-hatch)"/>
+  <polygon class="b-s" points="760,640 760,439.2 890,294 1020,439.2 1020,640" fill="none"/>
+  <path class="b-ml" d="M756 606H1024"/>
+
+  <!-- Szellőzőrács -->
+  <rect class="b-m" x="872" y="338" width="36" height="32" rx="1"/>
+  <path class="b-mt" d="M877 345H903M877 351H903M877 357H903M877 363H903"/>
+
+  <!-- Oromszegély -->
+  <polygon class="b-m" points="736,452 890,280 1044,452 1044,466 890,294 736,466"/>
+
+  <!-- Szárny ereszcsatornák (keresztmetszet) + lefolyók -->
+  <path class="b-m" d="M726 466A12 12 0 0 0 750 466Z"/>
+  <rect class="b-m" x="733" y="478" width="10" height="144"/>
+  <rect class="b-m" x="729" y="520" width="31" height="4"/>
+  <rect class="b-m" x="729" y="590" width="31" height="4"/>
+  <polygon class="b-m" points="733,622 743,622 747,632 729,632"/>
+
+  <path class="b-m" d="M1030 466A12 12 0 0 0 1054 466Z"/>
+  <rect class="b-m" x="1037" y="478" width="10" height="144"/>
+  <rect class="b-m" x="1020" y="520" width="31" height="4"/>
+  <rect class="b-m" x="1020" y="590" width="31" height="4"/>
+  <polygon class="b-m" points="1037,622 1047,622 1051,632 1033,632"/>
+
+  <!-- Ablak C -->
+  <g>
+    <rect class="b-o" x="840" y="462" width="100" height="124"/>
+    <rect class="b-o2" x="846" y="468" width="88" height="112"/>
+    <path class="b-t" d="M875 468V580M905 468V580M846 498H934"/>
+    <path class="b-r" d="M852 566l16-16M856 574l8-8M912 566l16-16M916 574l8-8"/>
+    <polygon class="b-m" points="834,458 946,458 942,450 838,450"/>
+    <polygon class="b-m" points="830,586 950,586 953,594 827,594"/>
+  </g>
+
+  <!-- ===== JELÖLÉSEK (törölhető) ===== -->
+  <g id="jelolesek">
+    <path class="b-lead" d="M318 108L382 140M245 300L344 334M500 360V377M128 362L163 408M152 520H215M806 322L812 365M968 318L908 352M722 434L684 457M556 446L520 472M392 556L362 581M984 566L1000 604"/>
+    <g fill="#b87333">
+      <circle cx="382" cy="140" r="2"/><circle cx="344" cy="334" r="2"/><circle cx="500" cy="377" r="2"/>
+      <circle cx="163" cy="408" r="2"/><circle cx="215" cy="520" r="2"/><circle cx="812" cy="365" r="2"/>
+      <circle cx="908" cy="352" r="2"/><circle cx="684" cy="457" r="2"/><circle cx="520" cy="472" r="2"/>
+      <circle cx="362" cy="581" r="2"/><circle cx="1000" cy="604" r="2"/>
+    </g>
+    <circle class="b-c" cx="318" cy="108" r="10"/><text class="b-n" x="318" y="108" dy=".35em">1</text>
+    <circle class="b-c" cx="245" cy="300" r="10"/><text class="b-n" x="245" y="300" dy=".35em">2</text>
+    <circle class="b-c" cx="500" cy="350" r="10"/><text class="b-n" x="500" y="350" dy=".35em">3</text>
+    <circle class="b-c" cx="128" cy="362" r="10"/><text class="b-n" x="128" y="362" dy=".35em">4</text>
+    <circle class="b-c" cx="152" cy="520" r="10"/><text class="b-n" x="152" y="520" dy=".35em">5</text>
+    <circle class="b-c" cx="806" cy="322" r="10"/><text class="b-n" x="806" y="322" dy=".35em">6</text>
+    <circle class="b-c" cx="968" cy="318" r="10"/><text class="b-n" x="968" y="318" dy=".35em">7</text>
+    <circle class="b-c" cx="722" cy="434" r="10"/><text class="b-n" x="722" y="434" dy=".35em">8</text>
+    <circle class="b-c" cx="556" cy="446" r="10"/><text class="b-n" x="556" y="446" dy=".35em">9</text>
+    <circle class="b-c" cx="392" cy="556" r="10"/><text class="b-n" x="392" y="556" dy=".35em">10</text>
+    <circle class="b-c" cx="984" cy="566" r="10"/><text class="b-n" x="984" y="566" dy=".35em">11</text>
+
+    <!-- Jelmagyarázat -->
+    <rect x="900" y="24" width="270" height="232" fill="#fff" stroke="#9aa0a6" stroke-width="1"/>
+    <text class="b-h" x="916" y="50">BÁDOGOS ELEMEK</text>
+    <text class="b-txt" x="1154" y="50" text-anchor="end">M 1:100</text>
+    <line x1="900" y1="62" x2="1170" y2="62" stroke="#9aa0a6" stroke-width="1"/>
+    <g class="b-txt">
+      <text x="944" y="84">Kéményfedés, kalap</text>
+      <text x="944" y="100">Kéményszegély</text>
+      <text x="944" y="116">Hófogó</text>
+      <text x="944" y="132">Ereszcsatorna</text>
+      <text x="944" y="148">Lefolyócső</text>
+      <text x="944" y="164">Oromszegély</text>
+      <text x="944" y="180">Szellőzőrács</text>
+      <text x="944" y="196">Ablak feletti csepegtető</text>
+      <text x="944" y="212">Előtető</text>
+      <text x="944" y="228">Ablakpárkány</text>
+      <text x="944" y="244">Lábazati csepegtető</text>
+    </g>
+    <g class="b-n" style="text-anchor:start; font-size:11px">
+      <text x="916" y="84">01</text><text x="916" y="100">02</text><text x="916" y="116">03</text>
+      <text x="916" y="132">04</text><text x="916" y="148">05</text><text x="916" y="164">06</text>
+      <text x="916" y="180">07</text><text x="916" y="196">08</text><text x="916" y="212">09</text>
+      <text x="916" y="228">10</text><text x="916" y="244">11</text>
+    </g>
+  </g>
+</svg>
