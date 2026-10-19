@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 620" role="img" aria-label="Tetőáttörések bádogozása tervrajz">
+  <defs>
+    <style>
+      .g  { fill: none; stroke: #6b7177; stroke-width: 1.5; stroke-linejoin: round; stroke-linecap: round; }
+      .gt { fill: none; stroke: #a3a9ae; stroke-width: 1; stroke-linecap: round; }
+      .gh { fill: none; stroke: #a3a9ae; stroke-width: 1; stroke-dasharray: 6 4; }
+      .cl { fill: none; stroke: #a3a9ae; stroke-width: 1; stroke-dasharray: 14 4 2 4; }
+      .dd { fill: none; stroke: #9aa0a6; stroke-width: 1; stroke-dasharray: 5 5; }
+      .m  { fill: none; stroke: #b87333; stroke-width: 2; stroke-linejoin: round; stroke-linecap: round; }
+      .mt { fill: none; stroke: #b87333; stroke-width: 1.25; stroke-linecap: round; }
+      .mh { fill: none; stroke: #b87333; stroke-width: 1.25; stroke-dasharray: 5 4; }
+    </style>
+    <clipPath id="ta-detail">
+      <circle cx="690" cy="430" r="104"/>
+    </clipPath>
+  </defs>
+
+  <!-- ===== METSZET A TETŐN ===== -->
+
+  <!-- Tetőfedés -->
+  <path class="g" d="M40 500L620 164.8M40 524L620 188.8M40 500V524"/>
+  <path class="g" d="M620 164.8L612 172L628 180L620 188.8"/>
+  <path class="gt" d="M66 485l5 8.7M92 469.9l5 8.7M118 454.9l5 8.7M214 399.4l5 8.7M240 384.4l5 8.7M436 271.1l5 8.7M606 172.9l5 8.7"/>
+  <path class="m" d="M22 504A13 13 0 0 0 48 504"/>
+
+  <!-- Szellőzőcső gallérral -->
+  <path class="cl" d="M170 320V600"/>
+  <path class="g" d="M162 340V429.5M178 340V420.2"/>
+  <path class="gh" d="M162 453.5V600M178 444.2V600"/>
+  <path class="m" d="M152 340H188L180 328H160Z"/>
+  <path class="m" d="M148 437.6L162 404H178L192 412.1"/>
+  <path class="m" d="M146 436.7L194 409"/>
+  <path class="m" d="M160 400H180V406H160Z"/>
+
+  <!-- Tetőablak burkolókerettel -->
+  <path class="g" d="M300 349.7L380 303.5L373 291.4L293 337.6Z"/>
+  <path class="gt" d="M298 341L376 296"/>
+  <path class="m" d="M293 337.6L268 365.2L268 359"/>
+  <path class="mh" d="M380 300.5L410 283.1"/>
+
+  <!-- Napelem tartókkal -->
+  <path class="g" d="M450 243L590 162.1L590 154.1L450 235Z"/>
+  <path class="g" d="M480 245.7V225.7M560 199.4V179.4"/>
+  <path class="m" d="M472 248.3L488 239.1M552 202.1L568 192.8"/>
+
+  <!-- ===== RÉSZLETJELÖLÉS ===== -->
+  <circle class="dd" cx="170" cy="418" r="28"/>
+  <path class="dd" d="M198 418.6L586 427.6"/>
+  <circle class="dd" cx="690" cy="430" r="104"/>
+
+  <!-- ===== RÉSZLET: szellőző gallér metszete ===== -->
+  <g clip-path="url(#ta-detail)">
+    <!-- Fedés a cső két oldalán -->
+    <path class="g" d="M586 502.3L678 449M702 435L800 378.2"/>
+    <path class="g" d="M586 518.3L678 465M702 451L800 394.2"/>
+
+    <!-- Cső -->
+    <path class="g" d="M678 320V465M702 320V451"/>
+    <path class="gh" d="M678 465V545M702 451V545"/>
+
+    <!-- Gallér: talplemez, kúp, bilincs -->
+    <path class="m" style="stroke-width:2.5" d="M640 469L740 411"/>
+    <path class="m" style="stroke-width:2.5" d="M652 462L676 420M728 418L704 412"/>
+    <rect class="m" x="674" y="404" width="32" height="10"/>
+    <path class="mh" d="M740 411L772 392.4"/>
+
+    <!-- Tengely -->
+    <path class="cl" d="M690 330V540"/>
+  </g>
+</svg>

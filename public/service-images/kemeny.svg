@@ -1,0 +1,94 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 620" role="img" aria-label="Kéményszegély és kéményfedés tervrajz">
+  <defs>
+    <style>
+      .g  { fill: none; stroke: #6b7177; stroke-width: 1.5; stroke-linejoin: round; stroke-linecap: round; }
+      .gt { fill: none; stroke: #a3a9ae; stroke-width: 1; stroke-linecap: round; }
+      .gh { fill: none; stroke: #a3a9ae; stroke-width: 1; stroke-dasharray: 6 4; }
+      .cl { fill: none; stroke: #a3a9ae; stroke-width: 1; stroke-dasharray: 14 4 2 4; }
+      .dd { fill: none; stroke: #9aa0a6; stroke-width: 1; stroke-dasharray: 5 5; }
+      .m  { fill: none; stroke: #b87333; stroke-width: 2; stroke-linejoin: round; stroke-linecap: round; }
+      .mt { fill: none; stroke: #b87333; stroke-width: 1.25; stroke-linecap: round; }
+      .mh { fill: none; stroke: #b87333; stroke-width: 1.25; stroke-dasharray: 5 4; }
+    </style>
+    <pattern id="kt-brick" width="24" height="16" patternUnits="userSpaceOnUse">
+      <path d="M0 7.5H24M0 15.5H24M0.5 0V8M12.5 8V16" fill="none" stroke="#c9cdd1" stroke-width="1"/>
+    </pattern>
+    <pattern id="kt-hatch" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+      <path d="M0 0V8" stroke="#c9cdd1" stroke-width="1"/>
+    </pattern>
+    <clipPath id="kt-brick-clip">
+      <polygon points="300,112 372,112 372,284 300,326"/>
+    </clipPath>
+    <clipPath id="kt-detail">
+      <circle cx="680" cy="420" r="104"/>
+    </clipPath>
+  </defs>
+
+  <!-- ===== OLDALNÉZET / METSZET ===== -->
+
+  <!-- Tetőfedés (a kéménynél megszakítva) -->
+  <path class="g" d="M40 500 L300 349.7 M372 308.1 L620 164.8"/>
+  <path class="g" d="M40 524 L300 373.7 M372 332.1 L620 188.8"/>
+  <path class="g" d="M40 500 V524 M620 164.8 L612 172 L628 180 L620 188.8"/>
+  <path class="gt" d="M66 485.0 l5 8.7 M92 469.9 l5 8.7 M118 454.9 l5 8.7 M144 439.9 l5 8.7 M170 424.9 l5 8.7 M196 409.8 l5 8.7 M222 394.8 l5 8.7 M248 379.8 l5 8.7 M274 364.7 l5 8.7 M398 293.1 l5 8.7 M424 278.0 l5 8.7 M450 263.0 l5 8.7 M476 248.0 l5 8.7 M502 233.0 l5 8.7 M528 217.9 l5 8.7 M554 202.9 l5 8.7 M580 187.9 l5 8.7 M606 172.9 l5 8.7"/>
+
+  <!-- Ereszcsatorna a tető alján -->
+  <path class="m" d="M22 504 A13 13 0 0 0 48 504"/>
+
+  <!-- Kémény a padlástérben (takart vonalak) -->
+  <path class="gh" d="M300 373.7 V600 M372 332.1 V600"/>
+  <!-- Kürtő -->
+  <path class="gh" d="M322 112 V600 M350 112 V600"/>
+  <path class="cl" d="M336 30 V610"/>
+
+  <!-- Kémény a tető felett -->
+  <rect x="300" y="104" width="72" height="250" fill="url(#kt-brick)" clip-path="url(#kt-brick-clip)"/>
+  <path class="g" d="M300 104 V349.7 M372 104 V308.1"/>
+
+  <!-- Kéményszegély: oldalsáv, felhajtás a horonyban -->
+  <path class="m" d="M300 326 L372 284 V308.1 L300 349.7 Z"/>
+  <path class="mt" d="M300 332 L372 290"/>
+  <!-- Alsó homlokszegély a cserépen -->
+  <path class="m" d="M300 346 L272 362.2 L272 356"/>
+  <!-- Felső szegély a cserép alatt (takart) -->
+  <path class="mh" d="M372 305 L404 286.5"/>
+
+  <!-- Kéményfedés csepegtetővel -->
+  <path class="m" d="M288 114 V104 H384 V114"/>
+  <path class="mt" d="M292 108 H380"/>
+
+  <!-- Kéménykalap -->
+  <path class="m" d="M318 104 V76 M354 104 V76"/>
+  <path class="m" d="M296 76 H376 L336 50 Z"/>
+  <path class="mt" d="M306 70 H366"/>
+
+  <!-- ===== RÉSZLETJELÖLÉS ===== -->
+  <circle class="dd" cx="336" cy="318" r="30"/>
+  <path class="dd" d="M365 326 L578 391"/>
+  <circle class="dd" cx="680" cy="420" r="104"/>
+
+  <!-- ===== RÉSZLET: szegély a kémény falánál ===== -->
+  <g clip-path="url(#kt-detail)">
+   <g transform="translate(1360 0) scale(-1 1)">
+    <!-- Kémény fala (tégla) -->
+    <rect x="560" y="300" width="80" height="260" fill="url(#kt-brick)"/>
+    <path class="g" d="M640 300 V376 M640 384 V560"/>
+    <!-- Horony a fugában -->
+    <path class="g" d="M640 376 H628 V384 H640"/>
+
+    <!-- Tetőfedés -->
+    <path class="g" d="M646 452 L800 524"/>
+    <path class="g" d="M646 468 L800 540"/>
+    <path class="g" d="M646 452 V468"/>
+    <path class="gt" d="M690 472.6 l5 8.7 M734 493.2 l5 8.7 M778 513.8 l5 8.7"/>
+
+    <!-- Szegély: függőleges szár a falon + rész a cserépen, visszahajtott véggel -->
+    <path class="m" style="stroke-width:2.5" d="M644 396 V450 L736 493 L740 487"/>
+
+    <!-- Takarószegély a horonyba fordítva -->
+    <path class="m" style="stroke-width:2.5" d="M631 380 H650 V428 L655 433"/>
+    <!-- Tömítés a horonyban -->
+    <circle cx="641" cy="380" r="3.5" fill="#6b7177"/>
+   </g>
+  </g>
+</svg>

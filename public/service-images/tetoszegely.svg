@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 620" role="img" aria-label="Tetőszegélyek tervrajz: vápa és oromszegély">
+  <defs>
+    <style>
+      .g  { fill: none; stroke: #6b7177; stroke-width: 1.5; stroke-linejoin: round; stroke-linecap: round; }
+      .gt { fill: none; stroke: #a3a9ae; stroke-width: 1; stroke-linecap: round; }
+      .gh { fill: none; stroke: #a3a9ae; stroke-width: 1; stroke-dasharray: 6 4; }
+      .cl { fill: none; stroke: #a3a9ae; stroke-width: 1; stroke-dasharray: 14 4 2 4; }
+      .dd { fill: none; stroke: #9aa0a6; stroke-width: 1; stroke-dasharray: 5 5; }
+      .m  { fill: none; stroke: #b87333; stroke-width: 2; stroke-linejoin: round; stroke-linecap: round; }
+      .mt { fill: none; stroke: #b87333; stroke-width: 1.25; stroke-linecap: round; }
+    </style>
+    <pattern id="ts-hatch" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+      <path d="M0 0V8" stroke="#c9cdd1" stroke-width="1"/>
+    </pattern>
+    <clipPath id="ts-detail">
+      <circle cx="690" cy="320" r="104"/>
+    </clipPath>
+  </defs>
+
+  <!-- ===== TETŐ FELÜLNÉZET (L alaprajz) ===== -->
+
+  <!-- Falak a tető alatt (takart) -->
+  <path class="gh" d="M80 140H500V290H450V540H320V290H80Z"/>
+
+  <!-- Tető körvonala, eresz -->
+  <path class="g" d="M60 120H520V310H470V560H300V310H60Z"/>
+
+  <!-- Gerincek -->
+  <path class="g" d="M60 215H520M385 225V560"/>
+
+  <!-- Vápák -->
+  <path class="m" style="stroke-width:3" d="M300 310L385 225L470 310"/>
+
+  <!-- Oromszegélyek -->
+  <path class="m" style="stroke-width:3" d="M60 120V310M520 120V310M300 560H470"/>
+
+  <!-- Lejtésirányok -->
+  <path class="gt" d="M150 195V145M144 153L150 145L156 153"/>
+  <path class="gt" d="M150 235V285M144 277L150 285L156 277"/>
+  <path class="gt" d="M440 195V145M434 153L440 145L446 153"/>
+  <path class="gt" d="M360 450H318M326 444L318 450L326 456"/>
+  <path class="gt" d="M410 450H452M444 444L452 450L444 456"/>
+
+  <!-- ===== RÉSZLETJELÖLÉS ===== -->
+  <circle class="dd" cx="342.5" cy="267.5" r="24"/>
+  <path class="dd" d="M366 271L587 304"/>
+  <circle class="dd" cx="690" cy="320" r="104"/>
+
+  <!-- ===== RÉSZLET: vápa keresztmetszete ===== -->
+  <g clip-path="url(#ts-detail)">
+    <!-- Aljzat -->
+    <path class="g" d="M590 248L690 331L790 248"/>
+    <path class="g" d="M590 262L690 345L790 262"/>
+
+    <!-- Vápalemez középső bordával, felhajtott szélekkel -->
+    <path class="m" style="stroke-width:2.5" d="M596 246L600 250L684 320L690 310L696 320L780 250L784 246"/>
+
+    <!-- Fedés két oldalt -->
+    <path class="g" d="M586 226L660 288L662 280L586 216"/>
+    <path class="g" d="M794 226L720 288L718 280L794 216"/>
+
+    <!-- Tengely -->
+    <path class="cl" d="M690 220V420"/>
+  </g>
+</svg>

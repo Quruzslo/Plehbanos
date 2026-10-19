@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 620" role="img" aria-label="Hófogó tervrajz">
+  <defs>
+    <style>
+      .g  { fill: none; stroke: #6b7177; stroke-width: 1.5; stroke-linejoin: round; stroke-linecap: round; }
+      .gt { fill: none; stroke: #a3a9ae; stroke-width: 1; stroke-linecap: round; stroke-linejoin: round; }
+      .dd { fill: none; stroke: #9aa0a6; stroke-width: 1; stroke-dasharray: 5 5; }
+      .m  { fill: none; stroke: #b87333; stroke-width: 2; stroke-linejoin: round; stroke-linecap: round; }
+      .mh { fill: none; stroke: #b87333; stroke-width: 1.25; stroke-dasharray: 5 4; }
+    </style>
+    <pattern id="hf-hatch" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+      <path d="M0 0V8" stroke="#c9cdd1" stroke-width="1"/>
+    </pattern>
+    <clipPath id="hf-detail">
+      <circle cx="660" cy="430" r="104"/>
+    </clipPath>
+  </defs>
+
+  <!-- ===== METSZET: TETŐ AZ ERESZNÉL ===== -->
+
+  <!-- Tetőfedés -->
+  <path class="g" d="M60 470L620 146.3M60 494L620 170.3M60 470V494"/>
+  <path class="g" d="M620 146.3L612 153.5L628 161.5L620 170.3"/>
+  <path class="gt" d="M86 455l5 8.7M112 439.9l5 8.7M138 424.9l5 8.7M164 409.9l5 8.7M260 354.4l5 8.7M312 324.3l5 8.7M364 294.3l5 8.7M416 264.2l5 8.7M468 234.2l5 8.7M520 204.1l5 8.7M572 174.1l5 8.7"/>
+
+  <!-- Ereszcsatorna -->
+  <path class="m" d="M38 476A13 13 0 0 0 64 476"/>
+
+  <!-- Fal és terep -->
+  <path class="g" d="M100 470.9V600"/>
+  <rect x="40" y="600" width="320" height="14" fill="url(#hf-hatch)"/>
+  <path class="g" d="M40 600H360"/>
+
+  <!-- Hó a tetőn -->
+  <path class="gt" d="M204 386.8V342.8L560 137L600 157.9"/>
+  <g fill="#a3a9ae">
+    <circle cx="260" cy="330" r="1.5"/><circle cx="290" cy="316" r="1.5"/>
+    <circle cx="320" cy="300" r="1.5"/><circle cx="380" cy="262" r="1.5"/>
+    <circle cx="440" cy="232" r="1.5"/><circle cx="500" cy="196" r="1.5"/>
+  </g>
+
+  <!-- Hófogó: tartó, csövek, rögzítés a fedés alatt -->
+  <path class="m" style="stroke-width:2.5" d="M200 389.1L192 336L198 332"/>
+  <circle class="m" cx="203" cy="370" r="5"/>
+  <circle class="m" cx="200" cy="352" r="5"/>
+  <path class="mh" d="M200 395L240 372"/>
+
+  <!-- ===== RÉSZLETJELÖLÉS ===== -->
+  <circle class="dd" cx="196" cy="362" r="30"/>
+  <path class="dd" d="M226 366L557 415"/>
+  <circle class="dd" cx="660" cy="430" r="104"/>
+
+  <!-- ===== RÉSZLET: hófogó tartó ===== -->
+  <g clip-path="url(#hf-detail)">
+    <!-- Fedés és szarufa -->
+    <path class="g" d="M556 502.3L770 378"/>
+    <path class="gt" d="M556 514.3L770 390"/>
+    <path d="M556 526.3L770 402V438L556 562.3Z" fill="url(#hf-hatch)"/>
+    <path class="g" d="M556 526.3L770 402V438L556 562.3Z"/>
+
+    <!-- Hó -->
+    <path class="gt" d="M652 446.5V395L790 310V366.4"/>
+
+    <!-- Rögzítőlemez a fedés alatt, csavarok -->
+    <path class="mh" d="M640 471.5L704 434.3"/>
+    <path class="g" d="M660 459.9V488M690 442.5V470"/>
+
+    <!-- Tartó és hófogó csövek -->
+    <path class="m" style="stroke-width:2.5" d="M640 471.5V453.5L628 384L636 378"/>
+    <circle class="m" style="stroke-width:2.5" cx="645" cy="425" r="8"/>
+    <circle class="m" style="stroke-width:2.5" cx="641" cy="400" r="8"/>
+  </g>
+</svg>

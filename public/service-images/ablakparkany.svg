@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 620" role="img" aria-label="Külső ablakpárkány tervrajz">
+  <defs>
+    <style>
+      .g  { fill: none; stroke: #6b7177; stroke-width: 1.5; stroke-linejoin: round; stroke-linecap: round; }
+      .gt { fill: none; stroke: #a3a9ae; stroke-width: 1; stroke-linecap: round; }
+      .dd { fill: none; stroke: #9aa0a6; stroke-width: 1; stroke-dasharray: 5 5; }
+      .m  { fill: none; stroke: #b87333; stroke-width: 2; stroke-linejoin: round; stroke-linecap: round; }
+      .mt { fill: none; stroke: #b87333; stroke-width: 1.25; stroke-linecap: round; stroke-linejoin: round; }
+    </style>
+    <pattern id="ap-brick" width="24" height="16" patternUnits="userSpaceOnUse">
+      <path d="M0 7.5H24M0 15.5H24M0.5 0V8M12.5 8V16" fill="none" stroke="#c9cdd1" stroke-width="1"/>
+    </pattern>
+    <pattern id="ap-ins" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(-45)">
+      <path d="M0 0V8" stroke="#c9cdd1" stroke-width="1"/>
+    </pattern>
+    <clipPath id="ap-detail">
+      <circle cx="690" cy="320" r="104"/>
+    </clipPath>
+  </defs>
+
+  <!-- ===== HOMLOKZATI NÉZET ===== -->
+
+  <!-- Falfelület -->
+  <rect class="gt" x="100" y="70" width="400" height="460"/>
+
+  <!-- Ablak -->
+  <rect class="g" x="180" y="110" width="240" height="330"/>
+  <rect class="gt" x="192" y="122" width="108" height="306"/>
+  <rect class="gt" x="300" y="122" width="108" height="306"/>
+  <path class="gt" d="M206 400l26-26M214 412l12-12M314 400l26-26M322 412l12-12"/>
+
+  <!-- Párkány oldalzárókkal -->
+  <rect class="m" x="168" y="440" width="264" height="12"/>
+  <rect class="m" x="164" y="432" width="6" height="20"/>
+  <rect class="m" x="430" y="432" width="6" height="20"/>
+
+  <!-- ===== RÉSZLETJELÖLÉS ===== -->
+  <circle class="dd" cx="426" cy="446" r="28"/>
+  <path class="dd" d="M451 434L596 365"/>
+  <circle class="dd" cx="690" cy="320" r="104"/>
+
+  <!-- ===== RÉSZLET: párkány függőleges metszete ===== -->
+  <g clip-path="url(#ap-detail)">
+    <!-- Falazat az ablak alatt -->
+    <rect x="586" y="300" width="64" height="130" fill="url(#ap-brick)"/>
+    <path class="g" d="M586 300H650V430"/>
+
+    <!-- Ablakkeret alsó profil és üveg -->
+    <rect class="g" x="606" y="250" width="44" height="50"/>
+    <path class="gt" d="M612 256H644V294H612Z"/>
+    <path class="g" d="M622 210V256M628 210V256"/>
+
+    <!-- Hőszigetelés lejtős tetővel, vakolat -->
+    <path d="M650 304L700 310V430H650Z" fill="url(#ap-ins)"/>
+    <path class="g" d="M650 304L700 310V430"/>
+    <path class="gt" d="M704 312V430"/>
+
+    <!-- Párkány csepegtető orral -->
+    <path class="m" style="stroke-width:2.5" d="M640 300H652L736 311V326L730 321"/>
+    <path class="gt" d="M654 304L700 309.5"/>
+
+    <!-- Lecsöppenő víz -->
+    <path class="mt" d="M736 338C736 338 731 344 731 347A5 5 0 0 0 741 347C741 344 736 338 736 338Z"/>
+  </g>
+</svg>

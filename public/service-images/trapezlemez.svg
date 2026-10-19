@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 620" role="img" aria-label="Trapézlemez és cserepes lemez fedés tervrajz">
+  <defs>
+    <style>
+      .g  { fill: none; stroke: #6b7177; stroke-width: 1.5; stroke-linejoin: round; stroke-linecap: round; }
+      .gt { fill: none; stroke: #a3a9ae; stroke-width: 1; stroke-linecap: round; }
+      .dd { fill: none; stroke: #9aa0a6; stroke-width: 1; stroke-dasharray: 5 5; }
+      .m  { fill: none; stroke: #b87333; stroke-width: 2; stroke-linejoin: round; stroke-linecap: round; }
+      .mt { fill: none; stroke: #b87333; stroke-width: 1.25; stroke-linecap: round; }
+    </style>
+    <pattern id="tc-hatch" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+      <path d="M0 0V8" stroke="#c9cdd1" stroke-width="1"/>
+    </pattern>
+    <clipPath id="tc-detail">
+      <circle cx="700" cy="250" r="104"/>
+    </clipPath>
+  </defs>
+
+  <!-- ===== HOMLOKZATI NÉZET ===== -->
+
+  <!-- Tetősík cserepes lemezzel -->
+  <rect class="g" x="56" y="110" width="508" height="320"/>
+  <path class="gt" d="M83 112V430M129 112V430M175 112V430M221 112V430M267 112V430M313 112V430M359 112V430M405 112V430M451 112V430M497 112V430M543 112V430"/>
+  <path class="mt" d="M60 145H560M60 180H560M60 215H560M60 250H560M60 285H560M60 320H560M60 355H560M60 390H560"/>
+  <path class="gt" d="M60 149H560M60 184H560M60 219H560M60 254H560M60 289H560M60 324H560M60 359H560M60 394H560"/>
+
+  <!-- Gerinc-, orom- és ereszszegély -->
+  <rect class="m" x="52" y="100" width="516" height="12"/>
+  <path class="m" d="M58 112V430M562 112V430"/>
+  <path class="m" d="M52 430H568"/>
+
+  <!-- Ereszcsatorna és lefolyó -->
+  <rect class="m" x="48" y="434" width="524" height="20"/>
+  <path class="mt" d="M48 440H572"/>
+  <path class="m" d="M508 454H540L533 470H515Z"/>
+  <path class="m" d="M518 470V552M530 470V552"/>
+  <path class="m" d="M514 510H534V516H514Z"/>
+  <path class="m" d="M518 552L534 566H546L530 552"/>
+
+  <!-- Fal, ablakok, terep -->
+  <path class="g" d="M80 454V570M540 454V570"/>
+  <rect class="g" x="140" y="480" width="90" height="60"/>
+  <path class="gt" d="M185 480V540M140 500H230"/>
+  <rect class="g" x="380" y="480" width="90" height="60"/>
+  <path class="gt" d="M425 480V540M380 500H470"/>
+  <rect x="40" y="570" width="580" height="14" fill="url(#tc-hatch)"/>
+  <path class="g" d="M40 570H620"/>
+
+  <!-- ===== RÉSZLETJELÖLÉS ===== -->
+  <circle class="dd" cx="300" cy="280" r="26"/>
+  <path class="dd" d="M326 278L596 258"/>
+  <circle class="dd" cx="700" cy="250" r="104"/>
+
+  <!-- ===== RÉSZLET: trapéz- és cserepes lemez profil ===== -->
+  <g clip-path="url(#tc-detail)">
+    <!-- Trapézlemez -->
+    <rect x="628" y="220" width="28" height="16" fill="url(#tc-hatch)"/>
+    <rect class="g" x="628" y="220" width="28" height="16"/>
+    <path class="m" style="stroke-width:2.5" d="M590 220H620L632 196H652L664 220H690L702 196H722L734 220H760L772 196H792L804 220H812"/>
+    <path class="g" d="M642 188V232M636 190H648"/>
+
+    <!-- Cserepes lemez -->
+    <rect x="676" y="300" width="32" height="16" fill="url(#tc-hatch)"/>
+    <rect class="g" x="676" y="300" width="32" height="16"/>
+    <path class="m" style="stroke-width:2.5" d="M590 300C610 300 614 285 628 285C642 285 646 300 660 300C674 300 678 285 692 285C706 285 710 300 724 300C738 300 742 285 756 285C770 285 774 300 788 300C798 300 806 292 812 288"/>
+    <path class="g" d="M692 279V312M686 281H698"/>
+  </g>
+</svg>

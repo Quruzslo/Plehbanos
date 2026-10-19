@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import navItems from "@/lib/ui/navItems";
+import navItems from "@/lib/datas/navItems";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence, type Variants } from "motion/react";
 

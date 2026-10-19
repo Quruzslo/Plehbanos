@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 620" role="img" aria-label="Állókorcos lemezfedés tervrajz">
+  <defs>
+    <style>
+      .g  { fill: none; stroke: #6b7177; stroke-width: 1.5; stroke-linejoin: round; stroke-linecap: round; }
+      .gt { fill: none; stroke: #a3a9ae; stroke-width: 1; stroke-linecap: round; }
+      .cl { fill: none; stroke: #a3a9ae; stroke-width: 1; stroke-dasharray: 14 4 2 4; }
+      .dd { fill: none; stroke: #9aa0a6; stroke-width: 1; stroke-dasharray: 5 5; }
+      .m  { fill: none; stroke: #b87333; stroke-width: 2; stroke-linejoin: round; stroke-linecap: round; }
+      .mt { fill: none; stroke: #b87333; stroke-width: 1.25; stroke-linecap: round; }
+      .mh { fill: none; stroke: #b87333; stroke-width: 1.25; stroke-dasharray: 5 4; }
+    </style>
+    <pattern id="ak-hatch" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+      <path d="M0 0V8" stroke="#c9cdd1" stroke-width="1"/>
+    </pattern>
+    <clipPath id="ak-detail">
+      <circle cx="700" cy="250" r="104"/>
+    </clipPath>
+  </defs>
+
+  <!-- ===== HOMLOKZATI NÉZET ===== -->
+
+  <!-- Tetősík -->
+  <rect class="g" x="56" y="110" width="508" height="320"/>
+
+  <!-- Állókorcok -->
+  <path class="m" d="M110 112V430M160 112V430M210 112V430M260 112V430M310 112V430M360 112V430M410 112V430M460 112V430M510 112V430"/>
+  <path class="mt" d="M113 112V430M163 112V430M213 112V430M263 112V430M313 112V430M363 112V430M413 112V430M463 112V430M513 112V430"/>
+
+  <!-- Gerincszegély, oromszegélyek, ereszszegély -->
+  <rect class="m" x="52" y="100" width="516" height="12"/>
+  <path class="m" d="M58 112V430M562 112V430"/>
+  <path class="m" d="M52 430H568"/>
+
+  <!-- Ereszcsatorna -->
+  <rect class="m" x="48" y="434" width="524" height="20"/>
+  <path class="mt" d="M48 440H572"/>
+  <path class="m" d="M120 428V442M220 428V442M320 428V442M420 428V442M500 428V442"/>
+
+  <!-- Lefolyó -->
+  <path class="m" d="M508 454H540L533 470H515Z"/>
+  <path class="m" d="M518 470V552M530 470V552"/>
+  <path class="m" d="M514 510H534V516H514Z"/>
+  <path class="m" d="M518 552L534 566H546L530 552"/>
+
+  <!-- Fal, ablakok, terep -->
+  <path class="g" d="M80 454V570M540 454V570"/>
+  <rect class="g" x="140" y="480" width="90" height="60"/>
+  <path class="gt" d="M185 480V540M140 500H230"/>
+  <rect class="g" x="380" y="480" width="90" height="60"/>
+  <path class="gt" d="M425 480V540M380 500H470"/>
+  <rect x="40" y="570" width="580" height="14" fill="url(#ak-hatch)"/>
+  <path class="g" d="M40 570H620"/>
+
+  <!-- ===== RÉSZLETJELÖLÉS ===== -->
+  <circle class="dd" cx="361.5" cy="270" r="26"/>
+  <path class="dd" d="M387 268L596 256"/>
+  <circle class="dd" cx="700" cy="250" r="104"/>
+
+  <!-- ===== RÉSZLET: dupla állókorc keresztmetszete ===== -->
+  <g clip-path="url(#ak-detail)">
+    <!-- Deszkázat és elválasztó réteg -->
+    <rect x="590" y="300" width="230" height="20" fill="url(#ak-hatch)"/>
+    <path class="g" d="M590 300H820M590 320H820"/>
+    <path class="gt" d="M590 297H820"/>
+
+    <!-- Korcoló (rejtett rögzítés) -->
+    <path class="g" d="M664 296H698"/>
+    <path class="mh" d="M698 296V222"/>
+    <path class="g" d="M680 290V316M674 290H686"/>
+
+    <!-- Lemezsávok felhajtással -->
+    <path class="m" style="stroke-width:2.5" d="M590 294H688Q694 294 694 288V230"/>
+    <path class="m" style="stroke-width:2.5" d="M820 294H712Q706 294 706 288V230"/>
+
+    <!-- Korcfej (kettős hajtás) -->
+    <rect class="m" style="stroke-width:2.5" x="687" y="194" width="26" height="40" rx="9"/>
+    <rect class="mt" x="694" y="203" width="12" height="27" rx="5"/>
+
+    <!-- Tengelyvonal -->
+    <path class="cl" d="M700 160V340"/>
+  </g>
+</svg>

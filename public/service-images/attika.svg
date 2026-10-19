@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 620" role="img" aria-label="Attika-, fal- és kerítésfedés tervrajz">
+  <defs>
+    <style>
+      .g  { fill: none; stroke: #6b7177; stroke-width: 1.5; stroke-linejoin: round; stroke-linecap: round; }
+      .dd { fill: none; stroke: #9aa0a6; stroke-width: 1; stroke-dasharray: 5 5; }
+      .m  { fill: none; stroke: #b87333; stroke-width: 2; stroke-linejoin: round; stroke-linecap: round; }
+      .mt { fill: none; stroke: #b87333; stroke-width: 1.25; stroke-linecap: round; }
+      .mh { fill: none; stroke: #b87333; stroke-width: 1.25; stroke-dasharray: 5 4; }
+    </style>
+    <pattern id="ak2-brick" width="24" height="16" patternUnits="userSpaceOnUse">
+      <path d="M0 7.5H24M0 15.5H24M0.5 0V8M12.5 8V16" fill="none" stroke="#c9cdd1" stroke-width="1"/>
+    </pattern>
+    <pattern id="ak2-hatch" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+      <path d="M0 0V8" stroke="#c9cdd1" stroke-width="1"/>
+    </pattern>
+    <clipPath id="ak2-detail">
+      <circle cx="680" cy="360" r="104"/>
+    </clipPath>
+  </defs>
+
+  <!-- ===== HOMLOKZATI NÉZET: KERÍTÉS ===== -->
+
+  <!-- Oszlopok -->
+  <rect x="40" y="300" width="50" height="220" fill="url(#ak2-brick)"/>
+  <rect class="g" x="40" y="300" width="50" height="220"/>
+  <rect x="250" y="300" width="50" height="220" fill="url(#ak2-brick)"/>
+  <rect class="g" x="250" y="300" width="50" height="220"/>
+  <rect x="460" y="300" width="50" height="220" fill="url(#ak2-brick)"/>
+  <rect class="g" x="460" y="300" width="50" height="220"/>
+
+  <!-- Falszakaszok -->
+  <rect x="90" y="400" width="160" height="120" fill="url(#ak2-brick)"/>
+  <rect class="g" x="90" y="400" width="160" height="120"/>
+  <rect x="300" y="400" width="160" height="120" fill="url(#ak2-brick)"/>
+  <rect class="g" x="300" y="400" width="160" height="120"/>
+
+  <!-- Oszlopsapkák -->
+  <path class="m" d="M34 300H96V292L65 278L34 292Z"/>
+  <path class="m" d="M244 300H306V292L275 278L244 292Z"/>
+  <path class="m" d="M454 300H516V292L485 278L454 292Z"/>
+
+  <!-- Falfedés -->
+  <rect class="m" x="88" y="392" width="164" height="8"/>
+  <rect class="m" x="298" y="392" width="164" height="8"/>
+
+  <!-- Terep -->
+  <rect x="20" y="520" width="520" height="14" fill="url(#ak2-hatch)"/>
+  <path class="g" d="M20 520H540"/>
+
+  <!-- ===== RÉSZLETJELÖLÉS ===== -->
+  <circle class="dd" cx="375" cy="396" r="26"/>
+  <path class="dd" d="M401 393L577 372"/>
+  <circle class="dd" cx="680" cy="360" r="104"/>
+
+  <!-- ===== RÉSZLET: falfedés keresztmetszete ===== -->
+  <g clip-path="url(#ak2-detail)">
+    <!-- Fal -->
+    <rect x="646" y="336" width="68" height="140" fill="url(#ak2-brick)"/>
+    <path class="g" d="M646 476V336H714V476"/>
+
+    <!-- Rögzítőpánt és csavar -->
+    <path class="mh" d="M640 330V336H720V328"/>
+    <path class="g" d="M680 336V358M675 336H685"/>
+
+    <!-- Lejtős fedés, kétoldali csepegtetővel -->
+    <path class="m" style="stroke-width:2.5" d="M630 346L634 342V322L726 314V336L730 340"/>
+  </g>
+</svg>

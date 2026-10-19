@@ -1,0 +1,106 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 620" role="img" aria-label="Ereszcsatorna tervrajz">
+  <defs>
+    <style>
+      .g  { fill: none; stroke: #6b7177; stroke-width: 1.5; stroke-linejoin: round; stroke-linecap: round; }
+      .gt { fill: none; stroke: #a3a9ae; stroke-width: 1; stroke-linecap: round; }
+      .cl { fill: none; stroke: #a3a9ae; stroke-width: 1; stroke-dasharray: 14 4 2 4; }
+      .dd { fill: none; stroke: #9aa0a6; stroke-width: 1; stroke-dasharray: 5 5; }
+      .m  { fill: none; stroke: #b87333; stroke-width: 2; stroke-linejoin: round; stroke-linecap: round; }
+      .mt { fill: none; stroke: #b87333; stroke-width: 1.25; stroke-linecap: round; }
+    </style>
+    <pattern id="et-hatch" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+      <path d="M0 0V8" stroke="#c9cdd1" stroke-width="1"/>
+    </pattern>
+    <clipPath id="et-detail">
+      <circle cx="690" cy="170" r="104"/>
+    </clipPath>
+  </defs>
+
+  <!-- ===== HOMLOKZATI NÉZET ===== -->
+
+  <!-- Tető (megszakítási vonallal) -->
+  <path class="g" d="M40 168 H580"/>
+  <path class="g" d="M40 168 V104 L120 104 L132 92 L144 116 L156 104 H580 V168"/>
+  <path class="gt" d="M40 116 H580 M40 128 H580 M40 140 H580 M40 152 H580"/>
+
+  <!-- Ereszszegély (csepegtető) -->
+  <path class="m" d="M38 168 H582 M38 174 H582"/>
+
+  <!-- Homlokdeszka -->
+  <rect class="g" x="60" y="174" width="500" height="22"/>
+
+  <!-- Fal és terep -->
+  <path class="g" d="M60 196 V570 M560 196 V570"/>
+  <rect x="40" y="570" width="580" height="14" fill="url(#et-hatch)"/>
+  <path class="g" d="M40 570 H620"/>
+
+  <!-- Ablak -->
+  <rect class="g" x="150" y="300" width="160" height="170"/>
+  <rect class="gt" x="160" y="310" width="140" height="150"/>
+  <path class="gt" d="M230 310 V460 M160 350 H300"/>
+  <path class="g" d="M144 470 H316 V476 H144 Z"/>
+
+  <!-- Csatorna tengelyvonal -->
+  <path class="cl" d="M30 209 H596"/>
+
+  <!-- Ereszcsatorna -->
+  <rect class="m" x="50" y="196" width="520" height="26"/>
+  <path class="mt" d="M50 202 H570"/>
+  <path class="mt" d="M56 196 V222 M564 196 V222"/>
+
+  <!-- Csatornatartók -->
+  <path class="m" d="M110 186 V204 M190 186 V204 M270 186 V204 M350 186 V204 M430 186 V204 M520 186 V204"/>
+
+  <!-- Vízgyűjtő üst -->
+  <path class="m" d="M482 222 H518 L510 246 H490 Z"/>
+
+  <!-- Lefolyócső tengelyvonal -->
+  <path class="cl" d="M500 232 V596"/>
+
+  <!-- Lefolyócső, könyökök -->
+  <path class="m" d="M492 246 V540 M508 246 V540"/>
+  <path class="mt" d="M492 262 H508 M492 270 H508 M492 296 H508 M492 304 H508"/>
+
+  <!-- Bilincsek -->
+  <path class="m" d="M484 350 H516 V358 H484 Z M484 460 H516 V468 H484 Z"/>
+  <path class="mt" d="M516 354 H560 M516 464 H560"/>
+
+  <!-- Kifolyó -->
+  <path class="m" d="M492 540 L510 562 H528 L508 540"/>
+
+  <!-- ===== RÉSZLETJELÖLÉS ===== -->
+  <circle class="dd" cx="548" cy="209" r="26"/>
+  <path class="dd" d="M573 203 L589 199"/>
+  <circle class="dd" cx="690" cy="170" r="104"/>
+
+  <!-- ===== KERESZTMETSZET (részlet) ===== -->
+  <g clip-path="url(#et-detail)">
+   <g transform="translate(14 34)">
+    <!-- Tetőfedés és deszkázat -->
+    <path class="g" d="M560 32 L648 96"/>
+    <path class="g" d="M560 46 L637 102"/>
+    <path class="gt" d="M560 20 L660 92 M572 10 L668 80"/>
+
+    <!-- Homlokdeszka (fa, sraffozva) -->
+    <rect x="625" y="102" width="12" height="108" fill="url(#et-hatch)"/>
+    <rect class="g" x="625" y="102" width="12" height="108"/>
+
+    <!-- Fal -->
+    <path class="g" d="M612 210 V290"/>
+
+    <!-- Ereszszegély a csatornába -->
+    <path class="m" d="M594 60 L654 104 L658 122"/>
+
+    <!-- Félkörös csatorna peremmel -->
+    <path class="m" d="M660 122 V140 A32 32 0 0 0 724 140 V133"/>
+    <circle class="m" cx="725" cy="128" r="5"/>
+
+    <!-- Csatornatartó -->
+    <path class="m" style="stroke-width:2.5" d="M637 148 H655 V140 A37 37 0 0 0 729 140 V134"/>
+    <circle cx="644" cy="148" r="2" fill="#b87333"/>
+
+    <!-- Csatorna tengelye -->
+    <path class="cl" d="M692 96 V196"/>
+   </g>
+  </g>
+</svg>

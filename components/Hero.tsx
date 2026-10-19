@@ -38,7 +38,7 @@ export default function Hero() {
             link="/#szolgaltatasok"
             icon={ArrowDownIcon}
             iconSize={25}
-            className="flex flex-row gap-3 mt-[20px]"
+            className="flex flex-row gap-3 mt-[20px] mr-auto md:mr-[0px] !text-white"
           />
         </div>
       </div>

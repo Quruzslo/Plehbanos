@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 610" role="img" aria-label="Egyedi bádogos idomok profilrajza">
+  <defs>
+    <style>
+      .g  { fill: none; stroke: #6b7177; stroke-width: 1.5; stroke-linejoin: round; stroke-linecap: round; }
+      .dd { fill: none; stroke: #9aa0a6; stroke-width: 1; stroke-dasharray: 5 5; }
+      .m  { fill: none; stroke: #b87333; stroke-width: 2.5; stroke-linejoin: round; stroke-linecap: round; }
+    </style>
+  </defs>
+
+  <!-- Profillapok keretei -->
+  <rect class="dd" x="40" y="60" width="220" height="220"/>
+  <rect class="dd" x="300" y="60" width="220" height="220"/>
+  <rect class="dd" x="560" y="60" width="220" height="220"/>
+  <rect class="dd" x="40" y="330" width="220" height="220"/>
+  <rect class="dd" x="300" y="330" width="220" height="220"/>
+  <rect class="dd" x="560" y="330" width="220" height="220"/>
+
+  <!-- Sarokjelek -->
+  <path class="g" d="M30 50h14M30 50v14M790 50h-14M790 50v14M30 560h14M30 560v-14M790 560h-14M790 560v-14"/>
+
+  <!-- 1. Ereszszegély (csepegtető) -->
+  <path class="m" d="M76 126L80 120L180 160L192 162V210L184 216"/>
+
+  <!-- 2. Oromszegély -->
+  <path class="m" d="M340 138V130H450V220L442 226"/>
+
+  <!-- 3. Falszegély -->
+  <path class="m" d="M600 100H612V200L720 236L724 230"/>
+
+  <!-- 4. Vápalemez -->
+  <path class="m" d="M56 396L60 400L144 470L150 460L156 470L240 400L244 396"/>
+
+  <!-- 5. Ablakpárkány -->
+  <path class="m" d="M330 400V420L480 436V456L474 451"/>
+
+  <!-- 6. Falfedés -->
+  <path class="m" d="M586 474L590 470V436L750 424V460L754 464"/>
+</svg>

@@ -86,3 +86,51 @@ body {
 .desktop-nav-item:hover::before {
   transform: scaleY(1);
 }
+
+/* Main Button ----------------- */
+.main-button-fill {
+  transition: width 0.5s ease;
+}
+
+.main-button-icon {
+  transform: translateY(-50%);
+  transition: transform 0.5s ease;
+}
+
+.main-button:hover .main-button-fill,
+.main-button:focus-visible .main-button-fill {
+  width: calc(100% - 8px);
+}
+
+.main-button:hover .main-button-icon,
+.main-button:focus-visible .main-button-icon {
+  transform: translateY(0);
+}
+
+.service-card {
+  background-color: #ffffff;
+  color: var(--text);
+  transition: all ease 0.4s;
+  position: relative;
+}
+
+.service-card:hover {
+  background-color: var(--text);
+  color: #ffffff;
+  transition: all ease 0.4s;
+  position: relative;
+}
+
+.card-preview {
+  position: absolute;
+  top: 15px;
+  right: -50px;
+  opacity: 1;
+  transition: all ease 0.4s;
+}
+
+.service-card:hover .card-preview {
+  top: 15px;
+  right: 15px;
+  opacity: 1;
+}

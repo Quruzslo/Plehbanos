@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 620" role="img" aria-label="Előtető bádogfedés tervrajz">
+  <defs>
+    <style>
+      .g  { fill: none; stroke: #6b7177; stroke-width: 1.5; stroke-linejoin: round; stroke-linecap: round; }
+      .gt { fill: none; stroke: #a3a9ae; stroke-width: 1; stroke-linecap: round; }
+      .dd { fill: none; stroke: #9aa0a6; stroke-width: 1; stroke-dasharray: 5 5; }
+      .m  { fill: none; stroke: #b87333; stroke-width: 2; stroke-linejoin: round; stroke-linecap: round; }
+      .mt { fill: none; stroke: #b87333; stroke-width: 1.25; stroke-linecap: round; }
+    </style>
+    <pattern id="et2-brick" width="24" height="16" patternUnits="userSpaceOnUse">
+      <path d="M0 7.5H24M0 15.5H24M0.5 0V8M12.5 8V16" fill="none" stroke="#c9cdd1" stroke-width="1"/>
+    </pattern>
+    <pattern id="et2-hatch" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+      <path d="M0 0V8" stroke="#c9cdd1" stroke-width="1"/>
+    </pattern>
+    <clipPath id="et2-detail">
+      <circle cx="690" cy="330" r="104"/>
+    </clipPath>
+  </defs>
+
+  <!-- ===== HOMLOKZATI NÉZET: BEJÁRAT ===== -->
+
+  <!-- Falfelület és terep -->
+  <path class="gt" d="M80 60V540M500 60V540"/>
+  <rect x="40" y="540" width="500" height="14" fill="url(#et2-hatch)"/>
+  <path class="g" d="M40 540H540"/>
+
+  <!-- Ajtó és lépcső -->
+  <rect class="g" x="230" y="320" width="120" height="210"/>
+  <rect class="gt" x="244" y="334" width="92" height="86"/>
+  <rect class="gt" x="244" y="432" width="92" height="84"/>
+  <circle cx="338" cy="428" r="3" fill="#6b7177"/>
+  <rect class="g" x="218" y="530" width="144" height="10"/>
+
+  <!-- Előtető: falszegély, korcolt fedés, csatorna, konzolok -->
+  <path class="m" d="M188 248H392"/>
+  <rect class="g" x="190" y="250" width="200" height="22"/>
+  <path class="mt" d="M210 250V272M230 250V272M250 250V272M270 250V272M290 250V272M310 250V272M330 250V272M350 250V272M370 250V272"/>
+  <rect class="m" x="186" y="272" width="208" height="12"/>
+  <path class="mt" d="M186 276H394"/>
+  <path class="g" d="M198 284V330M382 284V330"/>
+
+  <!-- Lefolyó -->
+  <path class="m" d="M380 284H400L396 294H384Z"/>
+  <path class="m" d="M386 294V528M394 294V528"/>
+  <path class="m" d="M383 380H397V385H383ZM383 470H397V475H383Z"/>
+  <path class="m" d="M386 528L398 538H406L394 528"/>
+
+  <!-- ===== RÉSZLETJELÖLÉS ===== -->
+  <circle class="dd" cx="214" cy="258" r="28"/>
+  <path class="dd" d="M242 262L587 314"/>
+  <circle class="dd" cx="690" cy="330" r="104"/>
+
+  <!-- ===== RÉSZLET: előtető oldalmetszete ===== -->
+  <g clip-path="url(#et2-detail)">
+    <!-- Fal horonnyal -->
+    <rect x="586" y="220" width="44" height="220" fill="url(#et2-brick)"/>
+    <path class="g" d="M630 220V278H622V286H630V440"/>
+    <circle cx="631" cy="284" r="3" fill="#6b7177"/>
+
+    <!-- Aljzat és konzol -->
+    <path d="M630 314L760 340V350L630 324Z" fill="url(#et2-hatch)"/>
+    <path class="g" d="M630 314L760 340V350L630 324"/>
+    <path class="g" d="M630 400L740 350"/>
+
+    <!-- Fedés a csatornáig, falszegély a horonyban -->
+    <path class="m" style="stroke-width:2.5" d="M630 312L760 338L766 344"/>
+    <path class="m" style="stroke-width:2.5" d="M624 282H634V309L670 316.2"/>
+
+    <!-- Csatorna -->
+    <path class="m" style="stroke-width:2.5" d="M756 342A11 11 0 0 0 778 342"/>
+    <circle class="mt" cx="778" cy="340" r="3"/>
+  </g>
+</svg>
