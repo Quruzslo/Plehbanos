@@ -2,7 +2,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import navItems from "@/lib/datas/navItems";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
+import { usePathname } from "next/navigation";
 import { motion, AnimatePresence, type Variants } from "motion/react";
 
 type Side = "left" | "right";
@@ -73,7 +74,9 @@ function MobileHeader({ scrolled }: { scrolled: boolean }) {
   }, [open]);
 
   const bar = `absolute left-0 h-[3px] w-full rounded-full transition-colors duration-300 ${
-    open ? "bg-accent" : "bg-white"
+    open
+      ? "bg-accent"
+      : "bg-white group-data-[theme=light]/header:bg-foreground"
   }`;
 
   return (
@@ -158,6 +161,37 @@ function MobileHeader({ scrolled }: { scrolled: boolean }) {
 
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);
+  const headerRef = useRef<HTMLElement>(null);
+  const [headerTheme, setHeaderTheme] = useState<"light" | "dark">("dark");
+  const pathname = usePathname();
+
+  // Melyik section van a header mögött
+  useEffect(() => {
+    const header = headerRef.current;
+    if (!header) return;
+
+    const line = header.offsetTop + header.offsetHeight / 2;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            setHeaderTheme(
+              entry.target.getAttribute("data-header") === "light"
+                ? "light"
+                : "dark",
+            );
+          }
+        }
+      },
+      { rootMargin: `-${line}px 0px -${window.innerHeight - line - 1}px 0px` },
+    );
+
+    document
+      .querySelectorAll("section")
+      .forEach((section) => observer.observe(section));
+    return () => observer.disconnect();
+  }, [pathname]);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 150);
@@ -168,7 +202,11 @@ export default function Header() {
   }, []);
 
   return (
-    <header className="fixed top-0 left-0 z-[999] w-full">
+    <header
+      ref={headerRef}
+      data-theme={headerTheme}
+      className="group/header fixed top-0 left-0 z-[999] w-full"
+    >
       {/* Desktop header ------------- */}
       <div
         className={`mx-auto hidden md:flex w-[90%] px-[25px] flex-row items-center mt-[35px] justify-center gap-[25px] rounded-full border border-transparent py-[10px] transition-all duration-500 ${

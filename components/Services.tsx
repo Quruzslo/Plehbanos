@@ -37,9 +37,9 @@ export default function Services() {
                 className="z-10 absolute card-preview cursor-pointer "
               >
                 <EyeIcon size={32} className="text-accent" />
-                <p className="pointer-none absolute top-full right-0 text-white bg-accent py-[3px] px-[10px]  opacity-0 translate-y-[35px] transition-all duration-300  [.card-preview:hover_&]:translate-y-0 [.card-preview:hover_&]:opacity-100">
+                <span className="pointer-events-none absolute top-full right-0 text-white bg-accent py-[3px] px-[10px]  opacity-0 translate-y-[35px] transition-all duration-300  [.card-preview:hover_&]:translate-y-0 [.card-preview:hover_&]:opacity-100">
                   Előnézet
-                </p>
+                </span>
               </button>
 
               <div className="absolute aspect-[4/3]  inset-0 ">

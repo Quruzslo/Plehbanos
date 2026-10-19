@@ -4,7 +4,10 @@ import { ArrowDownIcon } from "@phosphor-icons/react/ssr";
 
 export default function Hero() {
   return (
-    <section className="relative flex flex-col w-full min-h-svh pt-[100px] pb-[50px] bg-foreground">
+    <section
+      data-set="dark"
+      className="relative flex flex-col w-full min-h-svh pt-[100px] pb-[50px] bg-foreground"
+    >
       {/* Háttérkép */}
       <Image
         fill
