@@ -13,11 +13,7 @@ export default function Services() {
   const [activeModal, setActiveModal] = useState<Service | null>(null);
 
   return (
-    <section
-      id="szolgaltatasok"
-      aria-labelledby="szolgaltatasok-cim"
-      className="flex w-full flex-col py-[50px]"
-    >
+    <section id="szolgaltatasok" className="flex w-full flex-col py-[50px]">
       <div className="mx-auto flex w-[90%] max-w-[1800px] flex-col gap-8">
         <h2
           id="szolgaltatasok-cim"

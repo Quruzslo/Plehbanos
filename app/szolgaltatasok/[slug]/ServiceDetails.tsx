@@ -14,10 +14,10 @@ export default async function ServiceDetails({
 
   return (
     <section
-      data-header="dark"
-      className="w-full flex flex-col pt-[120px] bg-text h-[100svh]"
+      data-header="light"
+      className="w-full flex flex-col pt-[120px]  h-[100svh]"
     >
-      <div className="flex flex-col lg:flex-row w-[90%] max-w-[2560px] mx-auto my-auto text-white  rounded-[10px] ">
+      <div className="flex flex-col lg:flex-row w-[90%] max-w-[2560px] mx-auto my-auto text-text rounded-[10px] ">
         <div className="w-full lg:w-1/2 my-auto">
           <h1 className="text-[20px] lg:text-[35px] text-accent">
             {service.title}

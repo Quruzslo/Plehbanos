@@ -37,14 +37,24 @@ const menuItem: Variants = {
   visible: { x: 0, opacity: 1, transition: { duration: 0.2, ease } },
 };
 
-function NavGroup({ side }: { side: Side }) {
+function NavGroup({
+  side,
+  headerTheme,
+  scrolled,
+}: {
+  side: Side;
+  headerTheme: "dark" | "light";
+  scrolled: boolean;
+}) {
   return (
     <div
       className={`flex w-full flex-col motion-reduce:animate-none ${
         side === "left" ? "animate-reveal-left" : "animate-reveal-right"
       }`}
     >
-      <div className="h-[2px] w-full rounded-full bg-white/50" />
+      <div
+        className={`h-[2px] w-full rounded-full bg-white/50 ${headerTheme === "light" && !scrolled ? "!bg-text/50" : "!bg-white/50"}`}
+      />
       <nav className="desktop-nav flex w-full flex-row items-center justify-around gap-[15px]">
         {navItems
           .filter((item) => item.position === side)
@@ -52,7 +62,7 @@ function NavGroup({ side }: { side: Side }) {
             <Link
               key={item.path}
               href={item.path}
-              className="text-[20px] text-white desktop-nav-item"
+              className={`text-[20px] text-white desktop-nav-item ${headerTheme === "light" && !scrolled ? "!text-text" : "!text-white"}`}
             >
               {item.name}
             </Link>
@@ -65,7 +75,6 @@ function NavGroup({ side }: { side: Side }) {
 function MobileHeader({ scrolled }: { scrolled: boolean }) {
   const [open, setOpen] = useState(false);
 
-  // Nyitott menünél ne görgessen alatta az oldal
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
     return () => {
@@ -204,7 +213,7 @@ export default function Header() {
   return (
     <header
       ref={headerRef}
-      data-theme={headerTheme}
+      // data-theme={headerTheme}
       className="group/header fixed top-0 left-0 z-[999] w-full"
     >
       {/* Desktop header ------------- */}
@@ -213,7 +222,7 @@ export default function Header() {
           scrolled ? "border-white/40 bg-foreground/40 backdrop-blur-sm" : ""
         }`}
       >
-        <NavGroup side="left" />
+        <NavGroup headerTheme={headerTheme} scrolled={scrolled} side="left" />
 
         <Link
           href="/"
@@ -230,7 +239,7 @@ export default function Header() {
           />
         </Link>
 
-        <NavGroup side="right" />
+        <NavGroup headerTheme={headerTheme} scrolled={scrolled} side="right" />
       </div>
 
       {/* Mobil header ----------------- */}

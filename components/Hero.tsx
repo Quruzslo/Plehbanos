@@ -5,7 +5,7 @@ import { ArrowDownIcon } from "@phosphor-icons/react/ssr";
 export default function Hero() {
   return (
     <section
-      data-set="dark"
+      data-header="dark"
       className="relative flex flex-col w-full min-h-svh pt-[100px] pb-[50px] bg-foreground"
     >
       {/* Háttérkép */}
