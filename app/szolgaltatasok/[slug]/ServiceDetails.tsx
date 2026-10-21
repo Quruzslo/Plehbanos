@@ -70,9 +70,9 @@ export default async function ServiceDetails({
           </div>
         </div>
       </section>
-      <section className="w-full flex flex-col my-[100px]">
+      <section className="w-full flex flex-col my-[50px]">
         <div className="flex flex-col lg:flex-row w-[90%] max-w-[2560px] mx-auto my-auto text-text rounded-[10px] ">
-          <div className="flex flex-col w-full lg:w-1/2 p-[10px] ">
+          <div className="flex flex-col w-full lg:w-1/2 p-[10px] mt-[50px]">
             <h2 className="text-[20px] lg:text-[35px] font-bold mb-[20px]">
               Folyamat, ahogyan dolgozunk
             </h2>
@@ -101,7 +101,7 @@ export default async function ServiceDetails({
               ))}
             </ol>
           </div>
-          <div className="flex flex-col w-full lg:w-1/2 p-[10px]">
+          <div className="flex flex-col w-full lg:w-1/2 p-[10px] mt-[50px]">
             <h2 className="text-[20px] lg:text-[35px] font-bold mb-[20px]">
               Tervezett anyaghasználat
             </h2>

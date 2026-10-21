@@ -145,3 +145,34 @@ h3 {
   right: 15px;
   opacity: 1;
 }
+
+.footer-img::before {
+  content: "";
+  z-index: 10;
+  background: radial-gradient(
+    circle 25px at bottom left,
+    var(--color-text) 98%,
+    #fff
+  );
+  width: 25px;
+  height: 25px;
+  position: absolute;
+  top: 0;
+  left: -25px;
+}
+
+.footer-img::after {
+  content: "";
+  aspect-ratio: 1;
+  z-index: 10;
+  background: radial-gradient(
+    circle 25px at bottom right,
+    var(--color-text) 98%,
+    #ffff
+  );
+  width: 25px;
+  height: 25px;
+  position: absolute;
+  top: 0;
+  right: -25px;
+}

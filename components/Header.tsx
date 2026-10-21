@@ -162,7 +162,7 @@ function MobileHeader({
             initial="hidden"
             animate="visible"
             exit="hidden"
-            className="fixed top-0 right-0 w-2/3 h-dvh bg-foreground md:hidden rounded-tl-[10px] rounded-bl-[10px] overflow-y-auto overflow-x-hidden flex flex-col"
+            className="fixed top-0 right-0 w-2/3 h-dvh bg-foreground lg:hidden rounded-tl-[10px] rounded-bl-[10px] overflow-y-auto overflow-x-hidden flex flex-col"
           >
             <ul className="flex h-full flex-col justify-center gap-6 px-[10%] min-h-[450px]">
               {navItems.map((item) => (
@@ -237,7 +237,7 @@ export default function Header() {
     >
       {/* Desktop header ------------- */}
       <div
-        className={`mx-auto hidden lg:flex w-[90%] max-w-[2560px]  px-[25px] flex-row items-center mt-[10px] justify-center gap-[25px] rounded-full border border-transparent py-[10px] transition-all duration-500 ${
+        className={`mx-auto hidden lg:flex w-[90%] max-w-[2560px] px-[25px] flex-row items-center mt-[10px] justify-center gap-[25px] rounded-full border border-transparent py-[10px] transition-all duration-500 ${
           scrolled ? "border-white/40 bg-foreground/40 backdrop-blur-sm" : ""
         }`}
       >
