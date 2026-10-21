@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="currentColor" role="img" aria-label="Bádogos logó">
+  <defs>
+    <mask id="seams">
+      <rect width="200" height="200" fill="#fff"/>
+      <path d="M58 40 V122 M79 40 V122 M100 40 V122 M121 40 V122 M142 40 V122" stroke="#000" stroke-width="6"/>
+    </mask>
+  </defs>
+  <path d="M18 112 L100 30 L182 112 Z" mask="url(#seams)"/>
+  <rect x="12" y="120" width="176" height="16" rx="8"/>
+  <path d="M146 136 H162 V158 Q162 168 172 168 H186 V182 H170 Q146 182 146 160 Z"/>
+</svg>

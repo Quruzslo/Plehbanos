@@ -22,7 +22,7 @@ export default function Hero() {
       <div className="absolute inset-0 bg-linear-to-b from-foreground/90 via-foreground/30 to-foreground/90" />
 
       {/* Tartalom */}
-      <div className="relative z-10 flex flex-col md:flex-row w-[90%] max-w-[1800px] mx-auto my-auto ">
+      <div className="relative z-10 flex flex-col md:flex-row w-[90%] max-w-[1800px] mt-auto mx-auto lg:my-auto ">
         <div className="flex flex-col w-full md:max-w-[800px] mx-auto mt-[120px] justify-center items-center text-background w-fit">
           <h1 className="text-[25px] md:text-[45px] font-black mr-auto">
             József Zoltán – bádogos mester

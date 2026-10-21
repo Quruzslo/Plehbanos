@@ -7,10 +7,18 @@ import ServicesModal from "./ServicesModal";
 import type { Service } from "@/lib/datas/services";
 import { EyeIcon } from "@phosphor-icons/react";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function Services() {
   const [activeModal, setActiveModal] = useState<Service | null>(null);
+
+  useEffect(() => {
+    if (!activeModal) return;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [activeModal]);
 
   return (
     <section id="szolgaltatasok" className="flex w-full flex-col py-[50px]">
@@ -26,7 +34,8 @@ export default function Services() {
           {services.map((service) => (
             <article
               key={service.title}
-              className="service-card transition-all duration-300 hover:shadow-[5px_5px_15px_0px_rgba(0,0,0,0.3)] flex flex-col overflow-hidden rounded-[10px] bg-white text-text relative h-[450px] group "
+              tabIndex={-1}
+              className="service-card transition-all duration-300 hover:shadow-[5px_5px_15px_0px_rgba(0,0,0,0.3)] flex flex-col overflow-hidden rounded-[10px] bg-white text-text relative h-[450px] group"
             >
               <button
                 onClick={() => setActiveModal(service)}
@@ -61,7 +70,7 @@ export default function Services() {
                   text="Tovább"
                   icon={ArrowRightIcon}
                   iconSize={20}
-                  className="self-start service-button !text-accent translate-y-[110%] group-hover:translate-y-0 transition-all duration-500"
+                  className="self-start service-button !text-accent translate-y-[110%] group-hover:translate-y-0 group-focus-within:translate-y-0 transition-all duration-500"
                 />
               </div>
             </article>

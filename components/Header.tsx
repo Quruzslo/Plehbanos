@@ -5,6 +5,7 @@ import navItems from "@/lib/datas/navItems";
 import { useState, useEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence, type Variants } from "motion/react";
+import { PaperPlaneTiltIcon } from "@phosphor-icons/react";
 
 type Side = "left" | "right";
 
@@ -53,7 +54,7 @@ function NavGroup({
       }`}
     >
       <div
-        className={`h-[2px] w-full rounded-full bg-white/50 ${headerTheme === "light" && !scrolled ? "!bg-text/50" : "!bg-white/50"}`}
+        className={`h-[2px] transition duration-600 rounded-full bg-white/50 ${headerTheme === "light" && !scrolled ? "!bg-text/50" : "!bg-white/50"} ${scrolled ? "!w-0" : "!w-full"}`}
       />
       <nav className="desktop-nav flex w-full flex-row items-center justify-around gap-[15px]">
         {navItems
@@ -72,7 +73,13 @@ function NavGroup({
   );
 }
 
-function MobileHeader({ scrolled }: { scrolled: boolean }) {
+function MobileHeader({
+  scrolled,
+  headerTheme,
+}: {
+  scrolled: boolean;
+  headerTheme: "light" | "dark";
+}) {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
@@ -82,58 +89,67 @@ function MobileHeader({ scrolled }: { scrolled: boolean }) {
     };
   }, [open]);
 
-  const bar = `absolute left-0 h-[3px] w-full rounded-full transition-colors duration-300 ${
-    open
-      ? "bg-accent"
-      : "bg-white group-data-[theme=light]/header:bg-foreground"
+  const bar = `flex flex-row h-[3px] w-full rounded-full transition-colors duration-300  ${
+    open ? "!bg-accent" : "bg-white "
   }`;
 
   return (
     <>
-      {/* Felső sáv: logó + hamburger */}
+      {/*  logó + hamburger */}
       <div
-        className={`relative z-10 mx-auto mt-[15px] flex w-[90%] items-center justify-between rounded-full  px-[15px] py-[8px] transition-all duration-500 md:hidden ${
+        className={`relative z-10 mx-auto mt-[15px] flex w-[90%] items-center justify-between rounded-full  pl-[15px] pr-[5px] py-[8px] transition-all duration-500 md:hidden ${
           scrolled && !open ? " bg-foreground/40 backdrop-blur-sm" : ""
         }`}
       >
         <Link
           href="/"
-          onClick={() => setOpen(false)}
-          className="relative h-[60px] w-[90px] overflow-hidden rounded-[10px]"
+          className={`relative transition-all duration-300 ${
+            scrolled
+              ? "h-[40px] min-w-[40px] bg-transparent"
+              : "h-[75px] min-w-[75px] bg-accent shadow-xl"
+          } overflow-hidden rounded-full`}
         >
           <Image
             alt="József Zoltán bádogos mester – főoldal"
-            src="/images/favicon.ico.webp"
+            src="/icon.svg"
             fill
-            sizes="90px"
-            className="object-cover animate-scale-up"
+            sizes="150px"
+            className="object-cover animate-scale-up !stroke-accent"
           />
         </Link>
 
-        <button
-          type="button"
-          onClick={() => setOpen((o) => !o)}
-          aria-expanded={open}
-          aria-controls="mobile-menu"
-          aria-label={open ? "Menü bezárása" : "Menü megnyitása"}
-          className="relative h-5 w-7 cursor-pointer"
-        >
-          <motion.span
-            className={`${bar} top-0`}
-            animate={open ? { y: 9, rotate: 45 } : { y: 0, rotate: 0 }}
-            transition={{ duration: 0.3, ease }}
-          />
-          <motion.span
-            className={`${bar} top-[9px]`}
-            animate={{ opacity: open ? 0 : 1 }}
-            transition={{ duration: 0.2 }}
-          />
-          <motion.span
-            className={`${bar} top-[18px]`}
-            animate={open ? { y: -9, rotate: -45 } : { y: 0, rotate: 0 }}
-            transition={{ duration: 0.3, ease }}
-          />
-        </button>
+        <div className="flex flex-row gap-[5px] rounded-full ml-auto p-[3px] bg-gray-300">
+          <Link
+            href="/kapcsolat"
+            className="relative w-[50px] h-[50px] items-center justify-center  rounded-full flex flex-col gap-[5px] cursor-pointer bg-text px-[10px] py-[5px]"
+          >
+            <PaperPlaneTiltIcon size={25} className="text-white" />
+          </Link>
+          <button
+            type="button"
+            onClick={() => setOpen((o) => !o)}
+            aria-expanded={open}
+            aria-controls="mobile-menu"
+            aria-label={open ? "Menü bezárása" : "Menü megnyitása"}
+            className="relative w-[50px] h-[50px] flex flex-col items-center justify-center gap-[5px] rounded-full cursor-pointer bg-text px-[10px] py-[5px] overflow-hidden"
+          >
+            <motion.span
+              className={bar}
+              animate={open ? { y: 8, rotate: 45 } : { y: 0, rotate: 0 }}
+              transition={{ duration: 0.3, ease }}
+            />
+            <motion.span
+              className={bar}
+              animate={open ? { x: -40, opacity: 0 } : { x: 0, opacity: 1 }}
+              transition={{ duration: 0.3, ease }}
+            />
+            <motion.span
+              className={bar}
+              animate={open ? { y: -8, rotate: -45 } : { y: 0, rotate: 0 }}
+              transition={{ duration: 0.3, ease }}
+            />
+          </button>
+        </div>
       </div>
 
       {/* Lenyíló panel */}
@@ -146,7 +162,7 @@ function MobileHeader({ scrolled }: { scrolled: boolean }) {
             initial="hidden"
             animate="visible"
             exit="hidden"
-            className="fixed top-0 right-0 w-2/3 h-dvh bg-foreground md:hidden rounded-tl-[10px] rounded-bl-[10px] overflow-y-auto overflow-x-hidden"
+            className="fixed top-0 right-0 w-2/3 h-dvh bg-foreground md:hidden rounded-tl-[10px] rounded-bl-[10px] overflow-y-auto overflow-x-hidden flex flex-col"
           >
             <ul className="flex h-full flex-col justify-center gap-6 px-[10%] min-h-[450px]">
               {navItems.map((item) => (
@@ -154,13 +170,17 @@ function MobileHeader({ scrolled }: { scrolled: boolean }) {
                   <Link
                     href={item.path}
                     onClick={() => setOpen(false)}
-                    className="block  pb-3 text-[15px] font-bold text-white"
+                    className="flex flex-row pb-3 text-[15px] xs:text-[20px] gap-[5px] font-bold text-white items-center"
                   >
+                    <span className="w-[15px] h-[15px] bg-accent rounded-full" />
                     {item.name}
                   </Link>
                 </motion.li>
               ))}
             </ul>
+            <div className="mt-auto flex flex-row gap-[5px] bg-accent items-center justify-center text-white text-[15px] font-bold">
+              <p className="px-[5px]">Bádogos munkák / Somogy megye</p>
+            </div>
           </motion.nav>
         )}
       </AnimatePresence>
@@ -218,7 +238,7 @@ export default function Header() {
     >
       {/* Desktop header ------------- */}
       <div
-        className={`mx-auto hidden md:flex w-[90%] px-[25px] flex-row items-center mt-[35px] justify-center gap-[25px] rounded-full border border-transparent py-[10px] transition-all duration-500 ${
+        className={`mx-auto hidden md:flex w-[90%] px-[25px] flex-row items-center mt-[10px] justify-center gap-[25px] rounded-full border border-transparent py-[10px] transition-all duration-500 ${
           scrolled ? "border-white/40 bg-foreground/40 backdrop-blur-sm" : ""
         }`}
       >
@@ -227,15 +247,17 @@ export default function Header() {
         <Link
           href="/"
           className={`relative transition-all duration-300 ${
-            scrolled ? "h-[50px] min-w-[75px]" : "h-[100px] min-w-[150px]"
-          } overflow-hidden rounded-[10px]`}
+            scrolled
+              ? "h-[75px] min-w-[75px] bg-transparent"
+              : "h-[100px] min-w-[100px] bg-accent shadow-xl"
+          } overflow-hidden rounded-full`}
         >
           <Image
             alt="József Zoltán bádogos mester – főoldal"
-            src="/images/favicon.ico.webp"
+            src="/icon.svg"
             fill
             sizes="150px"
-            className="object-cover animate-scale-up"
+            className="object-cover animate-scale-up !stroke-accent"
           />
         </Link>
 
@@ -243,7 +265,7 @@ export default function Header() {
       </div>
 
       {/* Mobil header ----------------- */}
-      <MobileHeader scrolled={scrolled} />
+      <MobileHeader headerTheme={headerTheme} scrolled={scrolled} />
     </header>
   );
 }
