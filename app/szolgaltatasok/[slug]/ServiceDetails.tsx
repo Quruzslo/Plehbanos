@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import { getServiceBySlug, services, MATERIALS } from "@/lib/datas/services";
 import Image from "next/image";
 import Link from "next/link";
+import Faq from "./Faq";
 
 export default async function ServiceDetails({
   params,
@@ -126,6 +127,7 @@ export default async function ServiceDetails({
           </div>
         </div>
       </section>
+      <Faq data={service.faq}></Faq>
     </>
   );
 }

@@ -97,7 +97,7 @@ function MobileHeader({
     <>
       {/*  logó + hamburger */}
       <div
-        className={`relative z-10 mx-auto mt-[15px] flex w-[90%] items-center justify-between rounded-full  pl-[15px] pr-[5px] py-[8px] transition-all duration-500 lg:hidden ${
+        className={`relative z-10 mx-auto mt-[15px] flex w-[90%] max-w-[2560px] items-center justify-between rounded-full  pl-[15px] pr-[5px] py-[8px] transition-all duration-500 lg:hidden ${
           scrolled && !open ? " bg-foreground/40 backdrop-blur-sm" : ""
         }`}
       >
@@ -237,7 +237,7 @@ export default function Header() {
     >
       {/* Desktop header ------------- */}
       <div
-        className={`mx-auto hidden lg:flex w-[90%] px-[25px] flex-row items-center mt-[10px] justify-center gap-[25px] rounded-full border border-transparent py-[10px] transition-all duration-500 ${
+        className={`mx-auto hidden lg:flex w-[90%] max-w-[2560px]  px-[25px] flex-row items-center mt-[10px] justify-center gap-[25px] rounded-full border border-transparent py-[10px] transition-all duration-500 ${
           scrolled ? "border-white/40 bg-foreground/40 backdrop-blur-sm" : ""
         }`}
       >
