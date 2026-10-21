@@ -3,6 +3,7 @@ import { getServiceBySlug, services, MATERIALS } from "@/lib/datas/services";
 import Image from "next/image";
 import Link from "next/link";
 import Faq from "./Faq";
+import { HouseIcon } from "@phosphor-icons/react/ssr";
 
 export default async function ServiceDetails({
   params,
@@ -16,9 +17,19 @@ export default async function ServiceDetails({
 
   return (
     <>
-      <section data-header="light" className="w-full flex flex-col pt-[120px] ">
+      <section
+        data-header="light"
+        className="w-full flex flex-col pt-[120px] lg:pt-[150px]"
+      >
         <div className="flex flex-col lg:flex-row w-[90%] max-w-[2560px] mx-auto my-auto text-text rounded-[10px] ">
           <div className="w-full lg:w-1/2 my-auto order-2 lg:order-1">
+            <p className="flex flex-row items-center justify-center gap-3 w-fit mr-auto text-[15px] font-bold">
+              {" "}
+              <Link href="/">
+                <HouseIcon size={20} />
+              </Link>
+              / Szolgáltatások / {service.title}
+            </p>
             <h1 className="text-[20px] lg:text-[35px] text-accent font-bold mb-[25px]">
               {service.title}
             </h1>
