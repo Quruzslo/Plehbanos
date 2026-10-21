@@ -97,7 +97,7 @@ function MobileHeader({
     <>
       {/*  logó + hamburger */}
       <div
-        className={`relative z-10 mx-auto mt-[15px] flex w-[90%] items-center justify-between rounded-full  pl-[15px] pr-[5px] py-[8px] transition-all duration-500 md:hidden ${
+        className={`relative z-10 mx-auto mt-[15px] flex w-[90%] items-center justify-between rounded-full  pl-[15px] pr-[5px] py-[8px] transition-all duration-500 lg:hidden ${
           scrolled && !open ? " bg-foreground/40 backdrop-blur-sm" : ""
         }`}
       >
@@ -114,7 +114,7 @@ function MobileHeader({
             src="/icon.svg"
             fill
             sizes="150px"
-            className="object-cover animate-scale-up !stroke-accent"
+            className="object-cover animate-scale-up "
           />
         </Link>
 
@@ -233,12 +233,11 @@ export default function Header() {
   return (
     <header
       ref={headerRef}
-      // data-theme={headerTheme}
       className="group/header fixed top-0 left-0 z-[999] w-full"
     >
       {/* Desktop header ------------- */}
       <div
-        className={`mx-auto hidden md:flex w-[90%] px-[25px] flex-row items-center mt-[10px] justify-center gap-[25px] rounded-full border border-transparent py-[10px] transition-all duration-500 ${
+        className={`mx-auto hidden lg:flex w-[90%] px-[25px] flex-row items-center mt-[10px] justify-center gap-[25px] rounded-full border border-transparent py-[10px] transition-all duration-500 ${
           scrolled ? "border-white/40 bg-foreground/40 backdrop-blur-sm" : ""
         }`}
       >

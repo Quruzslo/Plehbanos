@@ -2,7 +2,7 @@
   <defs>
     <mask id="seams">
       <rect width="200" height="200" fill="#fff"/>
-      <path d="M58 40 V122 M79 40 V122 M100 40 V122 M121 40 V122 M142 40 V122" stroke="#000" stroke-width="6"/>
+      <path d="M58 40 V122 M79 40 V122 M100 40 V122 M121 40 V122 M142 40 V122" stroke="#ffffff" stroke-width="6"/>
     </mask>
   </defs>
   <path d="M18 112 L100 30 L182 112 Z" mask="url(#seams)"/>
