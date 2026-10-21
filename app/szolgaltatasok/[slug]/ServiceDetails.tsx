@@ -75,35 +75,51 @@ export default async function ServiceDetails({
             <h2 className="text-[20px] lg:text-[35px] font-bold mb-[20px]">
               Folyamat, ahogyan dolgozunk
             </h2>
-            <div className="flex flex-col gap-[15px] bg-accent p-[10px] rounded-[10px] shadow-md z-10">
+            <ol className="">
               {service.process.map((item, idx) => (
-                <div
+                <li
                   key={item.title}
-                  className="flex flex-col gap-[15px] text-white relative"
+                  className="grid grid-cols-[3.5rem_1fr] gap-x-4 border-t-2 border-text/15 py-[10px] lg:grid-cols-[4.5rem_1fr]"
                 >
-                  <div className="absolute top-[50%] translate-y-[-50%] left-[-25px] w-[25px] h-[25px] bg-transparent border-4 border-accent rounded-[5px]  !z-[-1]" />
-                  <div className="flex flex-row gap-3 items-center w-fit text-[20px] font-bold ">
-                    <span className="text-transparent [-webkit-text-stroke:1px_#ffffff] p-[5px] rounded-md bg-text">
-                      {idx + 1}/{service.process.length}
+                  <span className="pt-1 flex flex-row items-center justify-center text-sm tabular-nums text-accent bg-text/15 mt-[-10px]">
+                    {String(idx + 1).padStart(2, "0")}
+                    <span className="text-text/35">
+                      /{service.process.length}
                     </span>
-                    <p>{item.title}</p>
+                  </span>
+
+                  <div>
+                    <h3 className="text-lg font-semibold leading-snug lg:text-xl">
+                      {item.title}
+                    </h3>
+                    <p className="mt-1.5 max-w-prose leading-relaxed text-text/70">
+                      {item.desc}
+                    </p>
                   </div>
-                  <p>{item.desc}</p>
-                </div>
+                </li>
               ))}
-            </div>
+            </ol>
           </div>
           <div className="flex flex-col w-full lg:w-1/2 p-[10px]">
             <h2 className="text-[20px] lg:text-[35px] font-bold mb-[20px]">
               Tervezett anyaghasználat
             </h2>
-            <div className="grid grid-cols-2 gap-[15px]">
-              {service.materials.map((material, idx) => (
+            <div className="grid grid-cols-2 gap-[15px] w-full">
+              {service.materials.map((material, _) => (
                 <div
                   key={material.name}
-                  className="flex flex-col relative gap-[10px]"
+                  className="flex flex-col relative gap-[10px] relative w-full h-full items-center justify-center aspect-square  rounded-[10px] p-[10px] mx-auto my-auto"
                 >
-                  <span>{material.name}</span>
+                  <Image
+                    src={material.img.src}
+                    alt={material.img.alt}
+                    width={100}
+                    height={100}
+                    className="object-contain w-[250px] h-[250px]"
+                  ></Image>
+                  <span className="text-accent text-[15px] font-bold p-[5px]  border-1 border-accent">
+                    {material.name}
+                  </span>
                 </div>
               ))}
             </div>

@@ -103,61 +103,88 @@ export const MATERIALS = {
     id: "horganyzott-acel",
     name: "Horganyzott acéllemez",
     desc: "Cinkréteggel védett acél. Kedvező árú, megbízható alapanyag ereszcsatornához, szegélyekhez és fedésekhez.",
-    img: { src: "", alt: "Horganyzott acél bádoglemez" },
+    img: {
+      src: "/materials/horganyzott-acel.webp",
+      alt: "Horganyzott acél bádoglemez",
+    },
   },
   szinesAcel: {
     id: "szines-bevonatos-acel",
     name: "Színes bevonatos acéllemez",
     desc: "Horganyzott acél gyári színes bevonattal, például antracit, csokibarna, vörösbarna vagy fehér színben. Nem kell festeni, és a tetőhöz, nyílászárókhoz igazítható.",
-    img: { src: "", alt: "Színes bevonatos acél bádoglemez antracit színben" },
+    img: {
+      src: "/materials/szines-bevonatos-acel.webp",
+      alt: "Színes bevonatos acél bádoglemez téglavörös színben",
+    },
   },
   aluminium: {
     id: "aluminium",
     name: "Alumínium",
     desc: "Könnyű, nem rozsdásodó anyag, színes bevonattal is elérhető. Különösen ablakpárkányokhoz és szegélyekhez kedvelt.",
-    img: { src: "", alt: "Színes bevonatos alumínium lemez" },
+    img: {
+      src: "/materials/aluminium.webp",
+      alt: "Szálcsiszolt natúr alumínium lemez",
+    },
   },
   titancink: {
     id: "titancink",
     name: "Titáncink",
     desc: "Cink alapú ötvözet réz- és titántartalommal. Idővel természetes, matt szürke patinát kap, rendkívül hosszú élettartamú, és alig igényel karbantartást.",
-    img: { src: "", alt: "Titáncink ereszcsatorna matt szürke patinával" },
+    img: {
+      src: "/materials/titancink.webp",
+      alt: "Titáncink lemez matt szürke patinával",
+    },
   },
   rez: {
     id: "vorosrez",
     name: "Vörösréz",
     desc: "Prémium bádogos anyag, amely az évek során barnás, majd zöldes patinát kap. Különösen tartós, igényes lakóházakon és műemlék épületeken is alkalmazzák.",
-    img: { src: "", alt: "Vörösréz ereszcsatorna és bádog szegély" },
+    img: { src: "/materials/vorosrez.webp", alt: "Fényes vörösréz bádoglemez" },
   },
   trapezlemez: {
     id: "trapezlemez",
     name: "Trapézlemez",
     desc: "Trapéz keresztmetszetű, bordázott acéllemez. Nagy felületet fed gyorsan, ezért garázsokon, gazdasági és ipari épületeken népszerű.",
-    img: { src: "", alt: "Színes bevonatos trapézlemez tetőfedés" },
+    img: {
+      src: "/materials/trapezlemez.webp",
+      alt: "Antracit színű bevonatos trapézlemez",
+    },
   },
   cserepeslemez: {
     id: "cserepeslemez",
     name: "Cserepes lemez",
     desc: "Cserépfedést formázó profilú acéllemez. A cserép megjelenését adja, de annak töredéke a súlya, így könnyebb tetőszerkezet is elbírja.",
-    img: { src: "", alt: "Cserepes lemez tetőfedés családi házon" },
+    img: {
+      src: "/materials/cserepeslemez.webp",
+      alt: "Csokibarna cserepes lemez cserépsorokat formázó profillal",
+    },
   },
   hofogo: {
     id: "hofogo-elemek",
     name: "Hófogó rácsok és csövek",
     desc: "Acél hófogó elemek a tetőfedés típusához illő tartókkal, a fedés színéhez igazítva.",
-    img: { src: "", alt: "Hófogó rács lemeztetőn" },
+    img: {
+      src: "/materials/hofogo-elemek.webp",
+      alt: "Barna csöves hófogó tartókonzolokkal",
+    },
   },
   lombfogo: {
     id: "lombfogo",
     name: "Lombfogó rács és kosár",
     desc: "A csatornára vagy a vízgyűjtő üstbe helyezett rács, amely kiszűri a falevelet és a nagyobb hordalékot.",
-    img: { src: "", alt: "Lombfogó rács ereszcsatornán" },
+    img: {
+      src: "/materials/lombfogo.webp",
+      alt: "Lombfogó rács ereszcsatornán",
+    },
   },
   tomito: {
     id: "tomito-szegelyszalag",
     name: "Tömítőanyagok és szegélyszalagok",
     desc: "Időjárásálló tömítők és hajlítható szegélyszalagok a csatlakozások, toldások vízzáró lezárásához.",
-    img: { src: "", alt: "Bádogos tömítőanyag és szegélyszalag" },
+    img: {
+      src: "/materials/tomito-szegelyszalag.webp",
+      alt: "Bádogos tömítőanyag és szegélyszalag",
+    },
   },
 } satisfies Record<string, Material>;
 
