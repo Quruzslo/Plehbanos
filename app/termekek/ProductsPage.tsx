@@ -1,11 +1,28 @@
 "use client";
 import { CheckFatIcon } from "@phosphor-icons/react";
 import BreadCrumbs from "@/lib/ui/BreadCrumbs";
+import Image from "next/image";
+import Link from "next/link";
+import { easeIn, motion, Variants } from "motion/react";
+import ProductCarousel from "./ProductCarousel";
+import { getFirstProducts } from "./products";
+const CallToActionVariants: Variants = {
+  hidden: { opacity: 0, scale: 0.7 },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    transition: { duration: 0.4, ease: "easeIn" },
+  },
+  // transition: {duration: 0.4, easeIn}
+};
+
 const benefits = [
   "Nem tucat termék",
   "Minőségi anyagokból",
   "Időtálló és egyedi",
 ];
+
+const products = await getFirstProducts();
 
 export default function ProductPage() {
   return (
@@ -45,12 +62,52 @@ export default function ProductPage() {
             </li>
           </ul>
         </div>
-        <div className="flex flex-col w-full lg:w-1/2"></div>
+        <div className="flex flex-col w-full lg:w-1/2">
+          <ProductCarousel products={products}></ProductCarousel>
+        </div>
       </div>
-      <div className="flex flex-row my-[20px] bg-accent text-white p-[15px] rounded-[10px] w-[90%] max-w-[2560px] mx-auto">
-        <p>Szeretnél egy kifejezetten neked készített dísz elemet?</p>
-        <p>Írd meg az elképzeléseidet nekünk</p>
-      </div>
+      <motion.div
+        variants={CallToActionVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: false, amount: 0.3 }}
+        className="flex flex-col lg:flex-row my-[50px] bg-linear-45 from-transparent from-50% to-accent/70 to-[calc(50%+1px)] shadow-[5px_5px_10px_0px_rgba(0,0,0,0.4)] text-text font-bold p-[15px] rounded-[10px] w-[90%] max-w-[2560px] mx-auto items-center justify-center relative"
+      >
+        <div className="flex flex-col w-full lg:w-1/2">
+          <div className="flex flex-row">
+            <p className="text-[20px] lg:text-[30px] font-bold ">
+              Van egy ötleted{" "}
+              <span className="text-[35px] lg:text-[45px] font-black text-white bg-text p-[5px] h-fit rounded-md">
+                ?
+              </span>{" "}
+              Akár ajándékba adnád{" "}
+              <span className="text-[35px] lg:text-[45px] font-black text-white bg-text p-[5px] h-fit rounded-md">
+                ?
+              </span>
+            </p>
+          </div>
+          <p>
+            Csak írd meg az elképzeléseidet és elkészítjük neked az egyedi
+            termékedet!
+          </p>
+          <Link
+            href="/kapcsolat"
+            className="flex flex-row gap-[5px] bg-accent w-fit p-[10px] text-white rounded-md mt-[25px]"
+          >
+            {" "}
+            Van egy ötletem
+          </Link>
+        </div>
+        <div className="flex flex-col w-full lg:w-1/2 relative">
+          <Image
+            alt="Egyedi bádogos termékek, kézzel készült díszek"
+            width={350}
+            height={350}
+            src="/images/blob-bg.svg"
+            className=" object-cover ml-auto"
+          ></Image>
+        </div>
+      </motion.div>
     </section>
   );
 }
