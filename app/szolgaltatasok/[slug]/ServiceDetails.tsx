@@ -3,7 +3,7 @@ import { getServiceBySlug, services, MATERIALS } from "@/lib/datas/services";
 import Image from "next/image";
 import Link from "next/link";
 import Faq from "./Faq";
-import { HouseIcon } from "@phosphor-icons/react/ssr";
+import BreadCrumbs from "@/lib/ui/BreadCrumbs";
 
 export default async function ServiceDetails({
   params,
@@ -11,6 +11,7 @@ export default async function ServiceDetails({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
+
   const service = getServiceBySlug(slug);
 
   if (!service) notFound();
@@ -23,13 +24,12 @@ export default async function ServiceDetails({
       >
         <div className="flex flex-col lg:flex-row w-[90%] max-w-[2560px] mx-auto my-auto text-text rounded-[10px] ">
           <div className="w-full lg:w-1/2 my-auto order-2 lg:order-1">
-            <p className="flex flex-row items-center justify-center gap-3 w-fit mr-auto text-[15px] font-bold">
-              {" "}
-              <Link href="/">
-                <HouseIcon size={20} />
-              </Link>
-              / Szolgáltatások / {service.title}
-            </p>
+            <BreadCrumbs
+              items={[
+                { label: "Szolgáltatások", href: "/#szolgaltatasok" },
+                { label: service.title },
+              ]}
+            />
             <h1 className="text-[20px] lg:text-[35px] text-accent font-bold mb-[25px]">
               {service.title}
             </h1>
