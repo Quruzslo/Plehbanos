@@ -3,8 +3,9 @@ import { CheckFatIcon } from "@phosphor-icons/react";
 import BreadCrumbs from "@/lib/ui/BreadCrumbs";
 import Image from "next/image";
 import Link from "next/link";
-import { easeIn, motion, Variants } from "motion/react";
+import { motion, Variants } from "motion/react";
 import ProductCarousel from "./ProductCarousel";
+import ProductCard from "./ProductCard";
 import { getFirstProducts } from "./products";
 const CallToActionVariants: Variants = {
   hidden: { opacity: 0, scale: 0.7 },
@@ -108,6 +109,15 @@ export default function ProductPage() {
           ></Image>
         </div>
       </motion.div>
+
+      <div className="w-[90%] mx-auto flex flex-col">
+        <h2>Termékeink</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[15px]">
+          {products.map((elem) => (
+            <ProductCard key={elem.name} item={elem}></ProductCard>
+          ))}
+        </div>
+      </div>
     </section>
   );
 }

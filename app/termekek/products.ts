@@ -10,7 +10,7 @@ export type Product = {
     weightKg: number;
     color: string;
   };
-
+  stock: number;
   img: string;
 };
 
@@ -33,7 +33,7 @@ const products: Product[] = [
       weightKg: 6,
       color: "gray",
     },
-
+    stock: 0,
     img: "/products/szelkakas.jpg",
   },
   {
@@ -48,7 +48,7 @@ const products: Product[] = [
       weightKg: 3,
       color: "gray",
     },
-
+    stock: 1,
     img: "/products/flamingo.webp",
   },
   {
@@ -63,7 +63,7 @@ const products: Product[] = [
       weightKg: 1.5,
       color: "gray",
     },
-
+    stock: 1,
     img: "/products/sarkany.jpg",
   },
   {
@@ -78,7 +78,7 @@ const products: Product[] = [
       weightKg: 3,
       color: "gray",
     },
-
+    stock: 1,
     img: "/products/csucsdisz.jpg",
   },
 ];
