@@ -23,7 +23,7 @@ export default function ProductCard({ item }: { item: Product }) {
         />
       </div>
       <div className="flex flex-col gap-[5px] p-[10px]">
-        <p className="text-text text-[15px] font-black">{item.name}</p>
+        <p className="text-text text-[15px] font-bold">{item.name}</p>
 
         <div className=" absolute top-[3px] left-[3px] w-fit z-10">
           {item.stock >= 1 ? (
@@ -38,7 +38,9 @@ export default function ProductCard({ item }: { item: Product }) {
           )}
         </div>
 
-        <p className="text-text font-bold ">{item.price} Ft.</p>
+        <p className="text-text/50 font-bold ">
+          {item.price.toLocaleString("hu-HU")} Ft.
+        </p>
         <div className="flex flex-row gap-[5px] items-center">
           <button
             title="Kosárba"

@@ -12,6 +12,7 @@ export type Product = {
   };
   stock: number;
   img: string;
+  salePrice: number | null;
 };
 
 export const CATEGORIES = {
@@ -33,8 +34,9 @@ const products: Product[] = [
       weightKg: 6,
       color: "gray",
     },
-    stock: 0,
+    stock: 1,
     img: "/products/szelkakas.jpg",
+    salePrice: 125000,
   },
   {
     id: "2",
@@ -50,6 +52,7 @@ const products: Product[] = [
     },
     stock: 1,
     img: "/products/flamingo.webp",
+    salePrice: 0,
   },
   {
     id: "3",
@@ -65,6 +68,7 @@ const products: Product[] = [
     },
     stock: 1,
     img: "/products/sarkany.jpg",
+    salePrice: 55000,
   },
   {
     id: "4",
@@ -80,6 +84,7 @@ const products: Product[] = [
     },
     stock: 1,
     img: "/products/csucsdisz.jpg",
+    salePrice: 0,
   },
 ];
 
