@@ -51,11 +51,19 @@ export default function Categories({ category, setCategory }: Props) {
 
   return (
     <div className="w-fit lg:p-[10px] flex flex-col items-start gap-1 bg-white text-[15px] font-bold">
-      <Option
-        label="Összes"
-        active={category === null}
-        onSelect={() => setCategory(null)}
-      />
+      <div className="flex flex-row gap-3">
+        <Option
+          label="Összes"
+          active={category === null}
+          onSelect={() => setCategory(null)}
+        />
+        <span className="text-accent ">
+          {"("}
+          {getCategoriesCount("")}
+          {")"}
+        </span>
+      </div>
+
       {categories.map((cat) => (
         <div key={cat} className="flex flex-row gap-3">
           <Option

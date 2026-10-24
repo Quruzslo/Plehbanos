@@ -105,5 +105,6 @@ export function getCategories() {
 }
 
 export function getCategoriesCount(cat: any) {
+  if (cat === "") return products.length;
   return products.filter((p) => p.category === cat).length;
 }
