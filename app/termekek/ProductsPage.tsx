@@ -6,7 +6,10 @@ import Link from "next/link";
 import { motion, Variants } from "motion/react";
 import ProductCarousel from "./ProductCarousel";
 import ProductCard from "./ProductCard";
-import { getFirstProducts } from "./products";
+import { getFirstProducts, getProducts, type Category } from "./products";
+import Categories from "./Categories";
+import { useState } from "react";
+
 const CallToActionVariants: Variants = {
   hidden: { opacity: 0, scale: 0.7 },
   visible: {
@@ -23,9 +26,12 @@ const benefits = [
   "Időtálló és egyedi",
 ];
 
-const products = await getFirstProducts();
+const newProducts = await getFirstProducts();
 
 export default function ProductPage() {
+  const [activeCategory, setActiveCategory] = useState<Category | null>(null);
+  const products = getProducts(activeCategory);
+
   return (
     <section
       data-header="light"
@@ -64,7 +70,7 @@ export default function ProductPage() {
           </ul>
         </div>
         <div className="flex flex-col w-full lg:w-1/2">
-          <ProductCarousel products={products}></ProductCarousel>
+          <ProductCarousel products={newProducts}></ProductCarousel>
         </div>
       </div>
       <motion.div
@@ -111,11 +117,21 @@ export default function ProductPage() {
       </motion.div>
 
       <div className="w-[90%] mx-auto flex flex-col">
-        <h2>Termékeink</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[15px]">
-          {products.map((elem) => (
-            <ProductCard key={elem.name} item={elem}></ProductCard>
-          ))}
+        <h2 className="text-[35px] font-black">Termékeink</h2>
+        <div className="flex flex-col lg:flex-row">
+          <div className="flex flex-col w-full lg:w-1/3 py-[25px]  lg:px-[10px] justify-start ">
+            <Categories
+              category={activeCategory}
+              setCategory={setActiveCategory}
+            />
+          </div>
+          <div className="flex flex-col w-full lg:w-2/3 lg:px-[10px] py-[25px] mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[15px]">
+              {products.map((elem) => (
+                <ProductCard key={elem.name} item={elem}></ProductCard>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </section>

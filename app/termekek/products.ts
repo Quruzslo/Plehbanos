@@ -88,8 +88,8 @@ const products: Product[] = [
   },
 ];
 
-export async function getProducts() {
-  return products;
+export function getProducts(category: Category | null = null) {
+  return category ? products.filter((p) => p.category === category) : products;
 }
 
 export async function getProductBySlug(slug: string) {
@@ -98,4 +98,12 @@ export async function getProductBySlug(slug: string) {
 
 export async function getFirstProducts(count = 3) {
   return products.slice(0, count);
+}
+
+export function getCategories() {
+  return [...new Set(products.map((p) => p.category))];
+}
+
+export function getCategoriesCount(cat: any) {
+  return products.filter((p) => p.category === cat).length;
 }
