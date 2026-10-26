@@ -15,6 +15,7 @@ import {
 import Categories from "./Categories";
 import { useState } from "react";
 import Compare from "./Compare";
+import QuickView from "./QuickView";
 
 const CallToActionVariants: Variants = {
   hidden: { opacity: 0, scale: 0.7 },
@@ -38,6 +39,7 @@ export default function ProductPage() {
   const products = getProducts(activeCategory);
   const [activeCompare, setActiveCompare] = useState<Product[]>([]);
   const [compareOpen, setCompareOpen] = useState(false);
+  const [quickView, setQuickView] = useState(null);
 
   return (
     <section
@@ -50,6 +52,10 @@ export default function ProductPage() {
           setActiveCompare={setActiveCompare}
           onClose={() => setCompareOpen(false)}
         />
+      )}
+
+      {quickView && (
+        <QuickView setQuickView={setQuickView} item={quickView}></QuickView>
       )}
       <div className="flex flex-col lg:flex-row w-[90%] max-w-[2560px] mx-auto  items-center">
         <div className="flex flex-col w-full lg:w-1/2">
@@ -89,6 +95,7 @@ export default function ProductPage() {
             activeCompare={activeCompare}
             setActiveCompare={setActiveCompare}
             setCompareOpen={setCompareOpen}
+            setQuickView={setQuickView}
           />
         </div>
       </div>
@@ -152,6 +159,7 @@ export default function ProductPage() {
                   activeCompare={activeCompare}
                   setActiveCompare={setActiveCompare}
                   setCompareOpen={setCompareOpen}
+                  setQuickView={setQuickView}
                 />
               ))}
             </div>

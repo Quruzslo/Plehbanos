@@ -1,7 +1,11 @@
 import type { Dispatch, SetStateAction } from "react";
 import { useEffect } from "react";
 import Image from "next/image";
-import { ShoppingCartIcon, XIcon } from "@phosphor-icons/react";
+import {
+  ShoppingCartIcon,
+  XIcon,
+  ArrowsLeftRightIcon,
+} from "@phosphor-icons/react";
 import type { Product } from "./products";
 
 type Props = {
@@ -28,26 +32,32 @@ export default function Compare({
 
   const label =
     "sticky left-0 bg-white z-10 p-[10px] w-[150px] font-bold border-r border-text/20";
-  const cell = "p-[10px]";
-  const row = "border-t border-text/20";
+  const cell = "p-[10px] border border-text/20";
+  const row = "border-1 border-text/20";
 
   return (
     <section className="fixed inset-0 w-full h-full bg-black/70 z-[200] pt-[100px] lg:pt-[150px] pb-[35px] overflow-y-auto">
       <div className="w-[90%] max-w-[2560px] mx-auto bg-white rounded-md">
         <div className="flex items-center justify-between p-[10px] border-b border-text/20">
-          <h2 className="text-[20px] font-black">Összehasonlítás</h2>
+          <h2 className="text-[20px] font-black flex flex-row gap-5 items-center">
+            Összehasonlítás{" "}
+            <ArrowsLeftRightIcon className="w-[25px] h-[25px] bg-accent text-white rounded-xs"></ArrowsLeftRightIcon>
+          </h2>
           <button
             type="button"
             onClick={onClose}
             aria-label="Összehasonlítás bezárása"
-            className="rounded-full p-[8px] hover:bg-text/10"
+            className="rounded-full p-[8px] hover:bg-text/10 cursor-pointer"
           >
             <XIcon size={20} />
           </button>
         </div>
 
         <div className="overflow-x-auto">
-          <table className="w-full border-collapse text-left">
+          <table
+            className="w-full  table-fixed border-collapse text-left"
+            style={{ minWidth: 150 + activeCompare.length * 250 }}
+          >
             <thead>
               <tr>
                 <th scope="col" className={label}>
@@ -57,13 +67,13 @@ export default function Compare({
                   <th
                     key={p.id}
                     scope="col"
-                    className="relative w-[180px] p-[10px] align-top"
+                    className="relative p-[10px] align-top"
                   >
                     <button
                       type="button"
                       onClick={() => remove(p.id)}
                       aria-label={`${p.name} eltávolítása`}
-                      className=" rounded-full p-[5px] hover:bg-text/10"
+                      className=" rounded-full p-[5px] text-white hover:bg-red-600 bg-red-300 cursor-pointer"
                     >
                       <XIcon size={15} />
                     </button>
@@ -147,7 +157,7 @@ export default function Compare({
                       className="flex items-center gap-[5px] rounded-full bg-text px-[15px] py-[10px] text-white hover:bg-accent disabled:opacity-40"
                     >
                       <ShoppingCartIcon size={18} />
-                      {p.stock < 1 ? "Elfogyott" : "Kosárba"}
+                      {p.stock < 1 ? "Elfogyott" : "Rendelés"}
                     </button>
                   </td>
                 ))}

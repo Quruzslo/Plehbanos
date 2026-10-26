@@ -9,6 +9,7 @@ type Props = {
   activeCompare: Product[];
   setActiveCompare: Dispatch<SetStateAction<Product[]>>;
   setCompareOpen: Dispatch<SetStateAction<boolean>>;
+  setQuickView: any;
 };
 
 export default function ProductCarousel({
@@ -16,6 +17,7 @@ export default function ProductCarousel({
   activeCompare,
   setActiveCompare,
   setCompareOpen,
+  setQuickView,
 }: Props) {
   const [active, setActive] = useState(0);
   const latest = products.slice(-3).reverse();
@@ -44,6 +46,8 @@ export default function ProductCarousel({
                 activeCompare={activeCompare}
                 setActiveCompare={setActiveCompare}
                 setCompareOpen={setCompareOpen}
+                isNew
+                setQuickView={setQuickView}
               />
             </div>
           ))}
