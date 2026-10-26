@@ -28,15 +28,15 @@ export default function QuickView({
   };
 
   return (
-    <section className="fixed inset-0 flex flex-col bg-black/70 pt-[100px] lg:pt-[150px] pb-[35px] z-[100] overflow-y-auto">
-      <div className="flex flex-col lg:flex-row w-[90%] max-w-[2560px] bg-white rounded-md mx-auto relative h-full">
+    <section className="fixed inset-0 flex flex-col bg-black/70 pt-[100px] lg:pt-[150px] pb-[100px] lg:!pb-[35px] z-[100] overflow-y-auto">
+      <div className="flex flex-col lg:flex-row w-[90%] max-w-[2560px] !bg-white rounded-md mx-auto relative ">
         <button
           onClick={() => setQuickView(null)}
           className="absolute top-3 right-3 z-10 bg-black text-white w-[25px] h-[25px] rounded-full cursor-pointer"
         >
           X
         </button>
-        <div className="flex flex-col w-full lg:w-1/2">
+        <div className="flex flex-col w-full lg:w-1/2 ">
           <div
             onMouseMove={handleZoom}
             className="relative w-full min-h-[450px] h-full cursor-zoom-in overflow-hidden"
@@ -53,7 +53,7 @@ export default function QuickView({
         <div className="flex flex-col w-full lg:w-1/2 p-[10px]">
           <div className=" w-full relative flex flex-col  rounded-[10px] ">
             <div className="flex flex-col flex-1 gap-[5px] p-[10px]">
-              <p className="text-text text-[15px] font-bold">{item.name}</p>
+              <p className="text-text text-[35px] font-bold">{item.name}</p>
               <div className=" w-fit z-10">
                 {item.stock >= 1 ? (
                   <p className="bg-green-600 text-green-100 w-fit px-[5px] rounded-[7px]">

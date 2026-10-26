@@ -1,5 +1,5 @@
 "use client";
-import { CheckFatIcon } from "@phosphor-icons/react";
+import { CheckFatIcon, ArrowsLeftRightIcon } from "@phosphor-icons/react";
 import BreadCrumbs from "@/lib/ui/BreadCrumbs";
 import Image from "next/image";
 import Link from "next/link";
@@ -46,6 +46,20 @@ export default function ProductPage() {
       data-header="light"
       className="flex flex-col w-full pt-[120px] lg:pt-[150px] bg-white "
     >
+      {!compareOpen && activeCompare.length > 0 && (
+        <button
+          type="button"
+          onClick={() => setCompareOpen(true)}
+          className="fixed bottom-[20px] right-[50%] translate-x-[50%] z-[150] flex  items-center gap-[10px] rounded-full bg-text py-[8px] pl-[8px] pr-[15px] text-white shadow-[5px_5px_10px_0px_rgba(0,0,0,0.4)] transition-transform hover:scale-105 cursor-pointer"
+        >
+          <span className="flex h-[32px] w-[32px] items-center justify-center rounded-full bg-accent">
+            <ArrowsLeftRightIcon size={15} />
+          </span>
+          <span className="font-bold text-[15px]">
+            {activeCompare.length} összehasonlítva
+          </span>
+        </button>
+      )}
       {compareOpen && activeCompare.length > 0 && (
         <Compare
           activeCompare={activeCompare}

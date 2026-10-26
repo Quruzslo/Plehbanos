@@ -133,7 +133,7 @@ export default function Compare({
                   <td key={p.id} className={cell}>
                     {p.salePrice ? (
                       <>
-                        <span className="text-red-300 font-bold">
+                        <span className="text-red-600 font-bold">
                           {p.salePrice.toLocaleString("hu-HU")} Ft
                         </span>{" "}
                         <s className="text-text/50">
