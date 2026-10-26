@@ -6,9 +6,15 @@ import Link from "next/link";
 import { motion, Variants } from "motion/react";
 import ProductCarousel from "./ProductCarousel";
 import ProductCard from "./ProductCard";
-import { getFirstProducts, getProducts, type Category } from "./products";
+import {
+  getFirstProducts,
+  getProducts,
+  type Category,
+  type Product,
+} from "./products";
 import Categories from "./Categories";
 import { useState } from "react";
+import Compare from "./Compare";
 
 const CallToActionVariants: Variants = {
   hidden: { opacity: 0, scale: 0.7 },
@@ -17,7 +23,6 @@ const CallToActionVariants: Variants = {
     scale: 1,
     transition: { duration: 0.4, ease: "easeIn" },
   },
-  // transition: {duration: 0.4, easeIn}
 };
 
 const benefits = [
@@ -31,13 +36,22 @@ const newProducts = await getFirstProducts();
 export default function ProductPage() {
   const [activeCategory, setActiveCategory] = useState<Category | null>(null);
   const products = getProducts(activeCategory);
+  const [activeCompare, setActiveCompare] = useState<Product[]>([]);
+  const [compareOpen, setCompareOpen] = useState(false);
 
   return (
     <section
       data-header="light"
-      className="flex flex-col w-full pt-[120px] lg:pt-[150px] bg-white"
+      className="flex flex-col w-full pt-[120px] lg:pt-[150px] bg-white "
     >
-      <div className="flex flex-col lg:flex-row w-[90%] max-w-[2560px] mx-auto">
+      {compareOpen && activeCompare.length > 0 && (
+        <Compare
+          activeCompare={activeCompare}
+          setActiveCompare={setActiveCompare}
+          onClose={() => setCompareOpen(false)}
+        />
+      )}
+      <div className="flex flex-col lg:flex-row w-[90%] max-w-[2560px] mx-auto  items-center">
         <div className="flex flex-col w-full lg:w-1/2">
           <BreadCrumbs items={[{ label: "Termékek" }]}></BreadCrumbs>
           <h1 className="text-[35px] font-black">
@@ -70,7 +84,12 @@ export default function ProductPage() {
           </ul>
         </div>
         <div className="flex flex-col w-full lg:w-1/2">
-          <ProductCarousel products={newProducts}></ProductCarousel>
+          <ProductCarousel
+            products={newProducts}
+            activeCompare={activeCompare}
+            setActiveCompare={setActiveCompare}
+            setCompareOpen={setCompareOpen}
+          />
         </div>
       </div>
       <motion.div
@@ -101,7 +120,6 @@ export default function ProductPage() {
             href="/kapcsolat"
             className="flex flex-row gap-[5px] bg-accent w-fit p-[10px] text-white rounded-md mt-[25px]"
           >
-            {" "}
             Van egy ötletem
           </Link>
         </div>
@@ -128,7 +146,13 @@ export default function ProductPage() {
           <div className="flex flex-col w-full lg:w-2/3 lg:px-[10px] py-[25px] mx-auto">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[15px]">
               {products.map((elem) => (
-                <ProductCard key={elem.name} item={elem}></ProductCard>
+                <ProductCard
+                  key={elem.id}
+                  item={elem}
+                  activeCompare={activeCompare}
+                  setActiveCompare={setActiveCompare}
+                  setCompareOpen={setCompareOpen}
+                />
               ))}
             </div>
           </div>

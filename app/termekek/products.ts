@@ -84,7 +84,7 @@ const products: Product[] = [
     },
     stock: 1,
     img: "/products/csucsdisz.jpg",
-    salePrice: 0,
+    salePrice: 25000,
   },
 ];
 
