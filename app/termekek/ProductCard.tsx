@@ -1,4 +1,4 @@
-import type { Dispatch, SetStateAction } from "react";
+import { useRef, type Dispatch, type SetStateAction } from "react";
 import type { Product } from "./products";
 import Image from "next/image";
 import {
@@ -34,13 +34,13 @@ export default function ProductCard({
           Új
         </span>
       ) : null}
-      <div className="relative w-full max-w-[200px] aspect-square mx-auto mt-[10px]">
+      <div className="group relative w-full max-w-[200px] aspect-square mx-auto mt-[10px] overflow-hidden ">
         <Image
           fill
           alt={item.name}
           src={item.img}
-          sizes="200px"
-          className="object-contain"
+          sizes="400px"
+          className="object-contain transition-transform duration-300 ease-out "
         />
       </div>
 

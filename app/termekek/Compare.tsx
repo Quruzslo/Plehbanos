@@ -32,8 +32,8 @@ export default function Compare({
 
   const label =
     "sticky left-0 bg-white z-10 p-[10px] w-[150px] font-bold border-r border-text/20";
-  const cell = "p-[10px] border border-text/20";
-  const row = "border-1 border-text/20";
+  const cell = "p-[10px] border border-text/20 ";
+  const row = "border-1 border-text/20 ";
 
   return (
     <section className="fixed inset-0 w-full h-full bg-black/70 z-[200] pt-[100px] lg:pt-[150px] pb-[35px] overflow-y-auto">
