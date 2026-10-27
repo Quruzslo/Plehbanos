@@ -71,7 +71,7 @@ export default function ProductPage() {
       {quickView && (
         <QuickView setQuickView={setQuickView} item={quickView}></QuickView>
       )}
-      <div className="flex flex-col lg:flex-row w-[90%] max-w-[2560px] mx-auto  items-center">
+      <div className="flex flex-col lg:flex-row w-[90%] max-w-[2560px] mx-auto  items-center relative">
         <div className="flex flex-col w-full lg:w-1/2">
           <BreadCrumbs items={[{ label: "Termékek" }]}></BreadCrumbs>
           <h1 className="text-[35px] font-black">

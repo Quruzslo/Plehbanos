@@ -25,7 +25,7 @@ export default function ProductCarousel({
   const isLast = active === latest.length - 1;
 
   return (
-    <div className="flex flex-col items-center [--item:200px] md:[--item:250px] [--gap:15px]">
+    <div className="flex flex-col items-center [--item:300px] md:[--item:250px] [--gap:15px]">
       <div className="w-full overflow-hidden">
         <div
           className="flex w-max gap-(--gap) transition-transform duration-500 ease-out motion-reduce:transition-none p-[10px]"
