@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import ProductPage from "./ProductsPage";
 import { db } from "@/src/db";
 import { categories, products } from "@/src/db/schema";
-import { desc } from "drizzle-orm";
+import { desc, asc } from "drizzle-orm";
 
 export const metadata: Metadata = {
   title: "Kézműves bádogos dekorációs termékek Somogyból",

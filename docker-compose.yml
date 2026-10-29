@@ -6,3 +6,29 @@ services:
     env_file:
       - .env
     restart: unless-stopped
+
+# Parancs	Mit csinál
+# docker compose up -d --build	újrabuildel és elindít a háttérben
+# docker compose up -d	elindít a meglévő image-ből, build nélkül
+# docker compose build	csak buildel, nem indít
+# docker compose down	leállítja és törli a konténereket (a volume marad)
+# docker compose stop	leállítja, de nem törli
+# docker compose restart	újraindítja
+# docker compose ps	a projekt futó konténerei
+# docker compose logs -f	logok élőben (Ctrl + C-vel kilépsz)
+
+# Általános Docker parancsok (bármelyik mappából):
+
+# Parancs	Mit csinál
+# docker ps	az összes futó konténer
+# docker ps -a	a leállítottak is
+# docker images	a letöltött és buildelt image-ek
+# docker logs <konténer>	egy konténer logjai
+# docker exec -it <konténer> sh	belépsz egy futó konténerbe
+# docker volume ls	a volume-ok
+# docker system prune	törli a nem használt konténereket, image-eket, build cache-t
+
+# Két figyelmeztetés:
+
+# docker compose down -v: a -v a volume-okat is törli. Az adatbázisnál ez az összes adat elvesztését jelenti.
+# docker system prune: rendszeresen érdemes futtatni, mert a buildek sok helyet foglalnak, de előbb nézd meg, mit akar törölni. Rákérdez.

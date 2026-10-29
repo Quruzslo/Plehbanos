@@ -49,12 +49,16 @@ function NavGroup({
 }) {
   return (
     <div
-      className={`flex w-full flex-col motion-reduce:animate-none ${
+      className={`flex w-full flex-col motion-reduce:animate-none px-[15px] ${
         side === "left" ? "animate-reveal-left" : "animate-reveal-right"
       }`}
     >
       <div
-        className={`h-[2px] transition duration-600 rounded-full bg-white/50 ${headerTheme === "light" && !scrolled ? "!bg-text/50" : "!bg-white/50"} ${scrolled ? "!w-0" : "!w-full"}`}
+        className={`h-[2px] w-full rounded-full transition-all duration-300 ${
+          side === "left" ? "origin-left" : "origin-right"
+        } ${scrolled ? "scale-x-0" : "scale-x-100"} ${
+          headerTheme === "light" && !scrolled ? "bg-text/50" : "bg-white/50"
+        }`}
       />
       <nav className="desktop-nav flex w-full flex-row items-center justify-around gap-[15px]">
         {navItems
@@ -63,7 +67,7 @@ function NavGroup({
             <Link
               key={item.path}
               href={item.path}
-              className={`text-[20px] text-white desktop-nav-item ${headerTheme === "light" && !scrolled ? "!text-text" : "!text-white"}`}
+              className={`text-[20px] text-white desktop-nav-item ${headerTheme === "light" && !scrolled ? "!text-text" : "!text-white"} hover:!text-white`}
             >
               {item.name}
             </Link>
@@ -105,8 +109,8 @@ function MobileHeader({
           href="/"
           className={`relative transition-all duration-300 ${
             scrolled
-              ? "h-[40px] min-w-[40px] bg-transparent"
-              : "h-[75px] min-w-[75px] bg-accent shadow-xl"
+              ? "h-[50px] min-w-[50px] bg-transparent"
+              : "h-[50px] min-w-[50px] bg-accent shadow-xl"
           } overflow-hidden rounded-full`}
         >
           <Image
@@ -237,8 +241,8 @@ export default function Header() {
     >
       {/* Desktop header ------------- */}
       <div
-        className={`mx-auto hidden lg:flex w-[90%] max-w-[2560px] px-[25px] flex-row items-center mt-[10px] justify-center gap-[25px] rounded-full border border-transparent py-[10px] transition-all duration-500 ${
-          scrolled ? "border-white/40 bg-foreground/40 backdrop-blur-sm" : ""
+        className={`mx-auto hidden lg:flex w-[90%] max-w-[2560px] px-[0px] flex-row items-center mt-[10px] justify-center gap-[25px] rounded-full border border-transparent py-[10px] transition-all duration-300 ${
+          scrolled ? "border-white/40 bg-foreground/40 backdrop-blur-sm " : " "
         }`}
       >
         <NavGroup headerTheme={headerTheme} scrolled={scrolled} side="left" />
