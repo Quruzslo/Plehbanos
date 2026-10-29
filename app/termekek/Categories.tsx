@@ -1,11 +1,8 @@
+"use client";
+
 import { motion } from "motion/react";
 import { CheckFatIcon } from "@phosphor-icons/react";
-import {
-  getCategories,
-  CATEGORIES,
-  type Category,
-  getCategoriesCount,
-} from "./products";
+import type { Category, Product } from "@/src/db/schema";
 
 type OptionProps = {
   label: string;
@@ -30,7 +27,7 @@ function Option({ label, active, onSelect }: OptionProps) {
       >
         <motion.span
           initial={false}
-          animate={{ scale: active ? 1 : 0, opacity: active ? 1 : 1 }}
+          animate={{ scale: active ? 1 : 0 }}
           transition={{ type: "spring", stiffness: 500, damping: 25 }}
         >
           <CheckFatIcon size={12} weight="fill" className="fill-white" />
@@ -42,39 +39,38 @@ function Option({ label, active, onSelect }: OptionProps) {
 }
 
 type Props = {
-  category: Category | null;
-  setCategory: (c: Category | null) => void;
+  categories: Category[];
+  products: Product[];
+  active: number | null;
+  onChange: (id: number | null) => void;
 };
 
-export default function Categories({ category, setCategory }: Props) {
-  const categories = getCategories();
-
+export default function Categories({
+  categories,
+  products,
+  active,
+  onChange,
+}: Props) {
   return (
     <div className="w-fit lg:p-[10px] flex flex-col items-start gap-1 bg-white text-[15px] font-bold">
       <div className="flex flex-row gap-3">
         <Option
           label="Összes"
-          active={category === null}
-          onSelect={() => setCategory(null)}
+          active={active === null}
+          onSelect={() => onChange(null)}
         />
-        <span className="text-accent ">
-          {"("}
-          {getCategoriesCount("")}
-          {")"}
-        </span>
+        <span className="text-accent">({products.length})</span>
       </div>
 
       {categories.map((cat) => (
-        <div key={cat} className="flex flex-row gap-3">
+        <div key={cat.id} className="flex flex-row gap-3">
           <Option
-            label={CATEGORIES[cat]}
-            active={category === cat}
-            onSelect={() => setCategory(cat)}
+            label={cat.name}
+            active={active === cat.id}
+            onSelect={() => onChange(cat.id)}
           />
-          <span className="text-accent ">
-            {"("}
-            {getCategoriesCount(cat)}
-            {")"}
+          <span className="text-accent">
+            ({products.filter((p) => p.categoryId === cat.id).length})
           </span>
         </div>
       ))}

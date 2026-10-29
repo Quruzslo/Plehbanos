@@ -2,11 +2,11 @@ import type { Dispatch, SetStateAction } from "react";
 import { useEffect } from "react";
 import Image from "next/image";
 import {
-  ShoppingCartIcon,
-  XIcon,
   ArrowsLeftRightIcon,
+  XIcon,
+  ShoppingCartIcon,
 } from "@phosphor-icons/react";
-import type { Product } from "./products";
+import type { Product } from "@/src/db/schema";
 
 type Props = {
   activeCompare: Product[];
@@ -25,15 +25,16 @@ export default function Compare({
       document.documentElement.style.overflow = "";
     };
   }, []);
+
   if (activeCompare.length === 0) return null;
 
-  const remove = (id: string) =>
+  const remove = (id: number) =>
     setActiveCompare((prev) => prev.filter((p) => p.id !== id));
 
   const label =
     "sticky left-0 bg-white z-10 p-[10px] w-[150px] font-bold border-r border-text/20";
-  const cell = "p-[10px] border border-text/20 ";
-  const row = "border-1 border-text/20 ";
+  const cell = "p-[10px] border border-text/20";
+  const row = "border border-text/20";
 
   return (
     <section className="fixed inset-0 w-full h-full bg-black/70 z-[200] pt-[100px] lg:pt-[150px] pb-[35px] overflow-y-auto">
@@ -41,7 +42,7 @@ export default function Compare({
         <div className="flex items-center justify-between p-[10px] border-b border-text/20">
           <h2 className="text-[20px] font-black flex flex-row gap-5 items-center">
             Összehasonlítás{" "}
-            <ArrowsLeftRightIcon className="w-[25px] h-[25px] bg-accent text-white rounded-xs"></ArrowsLeftRightIcon>
+            <ArrowsLeftRightIcon className="w-[25px] h-[25px] bg-accent text-white rounded-xs" />
           </h2>
           <button
             type="button"
@@ -55,7 +56,7 @@ export default function Compare({
 
         <div className="overflow-x-auto">
           <table
-            className="w-full  table-fixed border-collapse text-left"
+            className="w-full table-fixed border-collapse text-left"
             style={{ minWidth: 150 + activeCompare.length * 250 }}
           >
             <thead>
@@ -73,7 +74,7 @@ export default function Compare({
                       type="button"
                       onClick={() => remove(p.id)}
                       aria-label={`${p.name} eltávolítása`}
-                      className=" rounded-full p-[5px] text-white hover:bg-red-600 bg-red-300 cursor-pointer"
+                      className="rounded-full p-[5px] text-white hover:bg-red-600 bg-red-300 cursor-pointer"
                     >
                       <XIcon size={15} />
                     </button>
@@ -99,7 +100,7 @@ export default function Compare({
                 </th>
                 {activeCompare.map((p) => (
                   <td key={p.id} className={cell}>
-                    {p.parameters.heightCm} cm
+                    {p.heightCm} cm
                   </td>
                 ))}
               </tr>
@@ -110,7 +111,7 @@ export default function Compare({
                 </th>
                 {activeCompare.map((p) => (
                   <td key={p.id} className={cell}>
-                    {p.parameters.widthCm} cm
+                    {p.widthCm} cm
                   </td>
                 ))}
               </tr>
@@ -121,10 +122,11 @@ export default function Compare({
                 </th>
                 {activeCompare.map((p) => (
                   <td key={p.id} className={cell}>
-                    {p.parameters.weightKg.toLocaleString("hu-HU")} kg
+                    {p.weightKg.toLocaleString("hu-HU")} kg
                   </td>
                 ))}
               </tr>
+
               <tr className={row}>
                 <th scope="row" className={label}>
                   Ár

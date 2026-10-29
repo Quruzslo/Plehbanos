@@ -13,9 +13,15 @@ export const categoryEnum = pgEnum("product_category", [
   "haz-elem",
 ]);
 
+export const categories = pgTable("categories", {
+  id: integer().primaryKey().generatedAlwaysAsIdentity(),
+  name: varchar({ length: 255 }).notNull(),
+  slug: varchar({ length: 255 }).notNull().unique(),
+});
+
 export const products = pgTable("products", {
   id: integer().primaryKey().generatedAlwaysAsIdentity(),
-  category: categoryEnum().notNull(),
+  categoryId: integer().references(() => categories.id),
   slug: varchar({ length: 255 }).notNull().unique(),
   name: varchar({ length: 255 }).notNull(),
   description: text().notNull(),
@@ -30,5 +36,6 @@ export const products = pgTable("products", {
   createdAt: timestamp().notNull().defaultNow(),
 });
 
+export type Category = typeof categories.$inferSelect;
 export type Product = typeof products.$inferSelect;
 export type NewProduct = typeof products.$inferInsert;

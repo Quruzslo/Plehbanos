@@ -1,4 +1,4 @@
-import { type Product } from "./products";
+// import { type Product } from "./products";
 import Image from "next/image";
 
 import { useEffect, useRef } from "react";
@@ -6,7 +6,7 @@ export default function QuickView({
   item,
   setQuickView,
 }: {
-  item: Product;
+  item: any;
   setQuickView: any;
 }) {
   useEffect(() => {
@@ -16,7 +16,7 @@ export default function QuickView({
     };
   }, []);
 
-  const imgRef = useRef(null);
+  const imgRef = useRef<HTMLImageElement>(null);
 
   const handleZoom = (e: React.MouseEvent<HTMLDivElement>) => {
     const rect = e.currentTarget.getBoundingClientRect();
@@ -86,19 +86,19 @@ export default function QuickView({
                 </h3>
                 <div className="flex flex-row gap-3 items-center justify-center w-fit ">
                   <div className="w-3 h-3 rounded-full bg-accent" />
-                  Magasság: {item.parameters.heightCm} cm
+                  Magasság: {item.heightCm} cm
                 </div>
                 <div className="flex flex-row gap-3 items-center justify-center w-fit ">
                   <div className="w-3 h-3 rounded-full bg-accent" />
-                  Szélesség: {item.parameters.widthCm} cm
+                  Szélesség: {item.widthCm} cm
                 </div>
                 <div className="flex flex-row gap-3 items-center justify-center w-fit ">
                   <div className="w-3 h-3 rounded-full bg-accent" />
-                  Súly: {item.parameters.weightKg} kg
+                  Súly: {item.weightKg} kg
                 </div>
                 <div className="flex flex-row gap-3 items-center justify-center w-fit ">
                   <div className="w-3 h-3 rounded-full bg-accent" />
-                  Szín: {item.parameters.color}
+                  Szín: {item.color}
                 </div>
               </div>
               <p className="mt-[20px] font-semibold">{item.description}</p>
