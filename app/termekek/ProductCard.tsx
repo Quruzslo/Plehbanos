@@ -7,6 +7,9 @@ import {
   ArrowsLeftRightIcon,
 } from "@phosphor-icons/react";
 
+import { CartActionsContext } from "@/src/context/cartContext";
+import { useContext } from "react";
+
 const MAX_COMPARE = 6;
 
 export default function ProductCard({
@@ -26,6 +29,8 @@ export default function ProductCard({
 }) {
   const active = activeCompare.some((i) => i.id === item.id);
   const disabled = !active && activeCompare.length >= MAX_COMPARE;
+
+  const { addItem } = useContext(CartActionsContext)!;
 
   return (
     <div className="shrink-0 h-full w-full relative flex flex-col transition duration-400 hover:shadow-[5px_5px_10px_0px_rgba(0,0,0,0.3)] rounded-[10px] border-1 border-text/20">
@@ -49,7 +54,7 @@ export default function ProductCard({
         <div className=" w-fit z-10">
           {item.stock >= 1 ? (
             <p className="bg-green-600 text-green-100 w-fit px-[5px] rounded-[7px]">
-              Raktáron
+              Raktáron {item.stock} db.
             </p>
           ) : (
             <p className="bg-stone-400 text-red-100 w-fit px-[5px] rounded-[7px]">
@@ -75,6 +80,7 @@ export default function ProductCard({
 
         <div className="flex flex-row gap-[5px] items-center mt-auto">
           <button
+            onClick={() => addItem(item)}
             type="button"
             title="Megrendelem"
             className="cursor-pointer w-fit rounded-full bg-text text-white text-[15px] p-[10px] hover:bg-accent"

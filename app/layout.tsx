@@ -4,6 +4,7 @@ import "./globals.css";
 import Header from "@/components/Header";
 import ScrollToTop from "@/lib/ui/ScrollToTop";
 import Footer from "@/components/Footer";
+import { CartProvider } from "@/src/context/cartContext";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -28,10 +29,12 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
-        <Header></Header>
-        {children}
-        <ScrollToTop></ScrollToTop>
-        <Footer></Footer>
+        <CartProvider>
+          <Header></Header>
+          {children}
+          <ScrollToTop></ScrollToTop>
+          <Footer></Footer>
+        </CartProvider>
       </body>
     </html>
   );
