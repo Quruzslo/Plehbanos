@@ -227,7 +227,7 @@ export default function Header() {
   }, [pathname]);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 150);
+    const onScroll = () => setScrolled(window.scrollY > 15);
 
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });

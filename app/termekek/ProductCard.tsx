@@ -1,5 +1,5 @@
-import { useRef, type Dispatch, type SetStateAction } from "react";
-import type { Product } from "./products";
+import type { Dispatch, SetStateAction } from "react";
+import type { Product } from "@/src/db/schema";
 import Image from "next/image";
 import {
   ShoppingCartIcon,
@@ -7,7 +7,7 @@ import {
   ArrowsLeftRightIcon,
 } from "@phosphor-icons/react";
 
-const MAX_COMPARE = 3;
+const MAX_COMPARE = 6;
 
 export default function ProductCard({
   item,

@@ -50,7 +50,7 @@ export default function ProductPage({ items, newItems, categories }: Props) {
       data-header="light"
       className="flex flex-col w-full pt-[120px] lg:pt-[150px] bg-white"
     >
-      {!compareOpen && activeCompare.length > 0 && (
+      {!compareOpen && activeCompare.length > 0 && !quickView && (
         <button
           type="button"
           onClick={() => setCompareOpen(true)}
@@ -65,7 +65,7 @@ export default function ProductPage({ items, newItems, categories }: Props) {
         </button>
       )}
 
-      {compareOpen && activeCompare.length > 0 && (
+      {compareOpen && activeCompare.length >= 1 && (
         <Compare
           activeCompare={activeCompare}
           setActiveCompare={setActiveCompare}

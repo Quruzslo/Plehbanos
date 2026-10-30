@@ -26,7 +26,7 @@ export default function Compare({
     };
   }, []);
 
-  if (activeCompare.length === 0) return null;
+  if (activeCompare.length < 1) return null;
 
   const remove = (id: number) =>
     setActiveCompare((prev) => prev.filter((p) => p.id !== id));
