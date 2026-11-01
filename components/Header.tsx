@@ -64,13 +64,13 @@ function NavGroup({
         {navItems
           .filter((item) => item.position === side)
           .map((item) => (
-            <Link
+            <a
               key={item.path}
               href={item.path}
               className={`text-[20px] text-white desktop-nav-item ${headerTheme === "light" && !scrolled ? "!text-text" : "!text-white"} hover:!text-white`}
             >
               {item.name}
-            </Link>
+            </a>
           ))}
       </nav>
     </div>

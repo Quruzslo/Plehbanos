@@ -17,7 +17,7 @@ export default function MainButton({
   className,
 }: MainButtonProps) {
   return (
-    <Link
+    <a
       href={link}
       className={`main-button relative inline-flex h-14 items-center rounded-[10px] bg-transparent pl-16 pr-6 font-semibold text-foreground ${className ?? ""}`}
     >
@@ -35,6 +35,6 @@ export default function MainButton({
         )}
       </span>
       <span>{text}</span>
-    </Link>
+    </a>
   );
 }
