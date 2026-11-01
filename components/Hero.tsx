@@ -1,6 +1,10 @@
 import Image from "next/image";
 import MainButton from "@/lib/ui/MainButton";
-import { ArrowDownIcon } from "@phosphor-icons/react/ssr";
+import {
+  ArrowDownIcon,
+  PaperPlaneTiltIcon,
+  PhoneOutgoingIcon,
+} from "@phosphor-icons/react/ssr";
 
 export default function Hero() {
   return (
@@ -9,6 +13,20 @@ export default function Hero() {
       className="relative flex flex-col w-full min-h-svh pt-[120px] lg:pt-[150px] pb-[50px] bg-background"
     >
       <div className="relative w-[90%] mx-auto flex flex-col overflow-hidden rounded-[10px] min-h-full flex-1 shadow-[5px_5px_15px_0px_rgba(0,0,0,0.4)] py-[15px]">
+        <div className="absolute z-[100] left-[5px] top-[15px] lg:top-[50%] lg:translate-y-[-50%] flex flex-row lg:flex-col w-fit gap-[15px]">
+          <a
+            href="tel:+36203127968"
+            className="w-[45px] h-[45px] rounded-full border-2 border-white/50 hover:border-white flex flex-row items-center justify-center"
+          >
+            <PhoneOutgoingIcon className="w-[35px] h-[35px] mx-auto my-auto text-white" />
+          </a>
+          <a
+            href="tel:+36203127968"
+            className="w-[45px] h-[45px] rounded-full border-2 border-white/50 hover:border-white flex flex-row items-center justify-center"
+          >
+            <PaperPlaneTiltIcon className="w-[35px] h-[35px] mx-auto my-auto text-white" />
+          </a>
+        </div>
         {/* Háttérkép */}
         <Image
           fill
@@ -23,7 +41,7 @@ export default function Hero() {
         <div className="absolute inset-0 bg-linear-to-b from-foreground/90 via-foreground/30 to-foreground/90" />
 
         {/* Tartalom */}
-        <div className="relative z-10 flex flex-col md:flex-row w-[90%] max-w-[1800px] mt-auto mx-auto lg:my-auto ">
+        <div className="relative z-10 flex flex-col md:flex-row w-[100%] p-[10px] mt-auto mx-auto lg:my-auto ">
           <div className="flex flex-col w-full md:max-w-[800px] mx-auto mt-[120px] justify-center items-center text-background w-fit">
             <h1 className="text-[25px] md:text-[45px] font-black mr-auto">
               József Zoltán – bádogos mester
