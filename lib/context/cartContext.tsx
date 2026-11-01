@@ -1,6 +1,6 @@
 "use client";
 import { createContext, useMemo, useState } from "react";
-import type { Product } from "@/src/db/schema";
+import type { Product } from "@/lib/db/schema";
 
 export type CartItem = Product & { quantity: number };
 

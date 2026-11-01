@@ -2,7 +2,7 @@
 
 import { motion } from "motion/react";
 import { CheckFatIcon } from "@phosphor-icons/react";
-import type { Category, Product } from "@/src/db/schema";
+import type { Category, Product } from "@/lib/db/schema";
 
 type OptionProps = {
   label: string;

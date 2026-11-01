@@ -1,5 +1,5 @@
 import type { Dispatch, SetStateAction } from "react";
-import type { Product } from "@/src/db/schema";
+import type { Product } from "@/lib/db/schema";
 import Image from "next/image";
 import {
   ShoppingCartIcon,
@@ -7,7 +7,7 @@ import {
   ArrowsLeftRightIcon,
 } from "@phosphor-icons/react";
 
-import { CartActionsContext } from "@/src/context/cartContext";
+import { CartActionsContext } from "@/lib/context/cartContext";
 import { useContext } from "react";
 
 const MAX_COMPARE = 6;

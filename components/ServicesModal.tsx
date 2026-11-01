@@ -21,7 +21,7 @@ export default function ServicesModal({
           aria-labelledby="service-modal-title"
           className=" w-full h-full pt-[120px] pb-[35px] overflow-y-auto flex flex-col fixed inset-0 z-[100] bg-black/80"
         >
-          <div className="relative flex flex-col lg:flex-row bg-white w-[80%] mx-auto my-auto rounded-[10px]">
+          <div className="relative flex flex-col lg:flex-row bg-white w-[90%]  mx-auto my-auto rounded-[10px]">
             <button
               type="button"
               onClick={() => setActiveModal(null)}

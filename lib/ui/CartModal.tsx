@@ -10,7 +10,7 @@ import {
 import {
   CartStateContext,
   CartActionsContext,
-} from "@/src/context/cartContext";
+} from "@/lib/context/cartContext";
 
 export default function CartModal() {
   const cartItems = useContext(CartStateContext)!;

@@ -35,7 +35,7 @@ export default function Services() {
             <article
               key={service.title}
               tabIndex={-1}
-              className="service-card transition-all duration-300 hover:shadow-[5px_5px_15px_0px_rgba(0,0,0,0.3)] flex flex-col overflow-hidden rounded-[10px] bg-white text-text relative h-[450px] group"
+              className="service-card transition-all duration-300 shadow-[0px_0px_10px_0px_rgba(0,0,0,0.3)] hover:shadow-[5px_5px_15px_0px_rgba(0,0,0,0.6)] flex flex-col overflow-hidden rounded-[10px] bg-white text-text relative h-[450px] group"
             >
               <button
                 onClick={() => setActiveModal(service)}
@@ -59,11 +59,11 @@ export default function Services() {
                 )}
               </div>
 
-              <div className="flex flex-col p-[5px] z-10 mt-auto">
+              <div className="flex flex-col px-[10px] py-[5px] z-10 mt-auto">
                 <h3 className="text-xl font-semibold">{service.title}</h3>
               </div>
 
-              <div className="flex flex-col gap-3 p-[5px] z-10 ">
+              <div className="flex flex-col gap-3 px-[10px] py-[5px] z-10 ">
                 <p className="flex-1 text-sm ">{service.shortDesc}</p>
                 <MainButton
                   link={`/szolgaltatasok/${service.slug}`}

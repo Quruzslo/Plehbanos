@@ -6,7 +6,7 @@ import {
   XIcon,
   ShoppingCartIcon,
 } from "@phosphor-icons/react";
-import type { Product } from "@/src/db/schema";
+import type { Product } from "@/lib/db/schema";
 
 type Props = {
   activeCompare: Product[];

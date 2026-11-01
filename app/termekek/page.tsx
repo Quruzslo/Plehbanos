@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import ProductPage from "./ProductsPage";
-import { db } from "@/src/db";
-import { categories, products } from "@/src/db/schema";
+import { db } from "@/lib/db";
+import { categories, products } from "@/lib/db/schema";
 import { desc, asc } from "drizzle-orm";
 
 export const metadata: Metadata = {

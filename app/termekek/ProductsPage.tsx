@@ -11,7 +11,7 @@ import ProductCard from "./ProductCard";
 import Categories from "./Categories";
 import Compare from "./Compare";
 import QuickView from "./QuickView";
-import type { Category, Product } from "@/src/db/schema";
+import type { Category, Product } from "@/lib/db/schema";
 import CartModal from "@/lib/ui/CartModal";
 
 const CallToActionVariants: Variants = {
