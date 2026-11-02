@@ -17,8 +17,10 @@ async function AdminShell({ children }: { children: React.ReactNode }) {
       </div>
 
       {/* Tartalom panel---------------- */}
-      <div className="w-[90%] lg:w-full mx-auto flex flex-col gap-[20px] p-[10px] lg:px-[35px] ">
-        <div className="w-full max-w-[1800px] mx-auto">{children}</div>
+      <div className="w-[90%] lg:w-full mx-auto flex flex-col gap-[20px] p-[10px] lg:px-[35px] min-h-full">
+        <div className="w-full max-w-[1800px] mx-auto h-full flex flex-col items-center justify-center">
+          {children}
+        </div>
       </div>
     </section>
   );

@@ -21,7 +21,7 @@ const fiokomNav = [
 
 export default function Fiokom() {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 w-full mx-auto pt-[120px]  gap-[20px] my-auto">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 w-full  mx-auto  gap-[20px] my-auto">
       {fiokomNav.map((i) => (
         <div
           key={i.title}
