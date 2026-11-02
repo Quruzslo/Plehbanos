@@ -1,16 +1,17 @@
+"use client";
 import Image from "next/image";
 import Link from "next/link";
 import navItems from "@/lib/datas/navItems";
+import { usePathname } from "next/navigation";
 
 const EMAIL = "info@pelda.hu";
 const PHONE = "+36 30 123 4567";
-
-async function Year() {
-  "use cache";
-  return new Date().getFullYear();
-}
+const now = new Date().getFullYear();
 
 export default function Footer() {
+  const pathname = usePathname();
+  if (pathname.startsWith("/admin") || pathname.startsWith("/belepes"))
+    return null;
   return (
     <section className="w-full mt-[50px] bg-text text-white flex flex-col py-[50px]">
       <div className="footer-img relative mx-auto mt-[-50px] mb-[50px] bg-white p-[10px] rounded-b-[25px]">
@@ -61,10 +62,7 @@ export default function Footer() {
       </div>
       <div className="mt-[25px] w-full flex flex-col border-t-2 border-t-white/50">
         <div className="w-[90%] max-w-[2560px] flex flex-col mx-auto items-center justify-center">
-          <div>
-            {" "}
-            © <Year></Year> Minden jog fenntartva.
-          </div>
+          <div> © {now} Minden jog fenntartva.</div>
         </div>
       </div>
     </section>

@@ -152,13 +152,13 @@ export default function ProductPage({ items, newItems, categories }: Props) {
             Van egy ötletem
           </Link>
         </div>
-        <div className="flex flex-col w-full lg:w-1/2 relative">
+        <div className="flex flex-col w-full lg:w-1/2 relative mb-[-15px]">
           <Image
             alt="Egyedi bádogos termékek, kézzel készült díszek"
-            width={350}
-            height={350}
-            src="/images/blob-bg.svg"
-            className="object-cover ml-auto"
+            width={450}
+            height={450}
+            src="/images/plan.png"
+            className="object-cover ml-auto "
           />
         </div>
       </motion.div>

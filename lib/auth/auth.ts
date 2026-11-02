@@ -8,7 +8,7 @@ export const auth = betterAuth({
   database: drizzleAdapter(db, { provider: "pg", schema: authSchema }),
   emailAndPassword: {
     enabled: true,
-    disableSignUp: false,
+    disableSignUp: true,
   },
   user: {
     additionalFields: {

@@ -84,6 +84,8 @@ function MobileHeader({
   scrolled: boolean;
   headerTheme: "light" | "dark";
 }) {
+  const pathname = usePathname();
+
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
@@ -96,6 +98,7 @@ function MobileHeader({
   const bar = `flex flex-row h-[3px] w-full rounded-full transition-colors duration-300  ${
     open ? "!bg-accent" : "bg-white "
   }`;
+  if (pathname.startsWith("/admin")) return null;
 
   return (
     <>
@@ -233,6 +236,7 @@ export default function Header() {
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+  if (pathname.startsWith("/admin")) return null;
 
   return (
     <header

@@ -9,12 +9,17 @@ export async function signInAction(_prev: unknown, formData: FormData) {
   const email = String(formData.get("email") ?? "");
   const password = String(formData.get("password") ?? "");
 
+  let role: string | undefined;
   try {
-    await auth.api.signInEmail({ body: { email, password } });
+    const res = await auth.api.signInEmail({ body: { email, password } });
+    role = res.user.role;
   } catch (e) {
     if (e instanceof APIError) return { error: "Hibás email vagy jelszó" };
     throw e;
   }
+
+  if (role !== "admin")
+    return { error: "Nincs jogosultságod az admin felülethez" };
 
   redirect("/admin/fiokom");
 }
