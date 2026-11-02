@@ -10,7 +10,7 @@ async function AdminShell({ children }: { children: React.ReactNode }) {
   if (!session || session.user.role !== "admin") redirect("/belepes");
 
   return (
-    <section className="w-full min-h-[100svh] flex flex-col lg:flex-row ">
+    <main className="w-full min-h-[100svh] flex flex-col lg:flex-row ">
       {/* Navigációs panel-------------- */}
       <div className="flex flex-col w-[90%] lg:w-[250px] lg:min-h-full mx-auto bg-text text-white shadow-[0px_0px_15px_0px_rgba(0,0,0,0.6)]">
         <AdminNav userName={session.user.name} />
@@ -22,7 +22,7 @@ async function AdminShell({ children }: { children: React.ReactNode }) {
           {children}
         </div>
       </div>
-    </section>
+    </main>
   );
 }
 
