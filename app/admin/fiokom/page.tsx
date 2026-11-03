@@ -5,17 +5,17 @@ const fiokomNav = [
   {
     title: "Termékek kezelése",
     img: "/images/products.jpg",
-    path: "admin/termekek",
+    path: "/admin/termekek",
   },
   {
     title: "Rendelések kezelése",
     img: "/images/orders.jpg",
-    path: "admin/rendelesek",
+    path: "/admin/rendelesek",
   },
   {
     title: "Üzenetek kezelése",
     img: "/images/mails.jpg",
-    path: "admin/levelezes",
+    path: "/admin/levelezes",
   },
 ];
 

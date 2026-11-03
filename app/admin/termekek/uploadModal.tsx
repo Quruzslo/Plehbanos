@@ -8,6 +8,9 @@ type Errors = Partial<Record<string, string[]>>;
 const inputClass =
   "w-full rounded-[8px] border border-text/20 bg-white px-3 py-2.5 text-text outline-none transition-colors focus:border-accent";
 
+const fileClass =
+  "w-full cursor-pointer rounded-[8px] border border-text/20 bg-white text-[14px] text-text/70 transition-colors focus:border-accent file:mr-3 file:cursor-pointer file:border-0 file:bg-text file:px-4 file:py-2.5 file:font-semibold file:text-white hover:file:bg-accent";
+
 const pillClass =
   "cursor-pointer rounded-full border border-text/20 px-4 py-2 text-[14px] text-text transition-colors hover:border-text/40 has-[:checked]:border-text has-[:checked]:bg-text has-[:checked]:text-white";
 
@@ -98,12 +101,17 @@ export default function UploadProductForm({
                   className={inputClass}
                 />
               </Field>
-              <Field label="Kép útvonala" name="img" error={err("img")}>
+              <Field
+                label="Kép (JPG, PNG, WebP, max. 2 MB)"
+                name="image"
+                error={err("image")}
+              >
                 <input
-                  id="img"
-                  name="img"
-                  placeholder="/images/termek.jpg"
-                  className={inputClass}
+                  id="image"
+                  name="image"
+                  type="file"
+                  accept="image/jpeg,image/png,image/webp"
+                  className={fileClass}
                 />
               </Field>
             </div>

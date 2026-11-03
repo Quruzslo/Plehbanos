@@ -1,6 +1,6 @@
 // app/admin/termekek/components/ProductsGrid.tsx
 "use client";
-import { useState } from "react";
+import { useEffect, useState, useTransition } from "react";
 import Image from "next/image";
 import {
   MagnifyingGlassPlusIcon,
@@ -11,8 +11,100 @@ import type { Category, Product } from "@/lib/db/schema";
 import EditProductModal from "./modifyModal";
 import UploadProductForm from "./uploadModal";
 import CategoryManager from "./categoryManager";
+import { deleteProduct } from "./actions/productActions";
 
 const formatHuf = (value: number) => `${value.toLocaleString("hu-HU")} Ft`;
+
+// Törlés modal ----------------------
+const CONFIRM_TEXT = "TÖRLÖM";
+
+function DeleteModal({
+  product,
+  onClose,
+}: {
+  product: Product;
+  onClose: () => void;
+}) {
+  const [value, setValue] = useState("");
+  const [pending, startTransition] = useTransition();
+  const confirmed = value === CONFIRM_TEXT;
+
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => e.key === "Escape" && onClose();
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  }, [onClose]);
+
+  function handleDelete() {
+    startTransition(async () => {
+      const res = await deleteProduct(product.id);
+      if (res?.success) onClose();
+    });
+  }
+
+  return (
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4 backdrop-blur-sm"
+      onClick={onClose}
+    >
+      <div
+        role="alertdialog"
+        aria-modal="true"
+        aria-labelledby="delete-title"
+        className="flex w-full max-w-[440px] flex-col gap-5 rounded-[10px] bg-white p-6 shadow-2xl"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div className="flex flex-col gap-1">
+          <h2 id="delete-title" className="text-[20px] font-bold text-text">
+            Termék törlése
+          </h2>
+          <p className="text-[14px] text-text/70">
+            A(z) <span className="font-semibold text-text">{product.name}</span>{" "}
+            és a képe véglegesen törlődik. Ez nem vonható vissza.
+          </p>
+        </div>
+
+        <div className="flex flex-col gap-1.5">
+          <label
+            htmlFor="delete-confirm"
+            className="text-[13px] font-semibold text-text/70"
+          >
+            A megerősítéshez írd be:{" "}
+            <span className="text-red-500">{CONFIRM_TEXT}</span>
+          </label>
+          <input
+            id="delete-confirm"
+            autoFocus
+            autoComplete="off"
+            value={value}
+            onChange={(e) => setValue(e.target.value)}
+            className="w-full rounded-[8px] border border-text/20 bg-white px-3 py-2.5 text-text outline-none transition-colors focus:border-red-500"
+          />
+        </div>
+
+        <div className="flex items-center justify-end gap-3">
+          <button
+            type="button"
+            onClick={onClose}
+            className="cursor-pointer rounded-full px-5 py-2.5 font-semibold text-text/70 transition-colors hover:bg-text/5 hover:text-text"
+          >
+            Mégse
+          </button>
+          <button
+            type="button"
+            onClick={handleDelete}
+            disabled={!confirmed || pending}
+            className="cursor-pointer rounded-full bg-red-500 px-6 py-2.5 font-semibold text-white transition-colors hover:bg-red-600 disabled:cursor-not-allowed disabled:opacity-40"
+          >
+            {pending ? "Törlés..." : "Végleges törlés"}
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// Termékkártyák rész-----------------------
 
 export default function ProductsGrid({
   items,
@@ -22,6 +114,7 @@ export default function ProductsGrid({
   categories: Category[];
 }) {
   const [editing, setEditing] = useState<Product | null>(null);
+  const [deleting, setDeleting] = useState<Product | null>(null);
 
   return (
     <section className="flex flex-col gap-[50px] w-full py-[50px]">
@@ -96,6 +189,7 @@ export default function ProductsGrid({
 
                 <button
                   type="button"
+                  onClick={() => setDeleting(item)}
                   title="Törlés"
                   aria-label="Törlés"
                   className="cursor-pointer rounded-full text-text border-1 border-text/20 p-[10px] hover:bg-red-500 hover:border-red-500 hover:text-white"
@@ -114,6 +208,14 @@ export default function ProductsGrid({
           product={editing}
           categories={categories}
           onClose={() => setEditing(null)}
+        />
+      )}
+
+      {deleting && (
+        <DeleteModal
+          key={deleting.id}
+          product={deleting}
+          onClose={() => setDeleting(null)}
         />
       )}
     </section>

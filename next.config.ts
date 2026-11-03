@@ -4,6 +4,7 @@ const nextConfig: NextConfig = {
   /* config options here */
   experimental: {
     agentFeedback: true,
+    serverActions: { bodySizeLimit: "2mb" },
   },
   output: "standalone",
   cacheComponents: true,
@@ -15,6 +16,10 @@ const nextConfig: NextConfig = {
         as: "*.css",
       },
     },
+  },
+
+  images: {
+    remotePatterns: [new URL(`${process.env.R2_PUBLIC_URL}/**`)],
   },
 };
 

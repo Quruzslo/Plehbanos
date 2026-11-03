@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useState, useTransition } from "react";
+import Image from "next/image";
 import { XIcon } from "@phosphor-icons/react";
 import type { Category, Product } from "@/lib/db/schema";
 import { modifyProduct } from "./actions/productActions";
@@ -8,6 +9,9 @@ type Errors = Partial<Record<string, string[]>>;
 
 const inputClass =
   "w-full rounded-[8px] border border-text/20 bg-white px-3 py-2.5 text-text outline-none transition-colors focus:border-accent";
+
+const fileClass =
+  "w-full cursor-pointer rounded-[8px] border border-text/20 bg-white text-[14px] text-text/70 transition-colors focus:border-accent file:mr-3 file:cursor-pointer file:border-0 file:bg-text file:px-4 file:py-2.5 file:font-semibold file:text-white hover:file:bg-accent";
 
 const pillClass =
   "cursor-pointer rounded-full border border-text/20 px-4 py-2 text-[14px] text-text transition-colors hover:border-text/40 has-[:checked]:border-text has-[:checked]:bg-text has-[:checked]:text-white";
@@ -65,7 +69,7 @@ export default function EditProductModal({
     };
   }, [onClose]);
 
-  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
 
@@ -139,21 +143,45 @@ export default function EditProductModal({
                 />
               </Field>
 
+              <div className="flex flex-col gap-1.5">
+                <span className="text-[13px] font-semibold text-text/70">
+                  Kép
+                </span>
+                <div className="flex items-center gap-4">
+                  <div className="relative h-[80px] w-[80px] shrink-0 overflow-hidden rounded-[8px] border border-text/10">
+                    <Image
+                      src={product.img}
+                      alt={product.name}
+                      fill
+                      sizes="80px"
+                      className="object-contain"
+                    />
+                  </div>
+                  <div className="flex flex-1 flex-col gap-1.5">
+                    <input
+                      id="image"
+                      name="image"
+                      type="file"
+                      accept="image/jpeg,image/png,image/webp"
+                      aria-label="Új kép feltöltése"
+                      className={fileClass}
+                    />
+                    <p className="text-[12px] text-text/50">
+                      Ha nem választasz új képet, a jelenlegi marad. JPG, PNG
+                      vagy WebP, max. 2 MB.
+                    </p>
+                  </div>
+                </div>
+                {err("image") && (
+                  <p className="text-[13px] text-red-500">{err("image")}</p>
+                )}
+              </div>
+
               <fieldset className="flex flex-col gap-1.5">
                 <legend className="mb-1.5 text-[13px] font-semibold text-text/70">
                   Kategória
                 </legend>
                 <div className="flex flex-wrap gap-2">
-                  {/* <label className={pillClass}>
-                    <input
-                      type="radio"
-                      name="categoryId"
-                      value=""
-                      defaultChecked={product.categoryId === null}
-                      className="sr-only"
-                    />
-                    Nincs
-                  </label> */}
                   {categories.map((c) => (
                     <label key={c.id} className={pillClass}>
                       <input
