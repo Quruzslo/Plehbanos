@@ -17,12 +17,6 @@ const s3 = new S3Client({
 });
 
 export async function uploadImage(file: File) {
-  console.log({
-    endpoint: process.env.R2_ENDPOINT,
-    hasKey: !!process.env.R2_ACCESS_KEY_ID,
-    hasSecret: !!process.env.R2_SECRET_ACCESS_KEY,
-    bucket: process.env.R2_BUCKET_NAME,
-  });
   const key = `products/${crypto.randomUUID()}`;
 
   await s3.send(

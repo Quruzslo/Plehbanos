@@ -12,12 +12,14 @@ import {
   CartActionsContext,
 } from "@/lib/context/cartContext";
 
+import MainButton from "./MainButton";
+import { PackageIcon } from "@phosphor-icons/react";
+
 export default function CartModal() {
   const cartItems = useContext(CartStateContext)!;
   const { addItem, decreaseItem, removeItem } = useContext(CartActionsContext)!;
   const [open, setOpen] = useState(false);
 
-  // ha kiürül a kosár, záródjon be, hogy a következő hozzáadáskor ne nyíljon ki magától
   if (cartItems.length === 0 && open) setOpen(false);
 
   if (cartItems.length === 0) return null;
@@ -49,7 +51,7 @@ export default function CartModal() {
 
       <div
         inert={!open}
-        className={`w-[min(350px,calc(100vw_-_100px))] max-h-[80vh] overflow-y-auto flex flex-col gap-[10px] p-[10px] bg-white rounded-md shadow-md transition-opacity duration-300 ${
+        className={`w-[min(350px,calc(100vw_-_100px))] max-h-[80vh] overflow-y-auto flex flex-col gap-[10px] p-[10px] bg-white rounded-md shadow-[5px_5px_10px_0px_rgba(0,0,0,0.6)] transition-opacity duration-300 ${
           open ? "opacity-100" : "opacity-0"
         }`}
       >
@@ -105,6 +107,13 @@ export default function CartModal() {
           <span>Összesen</span>
           <span>{total.toLocaleString("hu-HU")} Ft</span>
         </div>
+        <MainButton
+          text="Pénztár"
+          link="/penztar"
+          icon={PackageIcon}
+          iconSize={25}
+          className="flex flex-row gap-3 mt-[20px]   !text-text hover:text-white mx-auto w-fit"
+        />
       </div>
     </div>
   );

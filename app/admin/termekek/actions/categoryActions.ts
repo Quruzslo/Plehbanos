@@ -70,3 +70,20 @@ export async function updateCategory(id: Category["id"], formData: FormData) {
   revalidatePath("/admin/termekek");
   return { success: true };
 }
+
+export async function deleteCategory(id: Category["id"]) {
+  await requireAdmin();
+
+  try {
+    await db.delete(categories).where(eq(categories.id, id));
+  } catch (e: any) {
+    const code = e.cause?.code ?? e.code;
+    if (code === "23503") {
+      return { error: "A kategóriához még tartoznak termékek." };
+    }
+    throw e;
+  }
+
+  revalidatePath("/admin/categories");
+  return { success: true };
+}

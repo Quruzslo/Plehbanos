@@ -2,7 +2,11 @@
 import { useState, useTransition } from "react";
 import { PencilSimpleIcon } from "@phosphor-icons/react";
 import type { Category } from "@/lib/db/schema";
-import { createCategory, updateCategory } from "./actions/categoryActions";
+import {
+  createCategory,
+  updateCategory,
+  deleteCategory,
+} from "./actions/categoryActions";
 
 type Errors = Partial<Record<string, string[]>>;
 
@@ -75,6 +79,7 @@ function CreateCategoryForm() {
 function CategoryRow({ category }: { category: Category }) {
   const [editing, setEditing] = useState(false);
   const [errors, setErrors] = useState<Errors>({});
+  const [deleteError, setDeleteError] = useState<string | null>(null);
   const [pending, startTransition] = useTransition();
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
@@ -92,21 +97,40 @@ function CategoryRow({ category }: { category: Category }) {
     });
   }
 
+  function handleDelete() {
+    setDeleteError(null);
+    startTransition(async () => {
+      const res = await deleteCategory(category.id);
+      if (res?.error) setDeleteError(res.error);
+    });
+  }
+
   if (!editing) {
     return (
-      <li className="flex items-center gap-4 px-6 py-3">
-        <div className="flex flex-col">
-          <span className="font-semibold text-text">{category.name}</span>
-          <span className="text-[13px] text-text/50">/{category.slug}</span>
+      <li className="px-6 py-3">
+        <div className="flex items-center gap-4">
+          <div className="flex flex-col">
+            <span className="font-semibold text-text">{category.name}</span>
+            <span className="text-[13px] text-text/50">/{category.slug}</span>
+          </div>
+          <button
+            type="button"
+            onClick={() => setEditing(true)}
+            className="ml-auto flex cursor-pointer items-center gap-[6px] rounded-full border border-text/20 px-4 py-2 text-[14px] text-text transition-colors hover:bg-accent hover:text-white"
+          >
+            <PencilSimpleIcon size={16} />
+            Módosítás
+          </button>
+          <button
+            type="button"
+            onClick={handleDelete}
+            disabled={pending}
+            className="cursor-pointer text-red-300 hover:bg-red-600 hover:text-white px-[10px] rounded-full disabled:opacity-50"
+          >
+            {pending ? "Törlés..." : "Törlés"}
+          </button>
         </div>
-        <button
-          type="button"
-          onClick={() => setEditing(true)}
-          className="ml-auto flex cursor-pointer items-center gap-[6px] rounded-full border border-text/20 px-4 py-2 text-[14px] text-text transition-colors hover:bg-accent hover:text-white"
-        >
-          <PencilSimpleIcon size={16} />
-          Módosítás
-        </button>
+        <FieldError message={deleteError ?? undefined} />
       </li>
     );
   }

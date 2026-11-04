@@ -1,5 +1,5 @@
 "use client";
-import { createContext, useMemo, useState } from "react";
+import { createContext, useEffect, useMemo, useState } from "react";
 import type { Product } from "@/lib/db/schema";
 
 export type CartItem = Product & { quantity: number };
@@ -8,13 +8,29 @@ type CartActions = {
   addItem: (product: Product) => void;
   decreaseItem: (id: number) => void;
   removeItem: (id: number) => void;
+  clearCart: () => void;
 };
 
-export const CartStateContext = createContext<CartItem[] | null>(null);
-export const CartActionsContext = createContext<CartActions | null>(null);
+const STORAGE_KEY = "cart";
+
+export const CartActionsContext = createContext<CartActions>(null!);
+export const CartStateContext = createContext<CartItem[]>(null!);
 
 export function CartProvider({ children }: { children: React.ReactNode }) {
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
+  const [loaded, setLoaded] = useState(false);
+
+  useEffect(() => {
+    try {
+      const saved = localStorage.getItem(STORAGE_KEY);
+      if (saved) setCartItems(JSON.parse(saved));
+    } catch {}
+    setLoaded(true);
+  }, []);
+
+  useEffect(() => {
+    if (loaded) localStorage.setItem(STORAGE_KEY, JSON.stringify(cartItems));
+  }, [cartItems, loaded]);
 
   const actions = useMemo<CartActions>(
     () => ({
@@ -37,7 +53,10 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
 
       removeItem: (id) =>
         setCartItems((prev) => prev.filter((i) => i.id !== id)),
+
+      clearCart: () => setCartItems([]),
     }),
+
     [],
   );
 

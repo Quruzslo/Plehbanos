@@ -61,19 +61,21 @@ export default function Categories({
         />
         <span className="text-accent">({products.length})</span>
       </div>
+      {categories.map((cat) => {
+        const count = products.filter((p) => p.categoryId === cat.id).length;
+        if (count === 0) return null;
 
-      {categories.map((cat) => (
-        <div key={cat.id} className="flex flex-row gap-3">
-          <Option
-            label={cat.name}
-            active={active === cat.id}
-            onSelect={() => onChange(cat.id)}
-          />
-          <span className="text-accent">
-            ({products.filter((p) => p.categoryId === cat.id).length})
-          </span>
-        </div>
-      ))}
+        return (
+          <div key={cat.id} className="flex flex-row gap-3">
+            <Option
+              label={cat.name}
+              active={active === cat.id}
+              onSelect={() => onChange(cat.id)}
+            />
+            <span className="text-accent">({count})</span>
+          </div>
+        );
+      })}
     </div>
   );
 }
