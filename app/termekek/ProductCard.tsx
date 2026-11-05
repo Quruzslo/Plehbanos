@@ -1,4 +1,4 @@
-import type { Dispatch, SetStateAction } from "react";
+import { useContext, type Dispatch, type SetStateAction } from "react";
 import type { Product } from "@/lib/db/schema";
 import Image from "next/image";
 import {
@@ -6,9 +6,10 @@ import {
   MagnifyingGlassPlusIcon,
   ArrowsLeftRightIcon,
 } from "@phosphor-icons/react";
-
-import { CartActionsContext } from "@/lib/context/cartContext";
-import { useContext } from "react";
+import {
+  CartActionsContext,
+  CartStateContext,
+} from "@/lib/context/cartContext";
 
 const MAX_COMPARE = 6;
 
@@ -31,6 +32,8 @@ export default function ProductCard({
   const disabled = !active && activeCompare.length >= MAX_COMPARE;
 
   const { addItem } = useContext(CartActionsContext)!;
+  const cartItems = useContext(CartStateContext)!;
+  const inCart = cartItems.some((i) => i.id === item.id);
 
   return (
     <div className="shrink-0 h-full w-full relative flex flex-col transition duration-400 hover:shadow-[5px_5px_10px_0px_rgba(0,0,0,0.3)] rounded-[10px] border-1 border-text/20">
@@ -82,8 +85,10 @@ export default function ProductCard({
           <button
             onClick={() => addItem(item)}
             type="button"
-            title="Megrendelem"
-            className="cursor-pointer w-fit rounded-full bg-text text-white text-[15px] p-[10px] hover:bg-accent"
+            title={inCart ? "A kosárban van – még egy" : "Megrendelem"}
+            className={`cursor-pointer w-fit rounded-full border-2 bg-text text-white text-[15px] p-[8px] hover:bg-accent ${
+              inCart ? "border-accent" : "border-transparent"
+            }`}
           >
             <ShoppingCartIcon size={20} />
           </button>

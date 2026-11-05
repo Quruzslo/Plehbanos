@@ -1,12 +1,21 @@
-import type { Dispatch, SetStateAction } from "react";
-import { useEffect } from "react";
+import {
+  useContext,
+  useEffect,
+  type Dispatch,
+  type SetStateAction,
+} from "react";
 import Image from "next/image";
 import {
   ArrowsLeftRightIcon,
   XIcon,
   ShoppingCartIcon,
+  CheckIcon,
 } from "@phosphor-icons/react";
 import type { Product } from "@/lib/db/schema";
+import {
+  CartActionsContext,
+  CartStateContext,
+} from "@/lib/context/cartContext";
 
 type Props = {
   activeCompare: Product[];
@@ -19,6 +28,9 @@ export default function Compare({
   setActiveCompare,
   onClose,
 }: Props) {
+  const { addItem } = useContext(CartActionsContext)!;
+  const cartItems = useContext(CartStateContext)!;
+
   useEffect(() => {
     document.documentElement.style.overflow = "hidden";
     return () => {
@@ -151,18 +163,33 @@ export default function Compare({
 
               <tr className={row}>
                 <td className="sticky left-0 bg-white" />
-                {activeCompare.map((p) => (
-                  <td key={p.id} className={cell}>
-                    <button
-                      type="button"
-                      disabled={p.stock < 1}
-                      className="flex items-center gap-[5px] rounded-full bg-text px-[15px] py-[10px] text-white hover:bg-accent disabled:opacity-40"
-                    >
-                      <ShoppingCartIcon size={18} />
-                      {p.stock < 1 ? "Elfogyott" : "Rendelés"}
-                    </button>
-                  </td>
-                ))}
+                {activeCompare.map((p) => {
+                  const inCart = cartItems.some((item) => item.id === p.id);
+
+                  return (
+                    <td key={p.id} className={cell}>
+                      <div className="flex items-center gap-[10px]">
+                        <button
+                          onClick={() => addItem(p)}
+                          type="button"
+                          disabled={p.stock < 1}
+                          className="cursor-pointer flex items-center gap-[5px] rounded-full bg-text px-[15px] py-[10px] text-white hover:bg-accent disabled:opacity-40 disabled:hover:bg-text"
+                        >
+                          <ShoppingCartIcon size={18} />
+                          {p.stock < 1 ? "Elfogyott" : "Kosárba"}
+                        </button>
+                        {inCart && (
+                          <CheckIcon
+                            size={20}
+                            weight="bold"
+                            className="text-accent"
+                            aria-label="A kosárban van"
+                          />
+                        )}
+                      </div>
+                    </td>
+                  );
+                })}
               </tr>
             </tbody>
           </table>
