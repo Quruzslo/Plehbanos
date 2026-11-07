@@ -12,7 +12,6 @@ async function getOrders(page: number) {
     db
       .select()
       .from(orders)
-      // az id a holtversenyt dönti el, így két oldal között nem csúszik el semmi
       .orderBy(desc(orders.createdAt), desc(orders.id))
       .limit(PAGE_SIZE)
       .offset((page - 1) * PAGE_SIZE),
