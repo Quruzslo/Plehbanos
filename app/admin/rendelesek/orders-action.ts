@@ -11,6 +11,7 @@ import {
   type Order,
 } from "@/lib/db/schema";
 import { sendShippedEmail } from "@/lib/email/emailActions";
+import { requireAdmin } from "@/lib/auth/permission-check";
 
 const ORDERS_PATH = "/admin/rendelesek";
 
@@ -60,6 +61,8 @@ async function getStatus(id: number) {
 }
 
 export async function updateOrder(id: number, data: OrderUpdate) {
+  await requireAdmin();
+
   const { name, email, phone, zip, city, address, note, status } = data;
   if (!orderStatusEnum.enumValues.includes(status))
     throw new Error("Érvénytelen állapot");
@@ -76,6 +79,8 @@ export async function updateOrder(id: number, data: OrderUpdate) {
 }
 
 export async function setOrderStatus(id: number, status: Status) {
+  await requireAdmin();
+
   if (!orderStatusEnum.enumValues.includes(status))
     throw new Error("Érvénytelen állapot");
 
@@ -88,6 +93,8 @@ export async function setOrderStatus(id: number, status: Status) {
 }
 
 export async function deleteOrder(id: number) {
+  await requireAdmin();
+
   // az order_items sorok a cascade miatt maguktól törlődnek
   await db.delete(orders).where(eq(orders.id, id));
   revalidatePath(ORDERS_PATH);

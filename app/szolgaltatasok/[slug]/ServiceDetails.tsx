@@ -31,7 +31,7 @@ export default async function ServiceDetails({
               ]}
             />
             <h1 className="text-[20px] lg:text-[35px] text-accent font-bold mb-[25px]">
-              {service.title}
+              {service.title} - Kaposvár és környékén
             </h1>
             <p>{service.desc}</p>
             <div className="flex flex-col md:flex-row gap-[10px] items-center mt-[25px]">

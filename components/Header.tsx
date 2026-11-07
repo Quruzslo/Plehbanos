@@ -5,7 +5,8 @@ import navItems from "@/lib/datas/navItems";
 import { useState, useEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence, type Variants } from "motion/react";
-import { PaperPlaneTiltIcon } from "@phosphor-icons/react";
+
+import { PaperPlaneTiltIcon, PhoneOutgoingIcon } from "@phosphor-icons/react";
 
 type Side = "left" | "right";
 
@@ -171,22 +172,41 @@ function MobileHeader({
             exit="hidden"
             className="fixed top-0 right-0 w-2/3 h-dvh bg-foreground lg:hidden rounded-tl-[10px] rounded-bl-[10px] overflow-y-auto overflow-x-hidden flex flex-col"
           >
-            <ul className="flex h-full flex-col justify-center gap-6 px-[10%] min-h-[450px]">
-              {navItems.map((item) => (
-                <motion.li key={item.path} variants={menuItem}>
-                  <Link
-                    href={item.path}
-                    onClick={() => setOpen(false)}
-                    className="flex flex-row pb-3 text-[15px] xs:text-[20px] gap-[5px] font-bold text-white items-center"
-                  >
-                    <span className="w-[15px] h-[15px] bg-accent rounded-full" />
-                    {item.name}
-                  </Link>
-                </motion.li>
-              ))}
-            </ul>
-            <div className="mt-auto flex flex-row gap-[5px] bg-accent items-center justify-center text-white text-[15px] font-bold">
-              <p className="px-[5px]">Bádogos munkák / Somogy megye</p>
+            <div className="flex flex-col w-full h-full relative">
+              <div className="absolute right-0 top-[50%] translate-y-[-50%] rotate-[-90deg]">
+                <span className="text-[25vw] text-white/5">MENÜ</span>
+              </div>
+              <ul className="flex h-full flex-col justify-center gap-6 px-[10%] min-h-[450px]">
+                {navItems.map((item) => (
+                  <motion.li key={item.path} variants={menuItem}>
+                    <Link
+                      href={item.path}
+                      onClick={() => setOpen(false)}
+                      className="flex flex-row pb-3 text-[15px] xs:text-[20px] gap-[5px] font-bold text-white items-center"
+                    >
+                      <span className="w-[10px] h-[10px] bg-accent rounded-[2px]" />
+                      {item.name}
+                    </Link>
+                  </motion.li>
+                ))}
+              </ul>
+              <div className="flex flex-row w-fit gap-[15px] mx-auto mb-[25px]">
+                <a
+                  href="tel:+36203127968"
+                  className="w-[45px] h-[45px] rounded-full border-2 border-white/50 hover:border-white flex flex-row items-center justify-center"
+                >
+                  <PhoneOutgoingIcon className="w-[35px] h-[35px] mx-auto my-auto text-white" />
+                </a>
+                <a
+                  href="tel:+36203127968"
+                  className="w-[45px] h-[45px] rounded-full border-2 border-white/50 hover:border-white flex flex-row items-center justify-center"
+                >
+                  <PaperPlaneTiltIcon className="w-[35px] h-[35px] mx-auto my-auto text-white" />
+                </a>
+              </div>
+              <div className="mt-auto flex flex-row gap-[5px] bg-accent items-center justify-center text-white text-[15px] font-bold">
+                <p className="px-[5px]">Bádogos munkák / Somogy megye</p>
+              </div>
             </div>
           </motion.nav>
         )}

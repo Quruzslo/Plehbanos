@@ -122,6 +122,7 @@ export async function createOrder(
     );
 
     revalidatePath("/termekek", "layout");
+    revalidatePath("/", "layout");
   } catch (e) {
     if (e instanceof OutOfStockError) {
       return { error: `Nincs elég a készleten: ${e.productName}` };

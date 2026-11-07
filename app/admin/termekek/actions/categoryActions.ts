@@ -85,5 +85,6 @@ export async function deleteCategory(id: Category["id"]) {
   }
 
   revalidatePath("/admin/categories");
+  revalidatePath("/termekek");
   return { success: true };
 }
