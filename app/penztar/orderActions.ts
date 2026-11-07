@@ -1,9 +1,12 @@
 "use server";
+import { randomUUID } from "crypto";
 import { z } from "zod";
 import { and, eq, gte, inArray, sql } from "drizzle-orm";
 import { db } from "@/lib/db";
 import { products, orders, orderItems } from "@/lib/db/schema";
 import { revalidatePath } from "next/cache";
+import { after } from "next/server";
+import { sendOrderEmails } from "@/lib/email/emailActions";
 
 const orderSchema = z.object({
   name: z.string().trim().min(2, "Add meg a neved."),
@@ -64,13 +67,17 @@ export async function createOrder(
       name: product.name,
       unitPrice: product.salePrice ?? product.price,
       quantity: item.quantity,
+      img: product.img,
     };
   });
 
   const total = lines.reduce((sum, l) => sum + l.unitPrice * l.quantity, 0);
 
+  // Lemondó link titka – kriptográfiailag véletlen, nem kitalálható
+  const cancelToken = randomUUID();
+
   try {
-    await db.transaction(async (tx) => {
+    const orderId = await db.transaction(async (tx) => {
       for (const line of lines) {
         const updated = await tx
           .update(products)
@@ -88,13 +95,31 @@ export async function createOrder(
 
       const [order] = await tx
         .insert(orders)
-        .values({ ...parsed.data, total })
+        .values({ ...parsed.data, total, cancelToken })
         .returning({ id: orders.id });
 
       await tx
         .insert(orderItems)
         .values(lines.map((l) => ({ ...l, orderId: order.id })));
+
+      return order.id;
     });
+
+    const { name, email, phone, zip, city, address, note } = parsed.data;
+
+    after(() =>
+      sendOrderEmails({
+        id: orderId,
+        name,
+        email,
+        phone,
+        address: `${zip} ${city}, ${address}`,
+        note,
+        items: lines,
+        total,
+        cancelToken,
+      }).catch((err) => console.error(`Order email failed (#${orderId})`, err)),
+    );
 
     revalidatePath("/termekek", "layout");
   } catch (e) {

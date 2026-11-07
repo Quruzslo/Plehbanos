@@ -14,7 +14,6 @@ import { deleteOrder, setOrderStatus, updateOrder } from "./orders-action";
 
 type OrderWithItems = Order & { items: OrderItem[] };
 
-// Halvány háttér jelzi, hol tart; a szöveg marad a téma színe (dark módban is olvasható).
 const STATUS: Record<Order["status"], { label: string; className: string }> = {
   uj: { label: "Új", className: "bg-amber-400/25 font-semibold text-text" },
   feldolgozas: { label: "Feldolgozás", className: "bg-sky-400/20 text-text" },

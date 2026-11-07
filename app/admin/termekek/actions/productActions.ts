@@ -147,6 +147,7 @@ export async function modifyProduct(id: Product["id"], formData: FormData) {
   if (img && old?.img) await deleteImage(old.img);
 
   revalidatePath("/admin/termekek");
+  revalidatePath("/termekek");
   return { success: true };
 }
 

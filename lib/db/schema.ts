@@ -59,6 +59,7 @@ export const orders = pgTable("orders", {
   note: text(),
   total: integer().notNull(),
   status: orderStatusEnum().notNull().default("uj"),
+  cancelToken: varchar({ length: 36 }).unique(),
   createdAt: timestamp().notNull().defaultNow(),
 });
 
@@ -71,6 +72,7 @@ export const orderItems = pgTable("order_items", {
   name: varchar({ length: 255 }).notNull(),
   unitPrice: integer().notNull(),
   quantity: integer().notNull(),
+  img: varchar({ length: 255 }),
 });
 
 export type Order = typeof orders.$inferSelect;

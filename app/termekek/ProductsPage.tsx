@@ -24,9 +24,9 @@ const CallToActionVariants: Variants = {
 };
 
 const benefits = [
-  "Nem tucat termék",
-  "Minőségi anyagokból",
-  "Időtálló és egyedi",
+  "Nem tucattermék",
+  "Minőségi anyagokból készült",
+  "Időtálló és egyedi ",
 ];
 
 type Props = {
@@ -78,11 +78,9 @@ export default function ProductPage({ items, newItems, categories }: Props) {
       {quickView && <QuickView setQuickView={setQuickView} item={quickView} />}
 
       <div className="flex flex-col lg:flex-row w-[90%] max-w-[2560px] mx-auto items-center relative">
-        <div className="flex flex-col w-full lg:w-1/2">
+        <div className="flex flex-col w-full lg:w-1/2 self-start">
           <BreadCrumbs items={[{ label: "Termékek" }]} />
-          <h1 className="text-[35px] font-black">
-            Kézműves dekorációs termékek
-          </h1>
+          <h1 className="text-[35px] font-black">Kézműves bádog dekorációk</h1>
 
           <p className="text-[20px]">
             Kézműves bádogos termékek, családiházakra és kertekbe
@@ -105,7 +103,7 @@ export default function ProductPage({ items, newItems, categories }: Props) {
                 <span className="absolute bottom-0 left-0 w-full h-1/3 bg-green-400" />
               </div>
 
-              <p className="z-10 font-bold">Made in Hungary</p>
+              <p className="z-10 font-bold">Magyar termék</p>
             </li>
           </ul>
         </div>

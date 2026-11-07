@@ -142,17 +142,17 @@ function MobileHeader({
           >
             <motion.span
               className={bar}
-              animate={open ? { y: 8, rotate: 45 } : { y: 0, rotate: 0 }}
+              animate={open ? { x: 4 } : { x: 0 }}
               transition={{ duration: 0.3, ease }}
             />
             <motion.span
               className={bar}
-              animate={open ? { x: -40, opacity: 0 } : { x: 0, opacity: 1 }}
+              animate={open ? { x: -4 } : { x: 8 }}
               transition={{ duration: 0.3, ease }}
             />
             <motion.span
               className={bar}
-              animate={open ? { y: -8, rotate: -45 } : { y: 0, rotate: 0 }}
+              animate={open ? { x: 4 } : { x: 0 }}
               transition={{ duration: 0.3, ease }}
             />
           </button>

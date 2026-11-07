@@ -1,14 +1,14 @@
 import type { Metadata } from "next";
-import { cacheTag, cacheLife, revalidatePath } from "next/cache";
+import { cacheTag, cacheLife } from "next/cache";
 import { desc } from "drizzle-orm";
 import ProductPage from "./ProductsPage";
 import { db } from "@/lib/db";
 import { categories, products } from "@/lib/db/schema";
 
 export const metadata: Metadata = {
-  title: "Kézműves bádogos dekorációs termékek Somogyból",
+  title: "Kézműves bádog dekorációk Somogyból – József Zoltán bádogosmester",
   description:
-    "Rendelhető, egyedi, kézzel készített bádog dekorációs elemek, házakra, kertekbe. József Zoltán bádogosmester kezeiből",
+    "Kézzel készített, egyedi bádog díszek házra és kertbe, József Zoltán bádogosmester műhelyéből. Rendelés utánvéttel, országos szállítással.",
 };
 
 export default async function ProductsPageWrapper() {
@@ -16,11 +16,11 @@ export default async function ProductsPageWrapper() {
   cacheTag("products");
   cacheLife("hours");
 
-  const [items, newItems, allCategories] = await Promise.all([
-    db.select().from(products),
-    db.select().from(products).orderBy(desc(products.id)).limit(3),
+  const [items, allCategories] = await Promise.all([
+    db.select().from(products).orderBy(desc(products.id)),
     db.select().from(categories),
   ]);
+  const newItems = items.slice(0, 3);
 
   return (
     <ProductPage items={items} newItems={newItems} categories={allCategories} />
