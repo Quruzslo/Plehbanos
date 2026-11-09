@@ -26,7 +26,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default function ServiceSinglePage({ params }: Props) {
   return (
-    <section>
+    <section data-header="light">
       <Suspense fallback={<div className="h-[60vh]" />}>
         <ServiceDetails params={params} />
       </Suspense>

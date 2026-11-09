@@ -32,7 +32,7 @@ export default function CartModal() {
 
   return (
     <div
-      className={`fixed top-1/2 right-[15px] -translate-y-1/2 z-[11] flex flex-row items-center gap-[15px] transition-transform duration-300 ease-out ${
+      className={`fixed top-1/2 right-[15px] -translate-y-1/2 z-[200] flex flex-row items-center gap-[15px] transition-transform duration-300 ease-out ${
         open ? "translate-x-0" : "translate-x-[calc(100%_-_54px)]"
       }`}
     >

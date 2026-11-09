@@ -1,6 +1,11 @@
 import Image from "next/image";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useContext } from "react";
+import {
+  CartActionsContext,
+  CartStateContext,
+} from "@/lib/context/cartContext";
+import { ShoppingCartIcon, CheckIcon } from "@phosphor-icons/react";
 
 export default function QuickView({
   item,
@@ -9,6 +14,10 @@ export default function QuickView({
   item: any;
   setQuickView: any;
 }) {
+  const { addItem } = useContext(CartActionsContext)!;
+  const cartItems = useContext(CartStateContext)!;
+  const inCart = cartItems.some((i) => i.id === item.id);
+
   useEffect(() => {
     document.documentElement.style.overflow = "hidden";
     return () => {
@@ -102,6 +111,25 @@ export default function QuickView({
                 </div>
               </div>
               <p className="mt-[20px] font-semibold">{item.description}</p>
+            </div>
+            <div className="flex items-center gap-[10px]">
+              <button
+                onClick={() => addItem(item)}
+                type="button"
+                disabled={item.stock < 1}
+                className="cursor-pointer flex items-center gap-[5px] rounded-full bg-text px-[15px] py-[10px] text-white hover:bg-accent disabled:opacity-40 disabled:hover:bg-text"
+              >
+                <ShoppingCartIcon size={18} />
+                {item.stock < 1 ? "Elfogyott" : "Kosárba"}
+              </button>
+              {inCart && (
+                <CheckIcon
+                  size={20}
+                  weight="bold"
+                  className="text-accent"
+                  aria-label="A kosárban van"
+                />
+              )}
             </div>
           </div>
         </div>
