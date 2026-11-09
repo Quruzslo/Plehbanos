@@ -13,7 +13,7 @@ export default function Hero() {
       className="relative flex flex-col w-full min-h-svh  bg-background"
     >
       <div className="relative w-full gap-[20px] pt-[120px] lg:pt-[150px] mx-auto flex flex-col overflow-hidden min-h-full flex-1 shadow-[5px_5px_15px_0px_rgba(0,0,0,0.4)] ">
-        <div className="hidden lg:absolute z-[100] left-[5px] top-[15px] lg:top-[50%] lg:translate-y-[-50%] lg:flex lg:flex-col w-fit gap-[15px]">
+        <div className="hidden lg:absolute z-[100] left-[15px] top-[15px] lg:top-[50%] lg:translate-y-[-50%] lg:flex lg:flex-col w-fit gap-[15px]">
           <a
             href="tel:+36203127968"
             className="w-[45px] h-[45px] rounded-full border-2 border-white/50 hover:border-white flex flex-row items-center justify-center"
