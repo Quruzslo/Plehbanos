@@ -8,6 +8,8 @@ import {
   timestamp,
 } from "drizzle-orm/pg-core";
 
+// Termékek és kategóriák ---------------
+
 export const categoryEnum = pgEnum("product_category", [
   "kerti-disz",
   "haz-elem",
@@ -39,6 +41,8 @@ export const products = pgTable("products", {
 export type Category = typeof categories.$inferSelect;
 export type Product = typeof products.$inferSelect;
 export type NewProduct = typeof products.$inferInsert;
+
+// Rendelések --------------
 
 export const orderStatusEnum = pgEnum("order_status", [
   "uj",
@@ -77,3 +81,15 @@ export const orderItems = pgTable("order_items", {
 
 export type Order = typeof orders.$inferSelect;
 export type OrderItem = typeof orderItems.$inferSelect;
+
+// Kapcsolati űrlap -----------------
+
+export const contactForm = pgTable("contact_form", {
+  id: integer().primaryKey().generatedAlwaysAsIdentity(),
+  createdAt: timestamp().notNull().defaultNow(),
+  name: varchar({ length: 255 }).notNull(),
+  email: varchar({ length: 255 }).notNull(),
+  phone: varchar({ length: 50 }).notNull(),
+  message: varchar({ length: 255 }).notNull(),
+});
+export type Contact = typeof contactForm.$inferSelect;

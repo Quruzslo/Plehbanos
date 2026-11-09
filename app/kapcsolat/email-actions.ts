@@ -3,6 +3,9 @@
 import * as z from "zod";
 import { Resend } from "resend";
 
+import { db } from "@/lib/db";
+import { contactForm } from "@/lib/db/schema";
+
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 const FormSchema = z.object({
@@ -34,6 +37,15 @@ export async function sendEmail(prevState: any, formData: FormData) {
   const { name, email, tel, message } = validatedFields.data;
 
   try {
+    //  Mentés az adatbázisba
+    await db.insert(contactForm).values({
+      name,
+      email,
+      phone: tel,
+      message,
+    });
+
+    //  E-mail küldés a Resend-del
     const { data, error } = await resend.emails.send({
       from: "Bádogos Weboldal <onboarding@resend.dev>",
       to: ["sziligalaron@gmail.com"],
@@ -54,7 +66,8 @@ export async function sendEmail(prevState: any, formData: FormData) {
   } catch (error) {
     return {
       success: false,
-      generalError: "Váratlan hiba történt a levél küldésekor.",
+      generalError:
+        "Váratlan hiba történt a mentés vagy a levél küldése során.",
     };
   }
 }
