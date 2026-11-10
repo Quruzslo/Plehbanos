@@ -397,7 +397,7 @@ function MobileHeader({
             className="fixed top-0 right-0 w-2/3 h-dvh bg-foreground lg:hidden rounded-tl-[10px] rounded-bl-[10px] overflow-y-auto overflow-x-hidden flex flex-col"
           >
             <div className="flex flex-col w-full h-full relative">
-              <div className="absolute right-0 top-[50%] translate-y-[-50%] rotate-[-90deg]">
+              <div className="absolute right-0 top-[50%] translate-y-[-50%] rotate-[-90deg] z-[-1]">
                 <span className="text-[25vw] text-white/5">MENÜ</span>
               </div>
               <ul className="flex h-full flex-col justify-center gap-6 px-[10%] min-h-[450px]">

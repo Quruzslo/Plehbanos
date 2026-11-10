@@ -5,6 +5,7 @@ import Header from "@/components/Header";
 import ScrollToTop from "@/lib/ui/ScrollToTop";
 import Footer from "@/components/Footer";
 import { CartProvider } from "@/lib/context/cartContext";
+import { Suspense } from "react";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -30,10 +31,15 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     >
       <body className="min-h-full flex flex-col">
         <CartProvider>
-          <Header></Header>
+          <Suspense fallback={null}>
+            <Header />
+          </Suspense>
+
           {children}
           <ScrollToTop></ScrollToTop>
-          <Footer></Footer>
+          <Suspense fallback={null}>
+            <Footer />
+          </Suspense>
         </CartProvider>
       </body>
     </html>

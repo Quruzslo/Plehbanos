@@ -37,16 +37,16 @@ export default function ProductCard({
   const inCart = cartItems.some((i) => i.id === item.id);
 
   return (
-    <Link
-      href={`/termekek/${item.slug}`}
-      className="shrink-0 h-full w-full relative flex flex-col transition duration-400 hover:shadow-[5px_5px_10px_0px_rgba(0,0,0,0.3)] rounded-[10px] border-1 border-text/20"
-    >
+    <div className="shrink-0 h-full w-full relative flex flex-col transition duration-400 hover:shadow-[5px_5px_10px_0px_rgba(0,0,0,0.3)] rounded-[10px] border-1 border-text/20">
       {isNew ? (
         <span className="absolute top-[5px] right-[5px] bg-amber-400 text-text p-[2px] rounded-full w-[25px] h-[25px] z-10 flex flex-row items-center justify-center">
           Új
         </span>
       ) : null}
-      <div className="group relative w-full max-w-[200px] aspect-square mx-auto mt-[10px] overflow-hidden ">
+      <Link
+        href={`/termekek/${item.slug}`}
+        className="group relative w-full max-w-[200px] aspect-square mx-auto mt-[10px] overflow-hidden "
+      >
         <Image
           fill
           alt={item.name}
@@ -54,7 +54,7 @@ export default function ProductCard({
           sizes="400px"
           className="object-contain transition-transform duration-300 ease-out "
         />
-      </div>
+      </Link>
 
       <div className="flex flex-col flex-1 gap-[5px] p-[10px]">
         <p className="text-text text-[15px] font-bold">{item.name}</p>
@@ -121,6 +121,6 @@ export default function ProductCard({
           </button>
         </div>
       </div>
-    </Link>
+    </div>
   );
 }

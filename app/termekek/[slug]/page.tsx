@@ -10,7 +10,6 @@ type Props = {
   params: Promise<{ slug: string }>;
 };
 
-// 1. Adatlekérdező függvény slug alapján
 async function getProductBySlug(slug: string) {
   const [product] = await db
     .select()
@@ -38,7 +37,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-export default async function ProductSingleWrapper({ params }: Props) {
+async function ProductLoader({ params }: Props) {
   const { slug } = await params;
   const product = await getProductBySlug(slug);
 
@@ -46,10 +45,20 @@ export default async function ProductSingleWrapper({ params }: Props) {
     notFound();
   }
 
+  return <ProductSinglePage product={product} />;
+}
+
+export default function ProductSingleWrapper({ params }: Props) {
   return (
     <section data-header="light">
-      <Suspense fallback={<div className="h-[60vh]" />}>
-        <ProductSinglePage product={product} />
+      <Suspense
+        fallback={
+          <div className="h-[60vh] flex items-center justify-center">
+            Betöltés...
+          </div>
+        }
+      >
+        <ProductLoader params={params} />
       </Suspense>
     </section>
   );

@@ -51,6 +51,11 @@ export default function Categories({
   active,
   onChange,
 }: Props) {
+  // Először kiszűrjük azokat a kategóriákat, amiknek a száma 0
+  const validCategories = categories.filter(
+    (cat) => products.filter((p) => p.categoryId === cat.id).length > 0,
+  );
+
   return (
     <div className="w-fit lg:p-[10px] flex flex-col items-start gap-1 bg-white text-[15px] font-bold">
       <div className="flex flex-row gap-3">
@@ -61,9 +66,9 @@ export default function Categories({
         />
         <span className="text-accent">({products.length})</span>
       </div>
-      {categories.map((cat) => {
+
+      {validCategories.map((cat) => {
         const count = products.filter((p) => p.categoryId === cat.id).length;
-        if (count === 0) return null;
 
         return (
           <div key={cat.id} className="flex flex-row gap-3">

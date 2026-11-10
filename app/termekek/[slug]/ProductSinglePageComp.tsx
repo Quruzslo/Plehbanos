@@ -33,8 +33,8 @@ export default function ProductSinglePage({ product }: { product: Product }) {
 
   return (
     <div className="w-[90%] max-w-[2560px] mx-auto pt-[120px] lg:pt-[160px] pb-[80px]">
-      <div className="flex flex-col lg:flex-row  overflow-hidden ">
-        <div className="flex flex-col w-full lg:w-1/2 bg-text/[0.02]">
+      <div className="flex flex-col lg:flex-row overflow-hidden w-full">
+        <div className="flex flex-col w-full lg:w-1/2">
           <div
             onMouseMove={handleZoom}
             className="relative w-full min-h-[450px] lg:min-h-[450px] h-[450px] cursor-zoom-in overflow-hidden flex items-center justify-center p-8"
@@ -49,7 +49,7 @@ export default function ProductSinglePage({ product }: { product: Product }) {
           </div>
         </div>
 
-        <div className="flex flex-col w-full lg:w-1/2 p-6 lg:p-10 justify-between">
+        <div className="flex flex-col w-full lg:w-1/2  lg:p-10 justify-between mt-[25px] lg:mt-[0px]">
           <div className="flex flex-col flex-1 gap-[15px]">
             <BreadCrumbs
               items={[
