@@ -5,7 +5,6 @@ import navItems from "@/lib/datas/navItems";
 import { useState, useEffect, useRef, useContext } from "react";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence, type Variants } from "motion/react";
-import { createPortal } from "react-dom";
 
 import {
   PaperPlaneTiltIcon,
@@ -296,7 +295,11 @@ function NavGroup({
             <a
               key={item.path}
               href={item.path}
-              className={`text-[20px] text-white desktop-nav-item ${headerTheme === "light" && !scrolled ? "!text-text" : "!text-white"} hover:!text-white`}
+              className={`text-[20px] text-white desktop-nav-item ${
+                headerTheme === "light" && !scrolled
+                  ? "!text-text"
+                  : "!text-white"
+              } hover:!text-white`}
             >
               {item.name}
             </a>
@@ -316,7 +319,6 @@ function MobileHeader({
   latestProducts: Product[];
 }) {
   const pathname = usePathname();
-
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
@@ -333,11 +335,14 @@ function MobileHeader({
 
   return (
     <>
-      <div
-        className={`relative z-10 mx-auto mt-[15px] flex w-[90%] max-w-[2560px] items-center justify-between rounded-full  pl-[15px] pr-[5px] py-[8px] transition-all duration-500 lg:hidden ${
-          scrolled && !open ? " bg-foreground/40 backdrop-blur-sm" : ""
-        }`}
-      >
+      <div className="relative z-10 mx-auto mt-[15px] flex w-[90%] max-w-[2560px] items-center justify-between pl-[15px] pr-[5px] py-[8px] lg:hidden">
+        {/* HÁTTÉR ÉS BLUR KÜLÖN RÉTEGEN */}
+        <div
+          className={`absolute inset-0 -z-10 rounded-full transition-all duration-500 ${
+            scrolled && !open ? "bg-foreground/40 backdrop-blur-sm" : ""
+          }`}
+        />
+
         <Link
           href="/"
           className={`relative transition-all duration-300 ${
@@ -484,6 +489,7 @@ export default function Header() {
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
   if (pathname.startsWith("/admin")) return null;
 
   return (
@@ -492,11 +498,16 @@ export default function Header() {
       className="group/header fixed top-0 left-0 z-[999] w-full"
     >
       {/* Desktop header ------------- */}
-      <div
-        className={`mx-auto hidden lg:flex w-[90%] max-w-[2560px] px-[10px] flex-row items-center mt-[10px] justify-center gap-[25px] rounded-full border border-transparent py-[10px] transition-all duration-300 ${
-          scrolled ? "border-white/40 bg-foreground/40 backdrop-blur-sm " : " "
-        }`}
-      >
+      <div className="relative mx-auto hidden lg:flex w-[90%] max-w-[2560px] px-[10px] flex-row items-center mt-[10px] justify-center gap-[25px] py-[10px]">
+        {/* DESKTOP HÁTTÉR ÉS BLUR KÜLÖN RÉTEGEN */}
+        <div
+          className={`absolute inset-0 -z-10 rounded-full border transition-all duration-300 ${
+            scrolled
+              ? "border-white/40 bg-foreground/40 backdrop-blur-sm"
+              : "border-transparent"
+          }`}
+        />
+
         <Link
           href="/"
           className={`relative transition-all duration-300 mr-auto ${
@@ -513,9 +524,9 @@ export default function Header() {
             className="object-cover animate-scale-up !stroke-accent"
           />
         </Link>
+
         <NavGroup headerTheme={headerTheme} scrolled={scrolled} side="left" />
 
-        {/* Kosár helye -------- */}
         <CartDropdown latestProducts={latestProducts} />
       </div>
 
