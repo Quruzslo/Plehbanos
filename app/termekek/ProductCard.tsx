@@ -1,6 +1,7 @@
 import { useContext, type Dispatch, type SetStateAction } from "react";
 import type { Product } from "@/lib/db/schema";
 import Image from "next/image";
+import Link from "next/link";
 import {
   ShoppingCartIcon,
   MagnifyingGlassPlusIcon,
@@ -36,7 +37,10 @@ export default function ProductCard({
   const inCart = cartItems.some((i) => i.id === item.id);
 
   return (
-    <div className="shrink-0 h-full w-full relative flex flex-col transition duration-400 hover:shadow-[5px_5px_10px_0px_rgba(0,0,0,0.3)] rounded-[10px] border-1 border-text/20">
+    <Link
+      href={`/termekek/${item.slug}`}
+      className="shrink-0 h-full w-full relative flex flex-col transition duration-400 hover:shadow-[5px_5px_10px_0px_rgba(0,0,0,0.3)] rounded-[10px] border-1 border-text/20"
+    >
       {isNew ? (
         <span className="absolute top-[5px] right-[5px] bg-amber-400 text-text p-[2px] rounded-full w-[25px] h-[25px] z-10 flex flex-row items-center justify-center">
           Új
@@ -117,6 +121,6 @@ export default function ProductCard({
           </button>
         </div>
       </div>
-    </div>
+    </Link>
   );
 }

@@ -1,8 +1,16 @@
 "use client";
 import { useState, useTransition } from "react";
 import BreadCrumbs from "@/lib/ui/BreadCrumbs";
-import { Phone, Envelope, MapPin, ShieldCheck } from "@phosphor-icons/react";
+import {
+  Phone,
+  Envelope,
+  MapPin,
+  ShieldCheck,
+  EnvelopeOpenIcon,
+  EnvelopeIcon,
+} from "@phosphor-icons/react";
 import { sendEmail } from "./email-actions";
+import MainButton from "@/lib/ui/MainButton";
 
 export default function ContactPage() {
   const [isPending, startTransition] = useTransition();
@@ -11,7 +19,6 @@ export default function ContactPage() {
     text: string;
   } | null>(null);
 
-  // Mezőspecifikus hibaüzenetek tárolása
   const [errors, setErrors] = useState<{
     name?: string[];
     email?: string[];
@@ -235,9 +242,22 @@ export default function ContactPage() {
               <button
                 type="submit"
                 disabled={isPending}
-                className="w-full py-4 rounded-xl bg-accent text-white font-semibold transition-all shadow-md hover:opacity-90 disabled:opacity-50 cursor-pointer"
+                className="main-button cursor-pointer relative hover:shadow-md inline-flex h-14 items-center rounded-[10px] bg-transparent pl-16 pr-6 font-semibold text-foreground"
               >
-                {isPending ? "Küldés folyamatban..." : "Üzenet küldése"}
+                <span className="main-button-fill absolute inset-y-1 left-1 z-10 flex w-12 items-center justify-center rounded-[7px] bg-accent text-background">
+                  <span
+                    className="overflow-hidden"
+                    style={{ width: 25, height: 25 }}
+                  >
+                    <span className="main-button-icon flex flex-col">
+                      <EnvelopeIcon size={25} />
+                      <EnvelopeOpenIcon size={25} />
+                    </span>
+                  </span>
+                </span>
+                <span>
+                  {isPending ? "Küldés folyamatban..." : "Üzenet küldése"}
+                </span>
               </button>
             </form>
           </div>

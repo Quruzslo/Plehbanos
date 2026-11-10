@@ -6,7 +6,7 @@ import type { Product } from "@/lib/db/schema";
 import ProductCard from "@/app/termekek/ProductCard";
 import Compare from "@/app/termekek/Compare";
 import QuickView from "@/app/termekek/QuickView";
-import CartModal from "@/lib/ui/CartModal";
+// import CartModal from "@/lib/ui/CartModal";
 
 export default function FrontProductsGrid({ items }: { items: Product[] }) {
   const [activeCompare, setActiveCompare] = useState<Product[]>([]);
@@ -15,8 +15,6 @@ export default function FrontProductsGrid({ items }: { items: Product[] }) {
 
   return (
     <>
-      <CartModal />
-
       {!compareOpen && activeCompare.length > 0 && !quickView && (
         <button
           type="button"

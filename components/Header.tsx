@@ -2,11 +2,29 @@
 import Image from "next/image";
 import Link from "next/link";
 import navItems from "@/lib/datas/navItems";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useContext } from "react";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence, type Variants } from "motion/react";
+import { createPortal } from "react-dom";
 
-import { PaperPlaneTiltIcon, PhoneOutgoingIcon } from "@phosphor-icons/react";
+import {
+  PaperPlaneTiltIcon,
+  PhoneOutgoingIcon,
+  MinusIcon,
+  PlusIcon,
+  TrashIcon,
+  ShoppingCartIcon,
+  ShoppingBagIcon,
+  ArrowRightIcon,
+  PackageIcon,
+} from "@phosphor-icons/react";
+import {
+  CartStateContext,
+  CartActionsContext,
+} from "@/lib/context/cartContext";
+import type { Product } from "@/lib/db/schema";
+import { getLatestProducts } from "@/lib/db/getLatestProducts";
+import MainButton from "../lib/ui/MainButton";
 
 type Side = "left" | "right";
 
@@ -39,6 +57,223 @@ const menuItem: Variants = {
   visible: { x: 0, opacity: 1, transition: { duration: 0.2, ease } },
 };
 
+function CartDropdown({
+  isMobile = false,
+  latestProducts = [],
+}: {
+  isMobile?: boolean;
+  latestProducts?: Product[];
+}) {
+  const cartItems = useContext(CartStateContext) ?? [];
+  const { addItem, decreaseItem, removeItem } = useContext(CartActionsContext)!;
+  const [open, setOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+  const totalQuantity = cartItems.reduce((sum, i) => sum + i.quantity, 0);
+  const total = cartItems.reduce(
+    (sum, i) => sum + (i.salePrice ?? i.price) * i.quantity,
+    0,
+  );
+
+  useEffect(() => {
+    function handleClickOutside(e: MouseEvent) {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(e.target as Node)
+      ) {
+        setOpen(false);
+      }
+    }
+    if (open) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [open]);
+
+  return (
+    <div ref={dropdownRef} className="relative">
+      <button
+        type="button"
+        title="Kosár"
+        aria-expanded={open}
+        onClick={() => setOpen((o) => !o)}
+        className={`relative shrink-0 cursor-pointer z-10 rounded-full bg-text text-white transition-colors duration-200 hover:bg-accent flex items-center justify-center ${
+          isMobile ? "w-[50px] h-[50px] px-[10px] py-[5px]" : "p-[13px] "
+        }`}
+      >
+        <ShoppingCartIcon size={isMobile ? 25 : 24} />
+        {totalQuantity > 0 && (
+          <span className="absolute -top-[0px] -right-[0px] bg-amber-400 text-text text-[12px] font-bold rounded-full min-w-[22px] h-[22px] px-1 flex items-center justify-center shadow-sm">
+            {totalQuantity}
+          </span>
+        )}
+      </button>
+      <div
+        inert={!open}
+        className={`fixed lg:absolute overflow-hidden rounded-[10px] ${
+          isMobile
+            ? "left-[5%] right-[5%] w-[90%]"
+            : "right-0 w-[min(450px,calc(100vw_-_32px))]"
+        } top-[85px] lg:top-[calc(100%_+_12px)] z-[200] max-w-[2560px] lg:max-w-none grid shadow-[0_12px_35px_-5px_rgba(0,0,0,0.35)] transition-all duration-300 ease-out ${
+          open
+            ? "grid-rows-[1fr] opacity-100 "
+            : "grid-rows-[0fr] opacity-100 pointer-events-none"
+        }`}
+      >
+        <div className="overflow-hidden ">
+          <div className="flex flex-col gap-[12px] p-[20px] bg-white text-text border border-text/10 max-h-[calc(100vh_-_100px)] overflow-y-auto">
+            {cartItems.length === 0 ? (
+              <div className="flex flex-col">
+                <div className="w-[46px] h-[46px] rounded-xl bg-text/5 flex items-center justify-center mb-4">
+                  <ShoppingBagIcon size={22} className="text-text" />
+                </div>
+
+                <h3 className="text-[18px] font-bold text-text mb-1.5">
+                  A kosarad üres
+                </h3>
+                <p className="text-[13px] leading-relaxed text-text/60 mb-5">
+                  Kézműves bádog díszeink egyedi darabok. Nézz szét a legújabb
+                  munkáink között, és tedd a kosárba a kedvencedet!
+                </p>
+
+                {latestProducts.length > 0 && (
+                  <>
+                    <span className="text-[11px] font-bold uppercase tracking-[0.12em] text-text/50 mb-3">
+                      A LEGÚJABB DARABOK
+                    </span>
+
+                    <div className="flex flex-col gap-3 mb-5">
+                      {latestProducts.map((item) => (
+                        <Link
+                          key={item.id}
+                          href={`/termekek/${item.slug}`}
+                          onClick={() => setOpen(false)}
+                          className="group flex flex-row items-center gap-3.5 p-1.5 -mx-1.5 rounded-xl hover:bg-text/[0.04] transition-colors"
+                        >
+                          <Image
+                            width={52}
+                            height={52}
+                            src={item.img}
+                            alt={item.name}
+                            className="w-[52px] h-[52px] rounded-lg object-cover shrink-0 bg-text/5 border border-text/5"
+                          />
+                          <div className="flex flex-col min-w-0">
+                            <h4 className="text-[14px] font-semibold text-text truncate group-hover:text-accent transition-colors">
+                              {item.name}
+                            </h4>
+                            <span className="text-[13px] text-text/60 tabular-nums mt-0.5">
+                              {(item.salePrice ?? item.price).toLocaleString(
+                                "hu-HU",
+                              )}{" "}
+                              Ft
+                            </span>
+                          </div>
+                        </Link>
+                      ))}
+                    </div>
+                  </>
+                )}
+
+                {/* Összes termék gomb */}
+                <Link
+                  href="/termekek"
+                  onClick={() => setOpen(false)}
+                  className="w-full py-3.5 px-4 rounded-xl bg-text text-white text-[13px] font-bold uppercase tracking-wider flex items-center justify-center gap-2 hover:bg-accent transition-colors"
+                >
+                  <span>ÖSSZES TERMÉK</span>
+                  <ArrowRightIcon size={16} weight="bold" />
+                </Link>
+              </div>
+            ) : (
+              <>
+                <div className="max-h-[55vh] overflow-y-auto flex flex-col gap-[12px] pr-1">
+                  {cartItems.map((i) => (
+                    <div
+                      key={i.id}
+                      className="flex flex-row items-center gap-[10px] pb-[10px] border-b border-text/10 last:border-b-0 last:pb-0"
+                    >
+                      <Image
+                        width={50}
+                        height={50}
+                        src={i.img}
+                        alt={i.name}
+                        className="rounded-md object-cover shrink-0 bg-text/5"
+                      />
+
+                      <div className="flex flex-col min-w-0">
+                        <h3 className="text-[14px] font-bold truncate">
+                          {i.name}
+                        </h3>
+                        <span className="text-[13px] text-text/50 tabular-nums">
+                          {(
+                            (i.salePrice ?? i.price) * i.quantity
+                          ).toLocaleString("hu-HU")}{" "}
+                          Ft
+                        </span>
+                      </div>
+
+                      <div className="flex flex-row items-center gap-[5px] ml-auto shrink-0">
+                        <button
+                          type="button"
+                          title="Csökkentés"
+                          onClick={() => decreaseItem(i.id)}
+                          className="cursor-pointer p-[5px] rounded-full border border-text/20 hover:bg-accent hover:text-white transition-colors"
+                        >
+                          <MinusIcon size={12} />
+                        </button>
+
+                        <span className="w-[22px] text-center text-sm font-medium tabular-nums">
+                          {i.quantity}
+                        </span>
+
+                        <button
+                          type="button"
+                          title="Növelés"
+                          onClick={() => addItem(i)}
+                          disabled={i.quantity >= i.stock}
+                          className="cursor-pointer p-[5px] rounded-full border border-text/20 enabled:hover:bg-accent enabled:hover:text-white disabled:opacity-20 disabled:cursor-not-allowed transition-colors"
+                        >
+                          <PlusIcon size={12} />
+                        </button>
+
+                        <button
+                          type="button"
+                          title="Törlés"
+                          onClick={() => removeItem(i.id)}
+                          className="cursor-pointer p-[5px] text-red-500 hover:text-red-700 transition-colors"
+                        >
+                          <TrashIcon size={16} />
+                        </button>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="flex flex-row justify-between pt-[12px] border-t border-text/20 font-bold text-[15px]">
+                  <span>Összesen</span>
+                  <span className="tabular-nums">
+                    {total.toLocaleString("hu-HU")} Ft
+                  </span>
+                </div>
+
+                <div onClick={() => setOpen(false)}>
+                  <MainButton
+                    text="Pénztár"
+                    link="/penztar"
+                    icon={PackageIcon}
+                    iconSize={25}
+                    className="flex flex-row gap-3 mt-[8px] !text-text hover:!text-white mx-auto w-fit"
+                  />
+                </div>
+              </>
+            )}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function NavGroup({
   side,
   headerTheme,
@@ -50,17 +285,10 @@ function NavGroup({
 }) {
   return (
     <div
-      className={`flex w-full flex-col motion-reduce:animate-none px-[15px] ${
+      className={`flex w-fit flex-col motion-reduce:animate-none px-[15px] ${
         side === "left" ? "animate-reveal-left" : "animate-reveal-right"
       }`}
     >
-      <div
-        className={`h-[2px] w-full rounded-full transition-all duration-300 ${
-          side === "left" ? "origin-left" : "origin-right"
-        } ${scrolled ? "scale-x-0" : "scale-x-100"} ${
-          headerTheme === "light" && !scrolled ? "bg-text/50" : "bg-white/50"
-        }`}
-      />
       <nav className="desktop-nav flex w-full flex-row items-center justify-around gap-[15px]">
         {navItems
           .filter((item) => item.position === side)
@@ -81,9 +309,11 @@ function NavGroup({
 function MobileHeader({
   scrolled,
   headerTheme,
+  latestProducts,
 }: {
   scrolled: boolean;
   headerTheme: "light" | "dark";
+  latestProducts: Product[];
 }) {
   const pathname = usePathname();
 
@@ -103,7 +333,6 @@ function MobileHeader({
 
   return (
     <>
-      {/*  logó + hamburger */}
       <div
         className={`relative z-10 mx-auto mt-[15px] flex w-[90%] max-w-[2560px] items-center justify-between rounded-full  pl-[15px] pr-[5px] py-[8px] transition-all duration-500 lg:hidden ${
           scrolled && !open ? " bg-foreground/40 backdrop-blur-sm" : ""
@@ -127,12 +356,8 @@ function MobileHeader({
         </Link>
 
         <div className="flex flex-row gap-[5px] rounded-full ml-auto p-[3px] bg-gray-300">
-          <Link
-            href="/kapcsolat"
-            className="relative w-[50px] h-[50px] items-center justify-center  rounded-full flex flex-col gap-[5px] cursor-pointer bg-text px-[10px] py-[5px]"
-          >
-            <PaperPlaneTiltIcon size={25} className="text-white" />
-          </Link>
+          <CartDropdown isMobile latestProducts={latestProducts} />
+
           <button
             type="button"
             onClick={() => setOpen((o) => !o)}
@@ -160,7 +385,6 @@ function MobileHeader({
         </div>
       </div>
 
-      {/* Lenyíló panel */}
       <AnimatePresence>
         {open && (
           <motion.nav
@@ -219,9 +443,13 @@ export default function Header() {
   const [scrolled, setScrolled] = useState(false);
   const headerRef = useRef<HTMLElement>(null);
   const [headerTheme, setHeaderTheme] = useState<"light" | "dark">("dark");
+  const [latestProducts, setLatestProducts] = useState<Product[]>([]);
   const pathname = usePathname();
 
-  // Melyik section van a header mögött
+  useEffect(() => {
+    getLatestProducts().then(setLatestProducts).catch(console.error);
+  }, []);
+
   useEffect(() => {
     const header = headerRef.current;
     if (!header) return;
@@ -265,18 +493,16 @@ export default function Header() {
     >
       {/* Desktop header ------------- */}
       <div
-        className={`mx-auto hidden lg:flex w-[90%] max-w-[2560px] px-[0px] flex-row items-center mt-[10px] justify-center gap-[25px] rounded-full border border-transparent py-[10px] transition-all duration-300 ${
+        className={`mx-auto hidden lg:flex w-[90%] max-w-[2560px] px-[10px] flex-row items-center mt-[10px] justify-center gap-[25px] rounded-full border border-transparent py-[10px] transition-all duration-300 ${
           scrolled ? "border-white/40 bg-foreground/40 backdrop-blur-sm " : " "
         }`}
       >
-        <NavGroup headerTheme={headerTheme} scrolled={scrolled} side="left" />
-
         <Link
           href="/"
-          className={`relative transition-all duration-300 ${
+          className={`relative transition-all duration-300 mr-auto ${
             scrolled
-              ? "h-[75px] min-w-[75px] bg-transparent"
-              : "h-[100px] min-w-[100px] bg-accent shadow-xl"
+              ? "h-[50px] min-w-[50px] bg-transparent"
+              : "h-[75px] min-w-[75px] bg-accent shadow-xl"
           } overflow-hidden rounded-full`}
         >
           <Image
@@ -287,12 +513,18 @@ export default function Header() {
             className="object-cover animate-scale-up !stroke-accent"
           />
         </Link>
+        <NavGroup headerTheme={headerTheme} scrolled={scrolled} side="left" />
 
-        <NavGroup headerTheme={headerTheme} scrolled={scrolled} side="right" />
+        {/* Kosár helye -------- */}
+        <CartDropdown latestProducts={latestProducts} />
       </div>
 
       {/* Mobil header ----------------- */}
-      <MobileHeader headerTheme={headerTheme} scrolled={scrolled} />
+      <MobileHeader
+        headerTheme={headerTheme}
+        scrolled={scrolled}
+        latestProducts={latestProducts}
+      />
     </header>
   );
 }

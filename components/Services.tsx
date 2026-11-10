@@ -1,5 +1,8 @@
 "use client";
 import Image from "next/image";
+import { useState, useEffect } from "react";
+import { motion, Variants } from "motion/react";
+
 import { ArrowRightIcon } from "@phosphor-icons/react/ssr";
 import { services } from "@/lib/datas/services";
 import MainButton from "@/lib/ui/MainButton";
@@ -7,9 +10,25 @@ import ServicesModal from "./ServicesModal";
 import type { Service } from "@/lib/datas/services";
 import { EyeIcon } from "@phosphor-icons/react";
 
-import { useState, useEffect } from "react";
-
 export default function Services() {
+  const serviceCardVariant: Variants = {
+    hidden: {
+      opacity: 0,
+      scale: 0.65,
+      clipPath: "inset(10% 10% 10% 10%)",
+    },
+    visible: {
+      opacity: 1,
+      scale: 1,
+      clipPath: "",
+      transition: {
+        duration: 0.5,
+        ease: [0.25, 1, 0.5, 1],
+        opacity: { duration: 0.4 },
+      },
+    },
+  };
+
   const [activeModal, setActiveModal] = useState<Service | null>(null);
 
   useEffect(() => {
@@ -30,10 +49,14 @@ export default function Services() {
           Bádogos szolgáltatásaink
         </h2>
 
-        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-[10px]">
           {services.map((service) => (
-            <article
+            <motion.article
               key={service.title}
+              variants={serviceCardVariant}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ amount: 0.5, once: true }}
               tabIndex={-1}
               className="service-card transition-all duration-300 shadow-[0px_0px_10px_0px_rgba(0,0,0,0.3)] hover:shadow-[5px_5px_15px_0px_rgba(0,0,0,0.6)] flex flex-col overflow-hidden rounded-[10px] bg-white text-text relative h-[450px] group"
             >
@@ -73,7 +96,7 @@ export default function Services() {
                   className="self-start service-button !text-accent translate-y-[110%] group-hover:translate-y-0 group-focus-within:translate-y-0 transition-all duration-500"
                 />
               </div>
-            </article>
+            </motion.article>
           ))}
         </div>
         <ServicesModal

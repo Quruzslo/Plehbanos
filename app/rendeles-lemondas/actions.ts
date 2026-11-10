@@ -1,11 +1,12 @@
 "use server";
-import { and, eq, inArray, sql } from "drizzle-orm";
+import { and, eq, inArray } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
 import { after } from "next/server";
 import { db } from "@/lib/db";
-import { orders, orderItems, products } from "@/lib/db/schema";
+import { orders } from "@/lib/db/schema";
 import { sendCancelNotice } from "@/lib/email/emailActions";
 import { CANCELLABLE } from "./status";
+import { restoreItems } from "../admin/rendelesek/orders-action";
 
 export async function cancelOrder(token: string) {
   if (typeof token !== "string" || token.length !== 36) {
@@ -13,8 +14,6 @@ export async function cancelOrder(token: string) {
   }
 
   const cancelled = await db.transaction(async (tx) => {
-    // Feltételes update: csak akkor sikerül, ha a rendelés még lemondható.
-    // Ha az admin közben feladta, 0 sort ad vissza.
     const [order] = await tx
       .update(orders)
       .set({ status: "lemondva" })
@@ -25,21 +24,7 @@ export async function cancelOrder(token: string) {
 
     if (!order) return null;
 
-    const items = await tx
-      .select({
-        productId: orderItems.productId,
-        quantity: orderItems.quantity,
-      })
-      .from(orderItems)
-      .where(eq(orderItems.orderId, order.id));
-
-    for (const i of items) {
-      if (i.productId === null) continue;
-      await tx
-        .update(products)
-        .set({ stock: sql`${products.stock} + ${i.quantity}` })
-        .where(eq(products.id, i.productId));
-    }
+    await restoreItems(order.id);
 
     return order;
   });

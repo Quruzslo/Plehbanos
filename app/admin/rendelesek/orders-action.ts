@@ -1,6 +1,6 @@
 "use server";
 
-import { eq } from "drizzle-orm";
+import { eq, sql } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
 import { after } from "next/server";
 import { db } from "@/lib/db";
@@ -8,6 +8,7 @@ import {
   orders,
   orderItems,
   orderStatusEnum,
+  products,
   type Order,
 } from "@/lib/db/schema";
 import { sendShippedEmail } from "@/lib/email/emailActions";
@@ -41,8 +42,6 @@ async function notifyShipped(orderId: number) {
   });
 }
 
-// Csak akkor küld, ha a rendelés most kerül "elkuldve" állapotba,
-// egy már feladott rendelés újramentésekor nem.
 function sendIfShipped(id: number, prev: Status | undefined, next: Status) {
   if (prev === undefined || prev === "elkuldve" || next !== "elkuldve") return;
   after(() =>
@@ -98,4 +97,41 @@ export async function deleteOrder(id: number) {
   // az order_items sorok a cascade miatt maguktól törlődnek
   await db.delete(orders).where(eq(orders.id, id));
   revalidatePath(ORDERS_PATH);
+}
+
+// Rendelés sztornózása után visszaállítás a készletre---------------
+
+export async function restoreItems(orderId: number) {
+  try {
+    const itemsToRestore = await db
+      .select({
+        productId: orderItems.productId,
+        quantity: orderItems.quantity,
+      })
+      .from(orderItems)
+      .where(eq(orderItems.orderId, orderId));
+
+    if (!itemsToRestore || itemsToRestore.length === 0) return;
+
+    await db.transaction(async (tx) => {
+      for (const item of itemsToRestore) {
+        if (!item.productId) continue;
+
+        await tx
+          .update(products)
+          .set({
+            stock: sql`${products.stock} + ${item.quantity}`,
+          })
+          .where(eq(products.id, item.productId));
+      }
+    });
+
+    revalidatePath("/termekek");
+    revalidatePath("admin/termekek");
+    revalidatePath("admin/rendelesek");
+  } catch (error) {
+    throw new Error(
+      "Nem sikerült a raktárkészletet frissíteni a lemondás miatt.",
+    );
+  }
 }

@@ -19,12 +19,12 @@ const navItems: navItemsType[] = [
   {
     name: "Termékek",
     path: "/termekek",
-    position: "right",
+    position: "left",
   },
   {
     name: "Kapcsolat",
     path: "/kapcsolat",
-    position: "right",
+    position: "left",
   },
 ];
 

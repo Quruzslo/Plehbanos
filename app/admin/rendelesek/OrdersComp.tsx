@@ -10,7 +10,12 @@ import {
   type ReactNode,
 } from "react";
 import type { Order, OrderItem } from "@/lib/db/schema";
-import { deleteOrder, setOrderStatus, updateOrder } from "./orders-action";
+import {
+  deleteOrder,
+  setOrderStatus,
+  updateOrder,
+  restoreItems,
+} from "./orders-action";
 
 type OrderWithItems = Order & { items: OrderItem[] };
 
@@ -51,8 +56,10 @@ const timeFmt = new Intl.DateTimeFormat("hu-HU", {
   timeZone: tz,
 });
 
+// Tábla classok -------------------
+
 const th = "px-4 pb-3 pt-5 font-normal whitespace-nowrap";
-// xl alatt a sor kártyává törik (grid), felette rendes táblázatcella
+
 const td = "block min-w-0 xl:table-cell xl:px-4 xl:py-4 xl:align-top";
 const muted = "text-text/55";
 
@@ -65,7 +72,7 @@ const btn =
 const btnPrimary =
   "rounded-sm bg-text px-3 py-1.5 text-sm font-medium text-background hover:bg-text/85 disabled:opacity-40";
 const input =
-  "w-full rounded-sm border border-text/20 bg-text/[0.03] px-3 py-2 text-sm outline-none focus:border-text/70 focus:bg-transparent";
+  "w-full rounded-sm border border-text/20 bg-text/[0.03] px-3 py-2 text-sm outline-none focus:border-text/70 focus:bg-transparent disabled:opacity-50 disabled:cursor-not-allowed";
 const label = "text-sm text-text/65";
 
 export default function OrdersComp({
@@ -79,8 +86,6 @@ export default function OrdersComp({
 }) {
   const [editing, setEditing] = useState<OrderWithItems | null>(null);
   const [deleting, setDeleting] = useState<OrderWithItems | null>(null);
-
-  //   const newCount = orders.filter((o) => o.status === "uj").length;
 
   return (
     <>
@@ -155,6 +160,7 @@ function OrderRow({
         : null;
 
   const closed = CLOSED.includes(order.status);
+  const isCancelled = order.status === "lemondva";
 
   return (
     <tr
@@ -239,9 +245,11 @@ function OrderRow({
               {quick.label}
             </button>
           )}
-          <button onClick={onEdit} className={link}>
-            Módosítás
-          </button>
+          {!isCancelled && (
+            <button onClick={onEdit} className={link}>
+              Módosítás
+            </button>
+          )}
           <button onClick={onDelete} className={linkDanger}>
             Törlés
           </button>
@@ -305,11 +313,17 @@ function EditModal({
   onClose: () => void;
 }) {
   const [pending, startTransition] = useTransition();
+  const isCancelled = order.status === "lemondva";
 
   function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
+
+    // Ha már lemondott a rendelés, egyáltalán nem engedjük módosítani
+    if (isCancelled) return;
+
     const fd = new FormData(e.currentTarget);
     const get = (key: string) => String(fd.get(key) ?? "").trim();
+    const newStatus = get("status") as Order["status"];
 
     startTransition(async () => {
       await updateOrder(order.id, {
@@ -320,8 +334,14 @@ function EditModal({
         city: get("city"),
         address: get("address"),
         note: get("note") || null,
-        status: get("status") as Order["status"],
+        status: newStatus,
       });
+
+      // Csak akkor állítjuk vissza a készletet, ha most váltott "lemondva" státuszra
+      if (order.status !== "lemondva" && newStatus === "lemondva") {
+        await restoreItems(order.id);
+      }
+
       onClose();
     });
   }
@@ -337,6 +357,7 @@ function EditModal({
           name="name"
           defaultValue={order.name}
           required
+          disabled={isCancelled}
           className="col-span-2"
         />
         <Field
@@ -345,12 +366,14 @@ function EditModal({
           type="email"
           defaultValue={order.email}
           required
+          disabled={isCancelled}
         />
         <Field
           label="Telefon"
           name="phone"
           defaultValue={order.phone}
           required
+          disabled={isCancelled}
         />
 
         <div className="col-span-2 mt-2 border-t border-text/10" />
@@ -362,13 +385,21 @@ function EditModal({
           required
           pattern="\d{4}"
           maxLength={4}
+          disabled={isCancelled}
         />
-        <Field label="Város" name="city" defaultValue={order.city} required />
+        <Field
+          label="Város"
+          name="city"
+          defaultValue={order.city}
+          required
+          disabled={isCancelled}
+        />
         <Field
           label="Cím"
           name="address"
           defaultValue={order.address}
           required
+          disabled={isCancelled}
           className="col-span-2"
         />
 
@@ -378,13 +409,19 @@ function EditModal({
             name="note"
             defaultValue={order.note ?? ""}
             rows={3}
+            disabled={isCancelled}
             className={input}
           />
         </label>
 
         <label className="col-span-2 grid gap-1.5">
           <span className={label}>Állapot</span>
-          <select name="status" defaultValue={order.status} className={input}>
+          <select
+            name="status"
+            defaultValue={order.status}
+            disabled={isCancelled}
+            className={input}
+          >
             {Object.entries(STATUS).map(([value, s]) => (
               <option key={value} value={value}>
                 {s.label}
@@ -397,7 +434,7 @@ function EditModal({
           <button type="button" onClick={onClose} className={link}>
             Mégse
           </button>
-          <button disabled={pending} className={btnPrimary}>
+          <button disabled={pending || isCancelled} className={btnPrimary}>
             {pending ? "Mentés…" : "Mentés"}
           </button>
         </div>

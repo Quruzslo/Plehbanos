@@ -12,7 +12,7 @@ import Categories from "./Categories";
 import Compare from "./Compare";
 import QuickView from "./QuickView";
 import type { Category, Product } from "@/lib/db/schema";
-import CartModal from "@/lib/ui/CartModal";
+// import CartModal from "@/lib/ui/CartModal";
 
 const CallToActionVariants: Variants = {
   hidden: { opacity: 0, scale: 0.7 },
@@ -51,7 +51,6 @@ export default function ProductPage({ items, newItems, categories }: Props) {
       data-header="light"
       className="flex flex-col w-full pt-[120px] lg:pt-[150px] bg-white"
     >
-      <CartModal></CartModal>
       {!compareOpen && activeCompare.length > 0 && !quickView && (
         <button
           type="button"
