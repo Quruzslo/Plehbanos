@@ -68,12 +68,18 @@ function CartDropdown({
   const [open, setOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
+  // ÚJ: Kliens-oldali betöltés figyelése
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
   const totalQuantity = cartItems.reduce((sum, i) => sum + i.quantity, 0);
   const total = cartItems.reduce(
     (sum, i) => sum + (i.salePrice ?? i.price) * i.quantity,
     0,
   );
-
   useEffect(() => {
     function handleClickOutside(e: MouseEvent) {
       if (
@@ -101,7 +107,7 @@ function CartDropdown({
         }`}
       >
         <ShoppingCartIcon size={isMobile ? 25 : 24} />
-        {totalQuantity > 0 && (
+        {isMounted && totalQuantity > 0 && (
           <span className="absolute -top-[0px] -right-[0px] bg-amber-400 text-text text-[12px] font-bold rounded-full min-w-[22px] h-[22px] px-1 flex items-center justify-center shadow-sm">
             {totalQuantity}
           </span>
@@ -121,7 +127,7 @@ function CartDropdown({
       >
         <div className="overflow-hidden ">
           <div className="flex flex-col gap-[12px] p-[20px] bg-white text-text border border-text/10 max-h-[calc(100vh_-_100px)] overflow-y-auto">
-            {cartItems.length === 0 ? (
+            {!isMounted || cartItems.length === 0 ? (
               <div className="flex flex-col">
                 <div className="w-[46px] h-[46px] rounded-xl bg-text/5 flex items-center justify-center mb-4">
                   <ShoppingBagIcon size={22} className="text-text" />

@@ -43,6 +43,12 @@ export default function ProductCard({
           Új
         </span>
       ) : null}
+
+      {item.salePrice && (
+        <span className="absolute top-[5px] left-[50%] translate-x-[-50%] bg-red-400 text-white font-black p-[5px] rounded-[5px] w-fit h-[25px] z-10 flex flex-row items-center justify-center">
+          -{Math.round(((item.price - item.salePrice) / item.price) * 100)}%
+        </span>
+      )}
       <Link
         href={`/termekek/${item.slug}`}
         className="group relative w-full max-w-[200px] aspect-square mx-auto mt-[10px] overflow-hidden "
