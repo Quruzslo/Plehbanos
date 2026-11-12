@@ -9,6 +9,11 @@
   --muted-foreground: #5f656b;
   --accent: #b87333;
   --accent-dark: #8c4f24;
+  --nav-primary: #406ff3;
+  --nav-text-dark: #ffffff;
+  --nav-text-light: #1e293b;
+  --nav-timing: 280ms;
+  --nav-radius: 9999px;
 }
 
 @theme inline {
