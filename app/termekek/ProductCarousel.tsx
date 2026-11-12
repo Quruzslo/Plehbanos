@@ -1,6 +1,6 @@
 "use client";
 import { useState, type Dispatch, type SetStateAction } from "react";
-import type { Product } from "./products";
+import type { Product } from "@/lib/db/schema";
 import ProductCard from "./ProductCard";
 import { ArrowFatRightIcon, ArrowFatLeftIcon } from "@phosphor-icons/react";
 
