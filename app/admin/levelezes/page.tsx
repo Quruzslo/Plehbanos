@@ -1,5 +1,7 @@
+import { Suspense } from "react";
 import Link from "next/link";
 import { redirect } from "next/navigation";
+import { connection } from "next/server";
 import { count, desc } from "drizzle-orm";
 import { db } from "@/lib/db";
 import { contactForm } from "@/lib/db/schema";
@@ -24,11 +26,13 @@ async function getContacts(page: number) {
   };
 }
 
-export default async function ContactsPage({
+async function ContactsContent({
   searchParams,
 }: {
   searchParams: Promise<{ page?: string }>;
 }) {
+  await connection(); // Build időben itt megáll, nem próbálja elérni az adatbázist
+
   const { page: pageParam } = await searchParams;
   const page = Math.max(1, Math.floor(Number(pageParam)) || 1);
 
@@ -47,6 +51,22 @@ export default async function ContactsPage({
       <ContactsComp contacts={contacts} total={total} />
       <Pagination page={page} pages={pages} />
     </div>
+  );
+}
+
+export default function ContactsPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ page?: string }>;
+}) {
+  return (
+    <Suspense
+      fallback={
+        <p className="p-4 text-sm text-text/55">Üzenetek betöltése...</p>
+      }
+    >
+      <ContactsContent searchParams={searchParams} />
+    </Suspense>
   );
 }
 

@@ -1,5 +1,6 @@
 import { Suspense } from "react";
 import type { Metadata } from "next";
+import { cacheLife, cacheTag } from "next/cache";
 import { notFound } from "next/navigation";
 import { db } from "@/lib/db";
 import { products } from "@/lib/db/schema";
@@ -11,13 +12,22 @@ type Props = {
 };
 
 async function getProductBySlug(slug: string) {
-  const [product] = await db
-    .select()
-    .from(products)
-    .where(eq(products.slug, slug))
-    .limit(1);
+  "use cache";
+  cacheTag("products");
 
-  return product || null;
+  try {
+    const [product] = await db
+      .select()
+      .from(products)
+      .where(eq(products.slug, slug))
+      .limit(1);
+
+    cacheLife("hours");
+    return product || null;
+  } catch {
+    cacheLife({ revalidate: 1, expire: 1 });
+    return null;
+  }
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {

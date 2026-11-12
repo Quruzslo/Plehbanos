@@ -1,5 +1,7 @@
+import { Suspense } from "react";
 import Link from "next/link";
 import { redirect } from "next/navigation";
+import { connection } from "next/server";
 import { count, desc, eq, inArray } from "drizzle-orm";
 import { db } from "@/lib/db";
 import { orders, orderItems } from "@/lib/db/schema";
@@ -45,11 +47,13 @@ async function getOrders(page: number) {
   };
 }
 
-export default async function Orders({
+async function OrdersContent({
   searchParams,
 }: {
   searchParams: Promise<{ page?: string }>;
 }) {
+  await connection();
+
   const { page: pageParam } = await searchParams;
   const page = Math.max(1, Math.floor(Number(pageParam)) || 1);
 
@@ -65,6 +69,18 @@ export default async function Orders({
       <OrdersComp orders={orders} total={total} newCount={newCount} />
       <Pagination page={page} pages={pages} />
     </div>
+  );
+}
+
+export default function Orders({
+  searchParams,
+}: {
+  searchParams: Promise<{ page?: string }>;
+}) {
+  return (
+    <Suspense fallback={<p>Rendelések betöltése...</p>}>
+      <OrdersContent searchParams={searchParams} />
+    </Suspense>
   );
 }
 

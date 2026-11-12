@@ -8,13 +8,20 @@ import FrontProductsGrid from "./FrontProductsGrid";
 export default async function FrontProducts() {
   "use cache";
   cacheTag("products");
-  cacheLife("hours");
 
-  const items = await db
-    .select()
-    .from(products)
-    .orderBy(desc(products.id))
-    .limit(3);
+  let items: (typeof products.$inferSelect)[] = [];
+
+  try {
+    items = await db
+      .select()
+      .from(products)
+      .orderBy(desc(products.id))
+      .limit(3);
+    cacheLife("hours");
+  } catch {
+    cacheLife({ revalidate: 1, expire: 1 });
+    return null;
+  }
 
   if (items.length === 0) return null;
 

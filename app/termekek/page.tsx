@@ -14,12 +14,20 @@ export const metadata: Metadata = {
 export default async function ProductsPageWrapper() {
   "use cache";
   cacheTag("products");
-  cacheLife("hours");
 
-  const [items, allCategories] = await Promise.all([
-    db.select().from(products).orderBy(desc(products.id)),
-    db.select().from(categories),
-  ]);
+  let items: (typeof products.$inferSelect)[] = [];
+  let allCategories: (typeof categories.$inferSelect)[] = [];
+
+  try {
+    [items, allCategories] = await Promise.all([
+      db.select().from(products).orderBy(desc(products.id)),
+      db.select().from(categories),
+    ]);
+    cacheLife("hours");
+  } catch {
+    cacheLife({ revalidate: 1, expire: 1 });
+  }
+
   const newItems = items.slice(0, 3);
 
   return (
