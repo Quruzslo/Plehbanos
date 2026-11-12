@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import type { Metadata } from "next";
 import { cacheTag, cacheLife } from "next/cache";
 import { desc } from "drizzle-orm";
@@ -11,7 +12,7 @@ export const metadata: Metadata = {
     "Kézzel készített, egyedi bádog díszek házra és kertbe, József Zoltán bádogosmester műhelyéből. Rendelés utánvéttel, országos szállítással.",
 };
 
-export default async function ProductsPageWrapper() {
+async function ProductsContent() {
   "use cache";
   cacheTag("products");
 
@@ -32,5 +33,19 @@ export default async function ProductsPageWrapper() {
 
   return (
     <ProductPage items={items} newItems={newItems} categories={allCategories} />
+  );
+}
+
+export default function ProductsPageWrapper() {
+  return (
+    <Suspense
+      fallback={
+        <div className="h-[60vh] flex items-center justify-center">
+          Termékek betöltése...
+        </div>
+      }
+    >
+      <ProductsContent />
+    </Suspense>
   );
 }
