@@ -2,16 +2,20 @@
 
 import { useState } from "react";
 import { ArrowsLeftRightIcon } from "@phosphor-icons/react";
-import type { Product } from "@/lib/db/schema";
+import type { Product, ProductWithCategory } from "@/lib/db/schema";
 import ProductCard from "@/app/termekek/ProductCard";
 import Compare from "@/app/termekek/Compare";
 import QuickView from "@/app/termekek/QuickView";
 // import CartModal from "@/lib/ui/CartModal";
 
-export default function FrontProductsGrid({ items }: { items: Product[] }) {
-  const [activeCompare, setActiveCompare] = useState<Product[]>([]);
+export default function FrontProductsGrid({
+  items,
+}: {
+  items: ProductWithCategory[];
+}) {
+  const [activeCompare, setActiveCompare] = useState<ProductWithCategory[]>([]);
   const [compareOpen, setCompareOpen] = useState(false);
-  const [quickView, setQuickView] = useState<Product | null>(null);
+  const [quickView, setQuickView] = useState<ProductWithCategory | null>(null);
 
   return (
     <>

@@ -1,20 +1,28 @@
 import { cacheLife, cacheTag } from "next/cache";
-import { desc } from "drizzle-orm";
+import { desc, eq, getTableColumns } from "drizzle-orm";
 import Link from "next/link";
 import { db } from "@/lib/db";
-import { products } from "@/lib/db/schema";
+import {
+  categories,
+  products,
+  type ProductWithCategory,
+} from "@/lib/db/schema";
 import FrontProductsGrid from "./FrontProductsGrid";
 
 export default async function FrontProducts() {
   "use cache";
   cacheTag("products");
 
-  let items: (typeof products.$inferSelect)[] = [];
+  let items: ProductWithCategory[] = [];
 
   try {
     items = await db
-      .select()
+      .select({
+        ...getTableColumns(products),
+        categoryName: categories.name,
+      })
       .from(products)
+      .leftJoin(categories, eq(products.categoryId, categories.id))
       .orderBy(desc(products.id))
       .limit(3);
     cacheLife("hours");
