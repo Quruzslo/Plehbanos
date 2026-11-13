@@ -102,6 +102,7 @@ export async function createProduct(formData: FormData) {
   }
 
   revalidatePath("/admin/termekek");
+  revalidatePath("/termekek");
   return { success: true };
 }
 
