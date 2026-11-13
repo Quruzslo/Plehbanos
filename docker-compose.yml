@@ -6,6 +6,12 @@ services:
     env_file:
       - .env
     restart: unless-stopped
+    networks:
+      - coolify
+
+networks:
+  coolify:
+    external: true
 
 # Parancs	Mit csinál
 # docker compose up -d --build	újrabuildel és elindít a háttérben
