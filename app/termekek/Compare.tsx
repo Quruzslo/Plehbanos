@@ -11,15 +11,17 @@ import {
   ShoppingCartIcon,
   CheckIcon,
 } from "@phosphor-icons/react";
-import type { Product } from "@/lib/db/schema";
+
 import {
   CartActionsContext,
   CartStateContext,
 } from "@/lib/context/cartContext";
 
+import type { ProductWithCategory } from "@/lib/db/schema";
+
 type Props = {
-  activeCompare: Product[];
-  setActiveCompare: Dispatch<SetStateAction<Product[]>>;
+  activeCompare: ProductWithCategory[];
+  setActiveCompare: Dispatch<SetStateAction<ProductWithCategory[]>>;
   onClose: () => void;
 };
 

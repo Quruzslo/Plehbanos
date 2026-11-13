@@ -1,15 +1,15 @@
 "use client";
 import { useState, type Dispatch, type SetStateAction } from "react";
-import type { Product } from "@/lib/db/schema";
+import type { ProductWithCategory } from "@/lib/db/schema";
 import ProductCard from "./ProductCard";
 import { ArrowFatRightIcon, ArrowFatLeftIcon } from "@phosphor-icons/react";
 
 type Props = {
-  products: Product[];
-  activeCompare: Product[];
-  setActiveCompare: Dispatch<SetStateAction<Product[]>>;
+  products: ProductWithCategory[];
+  activeCompare: ProductWithCategory[];
+  setActiveCompare: Dispatch<SetStateAction<ProductWithCategory[]>>;
   setCompareOpen: Dispatch<SetStateAction<boolean>>;
-  setQuickView: any;
+  setQuickView: Dispatch<SetStateAction<ProductWithCategory | null>>;
 };
 
 export default function ProductCarousel({

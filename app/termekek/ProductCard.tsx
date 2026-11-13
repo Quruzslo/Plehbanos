@@ -1,5 +1,5 @@
 import { useContext, type Dispatch, type SetStateAction } from "react";
-import type { Product } from "@/lib/db/schema";
+import type { Product, ProductWithCategory } from "@/lib/db/schema";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -22,12 +22,12 @@ export default function ProductCard({
   isNew,
   setQuickView,
 }: {
-  item: Product;
-  setActiveCompare: Dispatch<SetStateAction<Product[]>>;
+  item: ProductWithCategory;
+  setActiveCompare: Dispatch<SetStateAction<ProductWithCategory[]>>;
   setCompareOpen: Dispatch<SetStateAction<boolean>>;
-  activeCompare: Product[];
+  activeCompare: ProductWithCategory[];
   isNew?: boolean;
-  setQuickView: any;
+  setQuickView: Dispatch<SetStateAction<ProductWithCategory | null>>;
 }) {
   const active = activeCompare.some((i) => i.id === item.id);
   const disabled = !active && activeCompare.length >= MAX_COMPARE;
@@ -63,6 +63,11 @@ export default function ProductCard({
       </Link>
 
       <div className="flex flex-col flex-1 gap-[5px] p-[10px]">
+        {item.categoryName && (
+          <p className="text-text/60 text-[12px] font-medium">
+            {item.categoryName}
+          </p>
+        )}
         <p className="text-text text-[15px] font-bold">{item.name}</p>
         <div className=" w-fit z-10">
           {item.stock >= 1 ? (

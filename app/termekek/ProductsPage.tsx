@@ -11,8 +11,7 @@ import ProductCard from "./ProductCard";
 import Categories from "./Categories";
 import Compare from "./Compare";
 import QuickView from "./QuickView";
-import type { Category, Product } from "@/lib/db/schema";
-// import CartModal from "@/lib/ui/CartModal";
+import type { Category, Product, ProductWithCategory } from "@/lib/db/schema";
 
 const CallToActionVariants: Variants = {
   hidden: { opacity: 0, scale: 0.7 },
@@ -30,16 +29,16 @@ const benefits = [
 ];
 
 type Props = {
-  items: Product[];
-  newItems: Product[];
+  items: ProductWithCategory[];
+  newItems: ProductWithCategory[];
   categories: Category[];
 };
 
 export default function ProductPage({ items, newItems, categories }: Props) {
   const [activeCategory, setActiveCategory] = useState<number | null>(null);
-  const [activeCompare, setActiveCompare] = useState<Product[]>([]);
+  const [activeCompare, setActiveCompare] = useState<ProductWithCategory[]>([]);
   const [compareOpen, setCompareOpen] = useState(false);
-  const [quickView, setQuickView] = useState<Product | null>(null);
+  const [quickView, setQuickView] = useState<ProductWithCategory | null>(null);
 
   const visibleProducts =
     activeCategory === null
@@ -126,14 +125,17 @@ export default function ProductPage({ items, newItems, categories }: Props) {
         className="flex flex-col lg:flex-row my-[50px] bg-linear-45 from-transparent from-50% to-accent/70 to-[calc(50%+1px)] shadow-[5px_5px_10px_0px_rgba(0,0,0,0.4)] text-text font-bold p-[15px] rounded-[10px] w-[90%] max-w-[2560px] mx-auto items-center justify-center relative"
       >
         <div className="flex flex-col w-full lg:w-1/2">
-          <div className="flex flex-row">
-            <p className="text-[20px] lg:text-[30px] font-bold">
+          <div className="flex flex-col gap-[10px]">
+            <p className="text-[20px] lg:text-[30px] font-bold flex flex-row items-center">
               Van egy ötleted{" "}
-              <span className="text-[35px] lg:text-[45px] font-black text-white bg-text p-[5px] h-fit rounded-md">
+              <span className="text-[20px] lg:text-[25px] font-black text-white bg-purple-500 p-[5px] h-fit rounded-full !w-[40px] !h-[40px] flex flex-row items-center justify-center">
                 ?
               </span>{" "}
+            </p>
+
+            <p className="text-[20px] lg:text-[30px] font-bold flex flex-row items-center">
               Akár ajándékba adnád{" "}
-              <span className="text-[35px] lg:text-[45px] font-black text-white bg-text p-[5px] h-fit rounded-md">
+              <span className="text-[20px] lg:text-[25px] font-black text-white bg-green-500 p-[5px] h-fit rounded-full !w-[40px] !h-[40px] flex flex-row items-center justify-center">
                 ?
               </span>
             </p>
@@ -144,7 +146,7 @@ export default function ProductPage({ items, newItems, categories }: Props) {
           </p>
           <Link
             href="/kapcsolat"
-            className="flex flex-row gap-[5px] bg-accent w-fit p-[10px] text-white rounded-md mt-[25px]"
+            className="flex flex-row gap-[5px] bg-accent w-fit p-[10px] text-white rounded-md mt-[25px] hover:shadow-md"
           >
             Van egy ötletem
           </Link>

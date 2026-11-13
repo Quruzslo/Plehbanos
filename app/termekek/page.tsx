@@ -1,10 +1,14 @@
 import { Suspense } from "react";
 import type { Metadata } from "next";
 import { cacheTag, cacheLife } from "next/cache";
-import { desc } from "drizzle-orm";
+import { desc, eq, getTableColumns } from "drizzle-orm";
 import ProductPage from "./ProductsPage";
 import { db } from "@/lib/db";
-import { categories, products } from "@/lib/db/schema";
+import {
+  categories,
+  products,
+  type ProductWithCategory,
+} from "@/lib/db/schema";
 
 export const metadata: Metadata = {
   title: "Kézműves bádog dekorációk Somogyból – József Zoltán bádogosmester",
@@ -16,12 +20,19 @@ async function ProductsContent() {
   "use cache";
   cacheTag("products");
 
-  let items: (typeof products.$inferSelect)[] = [];
+  let items: ProductWithCategory[] = [];
   let allCategories: (typeof categories.$inferSelect)[] = [];
 
   try {
     [items, allCategories] = await Promise.all([
-      db.select().from(products).orderBy(desc(products.id)),
+      db
+        .select({
+          ...getTableColumns(products),
+          categoryName: categories.name,
+        })
+        .from(products)
+        .leftJoin(categories, eq(products.categoryId, categories.id))
+        .orderBy(desc(products.id)),
       db.select().from(categories),
     ]);
     cacheLife("hours");

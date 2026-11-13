@@ -93,3 +93,7 @@ export const contactForm = pgTable("contact_form", {
   message: varchar({ length: 255 }).notNull(),
 });
 export type Contact = typeof contactForm.$inferSelect;
+
+export type ProductWithCategory = Product & {
+  categoryName: string | null;
+};
