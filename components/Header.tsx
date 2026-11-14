@@ -288,20 +288,48 @@ function NavGroup({
   headerTheme: "dark" | "light";
   scrolled: boolean;
 }) {
+  const indicatorRef = useRef<HTMLSpanElement>(null);
+
+  const handleMouseEnter = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    const el = e.currentTarget;
+    if (indicatorRef.current) {
+      indicatorRef.current.style.left = `${el.offsetLeft - 10}px`;
+      indicatorRef.current.style.width = `${el.offsetWidth + 20}px`;
+      indicatorRef.current.style.opacity = "1";
+    }
+  };
+
+  const handleMouseLeave = () => {
+    if (indicatorRef.current) {
+      indicatorRef.current.style.opacity = "0";
+    }
+  };
+
   return (
     <div
       className={`flex w-fit flex-col motion-reduce:animate-none px-[15px] ${
         side === "left" ? "animate-reveal-left" : "animate-reveal-right"
       }`}
     >
-      <nav className="desktop-nav flex w-full flex-row items-center justify-around gap-[15px]">
+      <nav
+        onMouseLeave={handleMouseLeave}
+        className="desktop-nav relative flex w-full flex-row items-center justify-around gap-[15px]"
+      >
+        {/* Csúszó háttér */}
+        <span
+          ref={indicatorRef}
+          aria-hidden
+          className="pointer-events-none absolute top-1/2 h-full -translate-y-1/2 rounded-full bg-accent opacity-0 transition-all duration-300 ease-out"
+        />
+
         {navItems
           .filter((item) => item.position === side)
           .map((item) => (
             <a
               key={item.path}
               href={item.path}
-              className={`text-[20px] text-white desktop-nav-item ${
+              onMouseEnter={handleMouseEnter}
+              className={`relative z-10 py-1.5 text-[20px] transition-colors desktop-nav-item ${
                 headerTheme === "light" && !scrolled
                   ? "!text-text"
                   : "!text-white"
