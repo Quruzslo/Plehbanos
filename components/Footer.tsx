@@ -3,13 +3,13 @@ import Image from "next/image";
 import Link from "next/link";
 import navItems from "@/lib/datas/navItems";
 import { usePathname } from "next/navigation";
-import { motion } from "framer-motion";
+import { motion, type Variants } from "framer-motion";
 
 const EMAIL = "info@pelda.hu";
 const PHONE = "+36 30 123 4567";
 const now = new Date().getFullYear();
 
-const col = (delay = 0) => ({
+const col = (delay = 0): Variants => ({
   hidden: { opacity: 0, y: 18 },
   visible: {
     opacity: 1,
@@ -18,7 +18,7 @@ const col = (delay = 0) => ({
   },
 });
 
-const mapVariant = {
+const mapVariant: Variants = {
   hidden: { opacity: 0, scale: 0.95 },
   visible: {
     opacity: 1,
