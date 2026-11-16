@@ -19,7 +19,11 @@ const nextConfig: NextConfig = {
   },
 
   images: {
-    remotePatterns: [new URL(`${process.env.R2_PUBLIC_URL}/**`)],
+    remotePatterns: [
+      new URL(
+        `${process.env.R2_PUBLIC_URL || "https://pub-ba49019f382d409191b529f4a734bb62.r2.dev"}/**`,
+      ),
+    ],
   },
 };
 
