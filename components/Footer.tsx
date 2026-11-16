@@ -149,7 +149,7 @@ export default function Footer() {
         </motion.div>
       </div>
 
-      <div className="mt-16 w-[90%] max-w-[1200px] mx-auto">
+      <div className="mt-16 w-[90%] max-w-[2560px] mx-auto">
         <div className="h-px bg-white/[0.08] mb-6" />
         <p className="text-xs text-white/30 tracking-wide">
           © {now} Minden jog fenntartva.
