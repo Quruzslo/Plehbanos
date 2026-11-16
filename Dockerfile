@@ -9,7 +9,8 @@ FROM node:22-alpine AS builder
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
-RUN npm run build
+ARG ENV_FILE
+RUN printf '%s\n' "$ENV_FILE" > .env.production && npm run build && rm -f .env.production
 
 # 3. Futtatás – csak a kész build kerül bele
 FROM node:22-alpine AS runner
