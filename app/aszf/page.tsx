@@ -1,6 +1,9 @@
 export default function Aszf() {
   return (
-    <section className="w-full flex flex-col pt-[100px] lg:pt-[150px] pb-20 bg-stone-100 text-stone-800">
+    <section
+      data-header="light"
+      className="w-full flex flex-col pt-[100px] lg:pt-[150px] pb-20 bg-stone-100 text-stone-800"
+    >
       <div className="w-[90%] max-w-4xl mx-auto flex flex-col gap-6 leading-relaxed">
         <h1 className="text-3xl lg:text-4xl font-bold text-stone-900">
           Általános Szerződési Feltételek
