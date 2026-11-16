@@ -46,7 +46,7 @@ export default function Footer() {
         />
       </div>
 
-      <div className="w-[90%] max-w-[1200px] grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-8 mx-auto">
+      <div className="w-[90%] max-w-[2560px] grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-8 mx-auto">
         <motion.div
           variants={col(0)}
           initial="hidden"
