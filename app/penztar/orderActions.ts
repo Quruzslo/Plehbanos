@@ -19,6 +19,9 @@ const orderSchema = z.object({
   city: z.string().trim().min(2, "Add meg a települést."),
   address: z.string().trim().min(3, "Add meg az utcát és a házszámot."),
   note: z.string().trim().max(500, "Legfeljebb 500 karakter.").optional(),
+  terms: z.literal("on", {
+    message: "El kell fogadnod az ÁSZF-et és az adatvédelmi tájékoztatót.",
+  }),
 });
 
 const cartSchema = z
@@ -76,6 +79,8 @@ export async function createOrder(
   // Lemondó link titka – kriptográfiailag véletlen, nem kitalálható
   const cancelToken = randomUUID();
 
+  const { terms: _terms, ...orderValues } = parsed.data;
+
   try {
     const orderId = await db.transaction(async (tx) => {
       for (const line of lines) {
@@ -95,7 +100,7 @@ export async function createOrder(
 
       const [order] = await tx
         .insert(orders)
-        .values({ ...parsed.data, total, cancelToken })
+        .values({ ...orderValues, total, cancelToken })
         .returning({ id: orders.id });
 
       await tx
@@ -105,7 +110,7 @@ export async function createOrder(
       return order.id;
     });
 
-    const { name, email, phone, zip, city, address, note } = parsed.data;
+    const { name, email, phone, zip, city, address, note } = orderValues;
 
     after(() =>
       sendOrderEmails({

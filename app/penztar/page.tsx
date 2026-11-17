@@ -225,6 +225,36 @@ export default function Checkout() {
                 </p>
               </div>
             </fieldset>
+
+            <div>
+              <label className="flex cursor-pointer items-start gap-2.5 text-[14px] text-text/80">
+                <input
+                  type="checkbox"
+                  name="terms"
+                  className="mt-1 size-4 shrink-0 cursor-pointer accent-accent"
+                />
+                <span>
+                  Elolvastam és elfogadom az{" "}
+                  <Link
+                    href="/aszf"
+                    target="_blank"
+                    className="font-semibold text-accent underline"
+                  >
+                    Általános Szerződési Feltételeket
+                  </Link>{" "}
+                  és az{" "}
+                  <Link
+                    href="/adatvedelem"
+                    target="_blank"
+                    className="font-semibold text-accent underline"
+                  >
+                    Adatvédelmi tájékoztatót
+                  </Link>
+                  .
+                </span>
+              </label>
+              <FieldError message={errors.terms?.[0]} />
+            </div>
           </form>
         </div>
 
