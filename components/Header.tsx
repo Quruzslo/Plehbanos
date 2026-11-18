@@ -329,7 +329,7 @@ function NavGroup({
               key={item.path}
               href={item.path}
               onMouseEnter={handleMouseEnter}
-              className={`relative z-10 py-1.5 text-[20px] transition-colors  ${
+              className={`relative z-10 py-1.5 text-[20px] font-bold transition-colors  ${
                 headerTheme === "light" && !scrolled
                   ? "!text-text"
                   : "!text-white"
